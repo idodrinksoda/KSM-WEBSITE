@@ -31,7 +31,10 @@
     nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; }
     nav a { color: var(--fg); opacity: 0.9; font-weight: 600; }
 
-    .hero { position: relative; padding: 96px 0 72px; background: radial-gradient(1200px 600px at 70% -20%, rgba(106,227,255,0.08), transparent 60%), radial-gradient(1400px 700px at -10% 0%, rgba(255,43,106,0.10), transparent 60%); }
+    .hero { position: relative; padding: 96px 0 72px; background: radial-gradient(1200px 600px at 70% -20%, rgba(106,227,255,0.08), transparent 60%), radial-gradient(1400px 700px at -10% 0%, rgba(255,43,106,0.10), transparent 60%); overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: url('assets/hero.jpg') center/cover no-repeat; opacity: 0.55; z-index: 0; transform: scale(1.05); pointer-events: none; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(11,11,13,0.65), rgba(11,11,13,0.25)); z-index: 0; pointer-events: none; }
+    .hero > .container { position: relative; z-index: 1; }
     .hero h1 { font-size: clamp(38px, 6vw, 68px); line-height: 1.02; margin: 0 0 12px; }
     .hero p { margin: 0 0 24px; color: var(--muted); font-size: clamp(16px, 2.3vw, 20px); }
     .cta { display: inline-flex; gap: 12px; align-items: center; padding: 14px 18px; border-radius: 999px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0b0b0d; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 8px 24px rgba(255,43,106,0.25), 0 4px 16px rgba(106,227,255,0.15); }
@@ -81,7 +84,7 @@
     <section class="hero">
       <div class="container">
         <h1>Heavy, hypnotic, and loud.</h1>
-        <p>Grunge/alt‑metal from Vancouver, BC. New singles and show dates below — get on the list.</p>
+        <p>Grunge/alt‑metal/Punk from Vancouver, BC. New singles and show dates below — get on the list.</p>
         <button class="cta" id="joinList">Join the mailing list</button>
       </div>
     </section>
@@ -94,7 +97,7 @@
           <!-- Spotify: right‑click track/album → Share → Embed code -->
           <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
           <!-- YouTube: Share → Embed → copy src URL -->
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/EHyuJ257rb4" title="YouTube video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -150,8 +153,8 @@
         <h2>Contact</h2>
         <div class="grid">
           <div class="card" style="grid-column: span 7;">
-            <!-- For a no-backend form, replace the action with your Formspree endpoint -->
-            <form id="contactForm" action="https://formspree.io/f/your-id" method="POST">
+            <p class="muted">Email us anytime at <a href="mailto:kamasutramurder@gmail.com">kamasutramurder@gmail.com</a>.</p>
+            <form id="contactForm" action="mailto:kamasutramurder@gmail.com" method="POST">
               <input name="name" type="text" placeholder="Your name" required>
               <input name="email" type="email" placeholder="Email" required>
               <textarea name="message" placeholder="Booking, press, or just say hi…" required></textarea>
@@ -202,14 +205,24 @@
     // Contact form UX helper (works even without Formspree)
     const form = document.getElementById('contactForm');
     const statusEl = document.getElementById('formStatus');
-    form?.addEventListener('submit', async (e) => {
+    form?.addEventListener('submit', (e) => {
       e.preventDefault();
-      statusEl.textContent = 'Sending…';
-      try {
-        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-        if (res.ok) { statusEl.textContent = 'Thanks! We\'ll get back to you.'; form.reset(); }
-        else { statusEl.textContent = 'Something went wrong. Try again or email us directly.'; }
-      } catch { statusEl.textContent = 'Network error. Please try again later.'; }
+      const data = new FormData(form);
+      const name = (data.get('name') || '').toString().trim();
+      const email = (data.get('email') || '').toString().trim();
+      const message = (data.get('message') || '').toString().trim();
+      const subject = encodeURIComponent(`Message from ${name || 'KSM Website'}`);
+      const bodyLines = [
+        name ? `Name: ${name}` : 'Name: (not provided)',
+        email ? `Email: ${email}` : 'Email: (not provided)',
+        '',
+        message || '(No message entered)'
+      ];
+      const body = encodeURIComponent(bodyLines.join('\n'));
+      const mailto = form.getAttribute('action') || 'mailto:kamasutramurder@gmail.com';
+      window.location.href = `${mailto}?subject=${subject}&body=${body}`;
+      statusEl.textContent = 'Opening your email app…';
+      form.reset();
     });
 
     // Year
