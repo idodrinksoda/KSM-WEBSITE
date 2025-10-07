@@ -1,4 +1,5 @@
 <!doctype html>
+<link rel="stylesheet" href="styles.css">
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -89,32 +90,68 @@
       </div>
     </section>
 
-    <section id="shows">
-      <div class="container">
-        <h2>Shows</h2>
-        <div class="card">
-          <table>
-            <thead>
-              <tr><th>Date</th><th>City</th><th>Venue</th><th></th></tr>
-            </thead>
-            <tbody id="showsTable">
-              <!-- Example rows; edit in HTML or inject from a JSON later -->
-              <tr>
-                <td>10-11-2025</td>
-                <td>New West, BC</td>
-                <td><a class="btn" href="https://www.google.com/maps/place/Bully's+Studios/@49.2047647,-122.9095717,16z/data=!3m1!4b1!4m6!3m5!1s0x5485d8726993ea8b:0xd9af9da9ad2c4cdb!8m2!3d49.2047647!4d-122.9095717!16s%2Fg%2F1tfxgchm?entry=ttu&g_ep=EgoyMDI1MTAwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Bullys</a></td>
-                <td><a class="btn" href="https://www.bullysstudios.ca/event-details/cascade-dead-mans-hand-hi-dive-bluestem?fbclid=PAZnRzaANLx7hleHRuA2FlbQIxMQABp7qEwOU0b9BtbCUZF9GxRWLgWU8WFZwanRA0BSBX5AL2tLOMvf7sm_qWrybu_aem_odF_4dD2BS2LG2GrvZqKQw" target="_blank" rel="noopener">Tickets</a></td>
-              </tr>
-              <tr>
-                <td>10‑31‑2025</td>
-                <td>Vancouver, BC</td>
-                <td>Jig Space</td>
-                <td><a class="btn" href="https://www.eventbrite.ca/e/yeah-man-entertainment-punktoberfest-tickets-1768096818179" target="_blank" rel="noopener">Tickets</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+ <section id="shows">
+  <div class="container">
+    <h2>Shows</h2>
+
+    <div class="card">
+      <!-- POSTER CARDS -->
+      <div class="shows-grid">
+        <!-- Jig Space -->
+        <article class="show-card"
+                 data-title="KSM — Punk-tober"
+                 data-date="2025-10-31"
+                 data-city="Vancouver, BC"
+                 data-venue="Jig Space"
+                 data-desc="Yeah Man Entertainment — doors 8pm, 19+."
+                 data-poster="posters/jigspace-2025-10-31.jpg"
+                 data-map="https://www.google.com/maps/dir//8889+Laurel+St+unit+106,+Vancouver,+BC+V6P+3V9/@49.2046355,-123.2077643,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x54867505c45bb40d:0x665c676e628d849f!2m2!1d-123.1253639!2d49.2046648?entry=ttu"
+                 data-tickets="https://www.eventbrite.ca/e/yeah-man-entertainment-punktoberfest-tickets-1768096818179">
+          <figure class="show-media">
+            <img src="posters/punktober.jpg"
+                 alt="KSM at Jig Space — Oct 31, 2025"
+                 loading="lazy">
+          </figure>
+          <div class="show-meta">
+            <time datetime="2025-10-31">Oct 31, 2025</time>
+            <span>Vancouver, BC • Jig Space</span>
+          </div>
+          <div class="show-actions">
+            <a class="btn btn-tickets" href="https://www.eventbrite.ca/e/yeah-man-entertainment-punktoberfest-tickets-1768096818179" target="_blank" rel="noopener">Tickets</a>
+            <a class="btn btn-map" href="https://www.google.com/maps/dir//8889+Laurel+St+unit+106,+Vancouver,+BC+V6P+3V9/@49.2046355,-123.2077643,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x54867505c45bb40d:0x665c676e628d849f!2m2!1d-123.1253639!2d49.2046648?entry=ttu" target="_blank" rel="noopener">Map</a>
+          </div>
+        </article>
+
+        <!-- Bully's -->
+        <article class="show-card"
+                 data-title="Cascade • Dead Man's Hand • Hi Dive • Bluestem"
+                 data-date="2025-10-11"
+                 data-city="New West, BC"
+                 data-venue="Bully’s"
+                 data-desc="Stacked lineup at Bully’s. Doors 8pm, 19+."
+                 data-poster="posters/bullys-2025-10-11.jpg"
+                 data-map="https://www.google.com/maps/place/Bully's+Studios/@49.2047647,-122.9095717,16z"
+                 data-tickets="https://www.bullysstudios.ca/event-details/cascade-dead-mans-hand-hi-dive-bluestem?fbclid=PAZnRzaANLx7hleHRuA2FlbQIxMQABp7qEwOU0b9BtbCUZF9GxRWLgWU8WFZwanRA0BSBX5AL2tLOMvf7sm_qWrybu_aem_odF_4dD2BS2LG2GrvZqKQw">
+          <figure class="show-media">
+            <img src="posters/bullys.jpg"
+                 alt="Cascade / DMH / Hi Dive / Bluestem at Bully’s — Oct 11, 2025"
+                 loading="lazy">
+          </figure>
+          <div class="show-meta">
+            <time datetime="2025-10-11">Oct 11, 2025</time>
+            <span>New West, BC • Bully’s</span>
+          </div>
+          <div class="show-actions">
+            <a class="btn btn-tickets" href="https://www.bullysstudios.ca/event-details/cascade-dead-mans-hand-hi-dive-bluestem?fbclid=PAZnRzaANLx7hleHRuA2FlbQIxMQABp7qEwOU0b9BtbCUZF9GxRWLgWU8WFZwanRA0BSBX5AL2tLOMvf7sm_qWrybu_aem_odF_4dD2BS2LG2GrvZqKQw" target="_blank" rel="noopener">Tickets</a>
+            <a class="btn btn-map" href="https://www.google.com/maps/place/Bully's+Studios/@49.2047647,-122.9095717,16z" target="_blank" rel="noopener">Map</a>
+          </div>
+        </article>
+      </div><!-- /.shows-grid -->
+    </div><!-- /.card -->
+  </div><!-- /.container -->
+</section>
+
+
     </section>
 
      <section id="music">
