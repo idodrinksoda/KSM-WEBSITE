@@ -167,7 +167,7 @@ h2 {
 
 .music-embeds iframe {
   width: 100%;          /* fill column */
-  min-height: 400px;    /* ensure visibility */
+  height: 400px;        /* fixed height (use min-height if you prefer growth) */
   border: 0;            /* clean frame */
   border-radius: 12px;  /* soften corners */
 }
@@ -258,27 +258,27 @@ textarea {
    SHOWS — POSTER GRID
    ========================= */
 .shows-grid {
-  display: grid;                                        /* grid of posters */
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* responsive cols */
-  gap: 0px;                                            /* spacing between cards */
-  margin-top: 16px;                                     /* spacing from title */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;            /* give cards some air */
+  margin-top: 16px;
 }
 
 .show-card {
-  background: var(--card);                         /* card surface */
-  border: 1px solid #22222a;                       /* outline */
-  border-radius: 16px;                              /* rounded corners */
-  overflow: hidden;                                 /* clip child overflow */
-  display: flex;                                    /* vertical layout */
-  flex-direction: column;                           /* stack media/meta */
-  transition: transform .2s ease, box-shadow .2s ease; /* hover effects */
-  width: 300px;                                     /* poster width (smaller cards) */
-  height: auto;                                     /* let height follow content */
+  background: var(--card);
+  border: 1px solid #22222a;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+  width: 100%;          /* let the grid control width */
+  height: auto;
 }
 
 .show-card:hover {
-  transform: translateY(-20px);               /* lift on hover */
-  box-shadow: 0 10px 28px rgba(0,0,0,.35);   /* shadow for depth */
+  transform: translateY(-6px); /* subtle lift to avoid layout shifts */
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
 }
 
 .show-media {
@@ -373,3 +373,14 @@ textarea {
    SCROLL TWEAKS
    ========================= */
 section { scroll-margin-top: 80px; } /* offset for sticky header when anchoring */
+
+@media (prefers-reduced-motion: reduce) {
+  .show-card,
+  .btn {
+    transition: none;
+  }
+  .show-card:hover {
+    transform: none;
+  }
+}
+
