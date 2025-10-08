@@ -167,7 +167,7 @@ h2 {
 
 .music-embeds iframe {
   width: 100%;          /* fill column */
-  min-height: 400px;    /* ensure visibility */
+  min-height: 380px;    /* ensure visibility */
   border: 0;            /* clean frame */
   border-radius: 12px;  /* soften corners */
 }
