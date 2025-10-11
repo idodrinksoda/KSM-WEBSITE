@@ -35,16 +35,24 @@
           <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
+  <!-- Dropdown menu -->
+<div id="mobileMenu" role="menu" aria-label="Mobile menu">
+  <a href="#shows" role="menuitem">Shows</a>
+  <a href="#music" role="menuitem">Music</a>
+  <a href="#" role="menuitem" data-open-mc>Mailing list</a>
 
-      <!-- Dropdown menu -->
-      <div id="mobileMenu" role="menu" aria-label="Mobile menu">
-        <a href="#shows" role="menuitem">Shows</a>
-        <a href="#music" role="menuitem">Music</a>
-        <!-- This opens the modal instead of scrolling -->
-        <a href="#" role="menuitem" data-open-mc>Mailing list</a>
-        <a href="#contact" role="menuitem">Contact</a>
-      </div>
-    </div>
+  <a href="#contact"
+     id="contactToggle"
+     role="menuitem"
+     aria-expanded="false"
+     aria-controls="contactSub">Contact</a>
+
+  <div id="contactSub" class="submenu" hidden>
+    <a href="mailto:kamasutramurder@gmail.com">kamasutramurder@gmail.com</a>
+  </div>
+</div>
+
+
   </header>
 
   <main>
@@ -194,89 +202,128 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script>
-    // ===== Mobile menu: toggle + autoclose (animated via .open) =====
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+ <!-- Scripts -->
+<script>
+  // ===== Mobile menu: toggle + autoclose (animated via .open) =====
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-    function openMenu() {
-      mobileMenu.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  function isMenuOpen() {
+    return mobileMenu.classList.contains('open');
+  }
+
+  hamburger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isMenuOpen() ? closeMenu() : openMenu();
+  });
+
+  // Close menu when clicking any link EXCEPT the Contact toggle
+  mobileMenu.querySelectorAll('a:not(#contactToggle)').forEach(a => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
+  });
+
+  // Graceful autoclose on mouse leave
+  let leaveTimer;
+  mobileMenu.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeMenu, 350); });
+  mobileMenu.addEventListener('mouseenter', () => { clearTimeout(leaveTimer); });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) closeMenu();
+  });
+
+  // --- Contact submenu toggle ---
+  const contactToggle = document.getElementById('contactToggle');
+  const contactSub = document.getElementById('contactSub');
+
+  function toggleContactSub(e) {
+    e.preventDefault();
+    const willOpen = contactSub.hasAttribute('hidden');
+    if (willOpen) {
+      contactSub.removeAttribute('hidden');
+      contactToggle.setAttribute('aria-expanded', 'true');
+    } else {
+      contactSub.setAttribute('hidden', '');
+      contactToggle.setAttribute('aria-expanded', 'false');
     }
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    }
-    function isMenuOpen() {
-      return mobileMenu.classList.contains('open');
-    }
+  }
+  contactToggle?.addEventListener('click', toggleContactSub);
 
-    hamburger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      isMenuOpen() ? closeMenu() : openMenu();
+  // Close menu when clicking any link EXCEPT the Contact toggler
+  mobileMenu.querySelectorAll('a:not(#contactToggle)').forEach(a => {
+    a.addEventListener('click', () => {
+      // collapse submenu for next time, then close the menu
+      contactSub?.setAttribute('hidden', '');
+      contactToggle?.setAttribute('aria-expanded', 'false');
+      closeMenu();
     });
+  });
 
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', closeMenu);
+  // Also collapse submenu whenever the menu itself closes
+  const _closeMenuOriginal = closeMenu;
+  closeMenu = function () {
+    contactSub?.setAttribute('hidden', '');
+    contactToggle?.setAttribute('aria-expanded', 'false');
+    _closeMenuOriginal();
+  };
+
+  // ===== Mailchimp modal controls (modal-only) =====
+  const mcModal = document.getElementById('mcModal');
+  const emailField = document.getElementById('mce-EMAIL-modal');
+  const mcSuccess = document.getElementById('mce-success-response-modal');
+
+  function openMcModal() {
+    if (!mcModal) return;
+    mcModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => emailField?.focus(), 50);
+  }
+  function closeMcModal() {
+    mcModal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  // Any element with data-open-mc opens the modal
+  document.querySelectorAll('[data-open-mc]').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openMcModal(); });
+  });
+
+  // Close modal on backdrop or X
+  mcModal?.addEventListener('click', (e) => {
+    if (e.target.matches('[data-close-mc], .modal-backdrop')) closeMcModal();
+  });
+
+  // Close modal on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mcModal && !mcModal.hidden) closeMcModal();
+  });
+
+  // Auto-close modal after Mailchimp success appears
+  if (mcSuccess) {
+    const observer = new MutationObserver(() => {
+      const visible = mcSuccess.style.display !== 'none';
+      const hasText = mcSuccess.textContent.trim() !== '';
+      if (visible && hasText) setTimeout(closeMcModal, 1500);
     });
+    observer.observe(mcSuccess, { childList: true, attributes: true, subtree: true });
+  }
 
-    document.addEventListener('click', (e) => {
-      if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
-    });
-
-    let leaveTimer;
-    mobileMenu.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeMenu, 350); });
-    mobileMenu.addEventListener('mouseenter', () => { clearTimeout(leaveTimer); });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isMenuOpen()) closeMenu();
-    });
-
-    // ===== Mailchimp modal controls (modal-only) =====
-    const mcModal = document.getElementById('mcModal');
-    const emailField = document.getElementById('mce-EMAIL-modal');
-    const mcSuccess = document.getElementById('mce-success-response-modal');
-
-    function openMcModal() {
-      if (!mcModal) return;
-      mcModal.hidden = false;
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => emailField?.focus(), 50);
-    }
-    function closeMcModal() {
-      mcModal.hidden = true;
-      document.body.style.overflow = '';
-    }
-
-    // Any element with data-open-mc opens the modal (hero button & menu link)
-    document.querySelectorAll('[data-open-mc]').forEach(el => {
-      el.addEventListener('click', (e) => { e.preventDefault(); openMcModal(); });
-    });
-
-    // Close modal on backdrop or X
-    mcModal?.addEventListener('click', (e) => {
-      if (e.target.matches('[data-close-mc], .modal-backdrop')) closeMcModal();
-    });
-
-    // Close modal on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mcModal && !mcModal.hidden) closeMcModal();
-    });
-
-    // Auto-close after Mailchimp success message appears
-    if (mcSuccess) {
-      const observer = new MutationObserver(() => {
-        const visible = mcSuccess.style.display !== 'none';
-        const hasText = mcSuccess.textContent.trim() !== '';
-        if (visible && hasText) setTimeout(closeMcModal, 1500);
-      });
-      observer.observe(mcSuccess, { childList: true, attributes: true, subtree: true });
-    }
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
 

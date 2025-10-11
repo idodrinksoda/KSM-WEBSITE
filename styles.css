@@ -276,3 +276,56 @@ section{scroll-margin-top:80px}
 
 /* Optional: keyboard focus ring for the hamburger */
 .hamburger:focus-visible { outline:2px solid var(--accent-2); outline-offset:2px; }
+
+/* Mobile menu contact submenu */
+#mobileMenu .submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 4px 0 8px 0;
+  padding: 6px 8px 0 12px;
+  border-left: 2px solid #22222a;
+}
+#mobileMenu .submenu-link {
+  padding: .45rem .5rem;
+  border-radius: 8px;
+  color: var(--fg);
+  opacity: 0.9;
+}
+#mobileMenu .submenu-link:hover {
+  background: #1b1b22;
+  transform: translateX(4px);
+}
+
+#mobileMenu .submenu {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #22222a;
+}
+#mobileMenu .submenu a {
+  padding: .5rem .7rem;
+  border-radius: 10px;
+}
+/* Submenu defaults: stay hidden until toggled */
+#mobileMenu .submenu[hidden] { display: none !important; }
+
+#mobileMenu .submenu {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #22222a;
+}
+
+/* Submenu links: slightly smaller, indented, don’t overflow */
+#mobileMenu .submenu a {
+  display: block;
+  padding: .5rem .7rem .5rem 1.4rem;  /* left indent */
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--fg);
+  overflow-wrap: anywhere; /* keeps long email inside the panel */
+}
+#mobileMenu .submenu a:hover {
+  background: #0f0f14;
+  transform: none; /* no slide on submenu items */
+}
+
