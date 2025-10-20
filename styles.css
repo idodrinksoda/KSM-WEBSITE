@@ -195,6 +195,30 @@ textarea{min-height:120px;resize:vertical}
   .mc-form .cta{width:100%}
 }
 
+/* Modal / Mailchimp: better mobile sizing */
+@media (max-width:640px) {
+  .modal-panel {
+    /* Make sure the panel never overflows the viewport and counts padding */
+    width: min(92vw, 520px);
+    max-width: 92vw;
+    box-sizing: border-box;
+    margin: 6vh auto;
+    padding: 12px;
+    border-radius: 12px;
+    gap: 12px;
+  }
+
+  /* Allow the form to fill the available space rather than forcing a large min-width */
+  .mc-form { max-width: 100%; width: 100%; }
+  .mc-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .mc-form input[type="email"]{ flex: 1 1 auto; min-width: 0; padding:10px 12px; }
+  .mc-form .cta{ width:100%; padding:12px 14px; }
+
+  /* Slightly smaller close button so it doesn't look huge on tiny screens */
+  .modal-close{ font-size:24px; top:8px; right:10px }
+}
+
+
 /* =========================
    MODAL (Mailchimp)
    ========================= */
