@@ -36,7 +36,7 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
    HEADER / NAV
    ========================= */
 header,.site-header{
-  position:sticky;top:0;z-index:50;
+  position:top:0;z-index:50;
   backdrop-filter:saturate(180%) blur(10px);
   background:rgba(11,11,13,.7);
   border-bottom:1px solid var(--border);
