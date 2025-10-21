@@ -15,44 +15,6 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="container nav">
-    
-      <!-- Desktop nav (kept but hidden via CSS) -->
-      <nav aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="#shows">Shows</a></li>
-          <li><a href="#music">Music</a></li>
-          <li><a href="#mailing-list" data-open-mc>Mailing list</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <!-- Hamburger (always visible) -->
-      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-  <!-- Dropdown menu -->
-<div id="mobileMenu" role="menu" aria-label="Mobile menu">
-  <a href="#shows" role="menuitem">Shows</a>
-  <a href="#music" role="menuitem">Music</a>
-  <a href="#" role="menuitem" data-open-mc>Mailing list</a>
-
-  <a href="#contact"
-     id="contactToggle"
-     role="menuitem"
-     aria-expanded="false"
-     aria-controls="contactSub">Contact</a>
-
-  <div id="contactSub" class="submenu" hidden>
-    <a href="mailto:kamasutramurder@gmail.com">kamasutramurder@gmail.com</a>
-  </div>
-</div>
-
-
-  </header>
 
   <main>
     <!-- HERO -->
@@ -173,7 +135,7 @@
           <div aria-hidden="true" class="mc-hp">
             <input type="text" name="b_6cd8a075a536c3481921962b1_51c81eb02f" tabindex="-1" value="">
           </div>
-          <p class="muted"
+          <p class="muted">No spam. Unsubscribe anytime.</p>
         </form>
       </div>
     </div>
@@ -181,81 +143,11 @@
 
  <!-- Scripts -->
 <script>
-  // ===== Mobile menu: toggle + autoclose (animated via .open) =====
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  function openMenu() {
-    mobileMenu.classList.add('open');
-    hamburger.setAttribute('aria-expanded', 'true');
-  }
-  function closeMenu() {
-    mobileMenu.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-  function isMenuOpen() {
-    return mobileMenu.classList.contains('open');
-  }
-
-  hamburger?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    isMenuOpen() ? closeMenu() : openMenu();
+  // Smooth scroll from hero CTA to contact
+  const joinBtn = document.getElementById('joinList');
+  joinBtn?.addEventListener('click', () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   });
-
-  // Close menu when clicking any link EXCEPT the Contact toggle
-  mobileMenu.querySelectorAll('a:not(#contactToggle)').forEach(a => {
-    a.addEventListener('click', closeMenu);
-  });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
-  });
-
-  // Graceful autoclose on mouse leave
-  let leaveTimer;
-  mobileMenu.addEventListener('mouseleave', () => { leaveTimer = setTimeout(closeMenu, 350); });
-  mobileMenu.addEventListener('mouseenter', () => { clearTimeout(leaveTimer); });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isMenuOpen()) closeMenu();
-  });
-
-  // --- Contact submenu toggle ---
-  const contactToggle = document.getElementById('contactToggle');
-  const contactSub = document.getElementById('contactSub');
-
-  function toggleContactSub(e) {
-    e.preventDefault();
-    const willOpen = contactSub.hasAttribute('hidden');
-    if (willOpen) {
-      contactSub.removeAttribute('hidden');
-      contactToggle.setAttribute('aria-expanded', 'true');
-    } else {
-      contactSub.setAttribute('hidden', '');
-      contactToggle.setAttribute('aria-expanded', 'false');
-    }
-  }
-  contactToggle?.addEventListener('click', toggleContactSub);
-
-  // Close menu when clicking any link EXCEPT the Contact toggler
-  mobileMenu.querySelectorAll('a:not(#contactToggle)').forEach(a => {
-    a.addEventListener('click', () => {
-      // collapse submenu for next time, then close the menu
-      contactSub?.setAttribute('hidden', '');
-      contactToggle?.setAttribute('aria-expanded', 'false');
-      closeMenu();
-    });
-  });
-
-  // Also collapse submenu whenever the menu itself closes
-  const _closeMenuOriginal = closeMenu;
-  closeMenu = function () {
-    contactSub?.setAttribute('hidden', '');
-    contactToggle?.setAttribute('aria-expanded', 'false');
-    _closeMenuOriginal();
-  };
 
   // ===== Mailchimp modal controls (modal-only) =====
   const mcModal = document.getElementById('mcModal');
