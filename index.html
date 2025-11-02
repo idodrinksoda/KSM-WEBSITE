@@ -6,6 +6,16 @@
   <title>Kama Sutra Murder — Official Site</title>
   <meta name="description" content="Kama Sutra Murder — heavy rock/grunge/alt-metal from Vancouver, BC. Shows, music, merch, contact." />
 
+  <!-- Open Graph / Twitter (single release placeholders) -->
+  <meta property="og:title" content="Kama Sutra Murder — Debut Single Coming Soon">
+  <meta property="og:description" content="Our first single drops on Nov 15, 2025. Pre-save now.">
+  <meta property="og:image" content="assets/single-cover-og.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kama Sutra Murder — Debut Single Coming Soon">
+  <meta name="twitter:description" content="Our first single drops on Nov 15, 2025. Pre-save now.">
+  <meta name="twitter:image" content="assets/single-cover-og.jpg">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +23,31 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- JSON-LD: MusicRecording (placeholder values; update when final) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicRecording",
+    "name": "Debut Single",
+    "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
+    "datePublished": "2025-11-15",
+    "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
+    "image": "assets/single-cover-og.jpg",
+    "url": "/"
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Announcement: debut single -->
+  <section class="announce" aria-label="Announcement: debut single">
+    <div class="container">
+      <span class="badge">New</span>
+      <span>Debut single drops Nov 15, 2025.</span>
+      <a class="cta" href="#" target="_blank" rel="noopener">Pre-save on Spotify</a>
+    </div>
+  </section>
 
   <main>
     <!-- HERO -->
@@ -23,6 +56,25 @@
         <h1>Kama Sutra Murder</h1>
         <p>grunge/punk/psych/alt-metal from Vancouver, BC.</p>
         <button class="cta" id="joinList" data-open-mc>Join the mailing list</button>
+      </div>
+    </section>
+
+    <!-- SINGLE -->
+    <section id="single" class="single">
+      <div class="container">
+        <div class="card single-card">
+          <div class="single-media">
+            <img src="assets/single-cover.jpg" alt="KSM debut single cover art" loading="lazy">
+          </div>
+          <div class="single-meta">
+            <h2>Debut Single — Coming Nov 15, 2025</h2>
+            <p class="muted">Pre-save now to get notified the moment it drops.</p>
+            <div class="single-actions">
+              <a class="btn btn-tickets" href="#" target="_blank" rel="noopener">Pre-save on Spotify</a>
+              <button class="btn" data-open-mc>Join mailing list</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -67,6 +119,14 @@
     <section id="music">
       <div class="container">
         <h2>Music</h2>
+        <!-- Bandcamp-first CTA and platforms -->
+        <div class="platforms" aria-label="Listen on">
+          <a class="btn btn-tickets" href="https://kamasutramurder.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a>
+          <a class="btn" href="https://open.spotify.com/playlist/7bvt5vHquWCE3um3CWcIUo" target="_blank" rel="noopener">Spotify</a>
+          <a class="btn" href="#" target="_blank" rel="noopener">Apple Music</a>
+          <a class="btn" href="https://www.youtube.com/watch?v=EHyuJ257rb4" target="_blank" rel="noopener">YouTube</a>
+          <a class="btn" href="#" target="_blank" rel="noopener">iTunes</a>
+        </div>
         <div class="music-embeds">
           <iframe src="https://open.spotify.com/embed/playlist/7bvt5vHquWCE3um3CWcIUo?si=fi-sPZGPSAi_bigFljB-4g" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
           <iframe src="https://www.youtube.com/embed/EHyuJ257rb4" title="YouTube video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
