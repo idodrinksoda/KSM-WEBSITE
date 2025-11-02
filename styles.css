@@ -233,16 +233,5 @@ section{scroll-margin-top:80px}
 .socials a { color: var(--fg); }
 .socials a:hover { color: var(--accent); }
 
-/* =========================
-   SINGLE
-   ========================= */
-.single{padding:48px 0}
-.single-card{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
-.single-media img{width:100%;display:block;border-radius:12px}
-.single-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-@media(max-width:780px){
-  .single-card{grid-template-columns:1fr}
-  .single .card{text-align:center}
-  .single-actions{justify-content:center}
-}
+/* (Removed .single styles — section no longer used) */
 
