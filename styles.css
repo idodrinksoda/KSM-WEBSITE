@@ -129,10 +129,10 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
 /* Make hero platform icons larger */
 .hero .platform-icons{gap:18px;margin-top:0}
 .hero .platform-icons svg,
-.hero .platform-icons img{width:40px;height:40px}
+.hero .platform-icons img{width:36px;height:36px}
 @media(max-width:520px){
   .hero .platform-icons svg,
-  .hero .platform-icons img{width:36px;height:36px}
+  .hero .platform-icons img{width:34px;height:34px}
 }
 
 /* Simple CSS tooltip for platform icons */
