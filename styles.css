@@ -126,6 +126,15 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
 .platform-icons svg,.platform-icons img{width:32px;height:32px;display:block}
 .platform-icons a:hover img{transform:translateY(-1px)}
 
+/* Make hero platform icons larger */
+.hero .platform-icons{gap:18px}
+.hero .platform-icons svg,
+.hero .platform-icons img{width:44px;height:44px}
+@media(max-width:520px){
+  .hero .platform-icons svg,
+  .hero .platform-icons img{width:40px;height:40px}
+}
+
 /* Simple CSS tooltip for platform icons */
 .platform-icons a[data-tooltip]::after{
   content: attr(data-tooltip);
