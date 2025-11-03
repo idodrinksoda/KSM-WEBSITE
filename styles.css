@@ -118,7 +118,7 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
 .bandcamp-embed{background:transparent;border:0;padding:0}
 
 /* Platform icon row below Bandcamp embed */
-.platform-icons{display:flex;gap:14px;align-items:center;margin-top:10px}
+.platform-icons{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px}
 .platform-icons a{color:var(--fg);transition:color .2s ease,transform .15s ease}
 .platform-icons a:hover{color:var(--accent);transform:translateY(-1px)}
 .platform-icons svg{width:28px;height:28px;display:block}
