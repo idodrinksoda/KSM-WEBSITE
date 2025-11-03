@@ -121,10 +121,42 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
 
 /* Platform icon row below Bandcamp embed */
 .platform-icons{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px}
-.platform-icons a{color:var(--fg);transition:color .2s ease,transform .15s ease}
+.platform-icons a{position:relative;color:var(--fg);transition:color .2s ease,transform .15s ease}
 .platform-icons a:hover{color:var(--accent);transform:translateY(-1px)}
 .platform-icons svg,.platform-icons img{width:32px;height:32px;display:block}
 .platform-icons a:hover img{transform:translateY(-1px)}
+
+/* Simple CSS tooltip for platform icons */
+.platform-icons a[data-tooltip]::after{
+  content: attr(data-tooltip);
+  position:absolute;left:50%;bottom:100%;
+  transform: translate(-50%, -6px);
+  background: var(--card);
+  color: var(--fg);
+  border:1px solid #22222a;
+  border-radius:8px;
+  padding:4px 8px;
+  font-size:12px;line-height:1;white-space:nowrap;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;z-index:10;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.platform-icons a[data-tooltip]::before{
+  content:"";position:absolute;left:50%;bottom:100%;
+  transform: translate(-50%, 2px) rotate(45deg);
+  width:8px;height:8px;
+  background: var(--card);
+  border-left:1px solid #22222a;border-top:1px solid #22222a;
+  opacity:0;pointer-events:none;z-index:9;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.platform-icons a:hover[data-tooltip]::after,
+.platform-icons a:focus-visible[data-tooltip]::after,
+.platform-icons a:hover[data-tooltip]::before,
+.platform-icons a:focus-visible[data-tooltip]::before{
+  opacity:1;
+  transform: translate(-50%, -10px);
+}
 
 /* Listen platform buttons row */
 .platforms{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 16px}
