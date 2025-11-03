@@ -139,13 +139,9 @@
       <div class="container">
         <h2>YVR Spotify Playlist</h2>
         <div class="card playlist-embed">
-          <iframe
-            src="https://open.spotify.com/embed/playlist/7bvt5vHquWCE3um3CWcIUo?utm_source=generator"
-            title="KSM — YVR Spotify Playlist"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          ></iframe>
+          <div id="playlistMount" class="playlist-mount">
+            <button id="loadPlaylistBtn" class="btn">Load Spotify player</button>
+          </div>
         </div>
         <p class="muted" style="margin-top:8px">If the playlist fails to load, open it directly on
           <a href="https://open.spotify.com/playlist/7bvt5vHquWCE3um3CWcIUo" target="_blank" rel="noopener">Spotify</a>.
@@ -274,6 +270,25 @@
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Click-to-load for Spotify playlist to reduce upstream timeout/ad-block issues
+  const loadBtn = document.getElementById('loadPlaylistBtn');
+  const playlistMount = document.getElementById('playlistMount');
+  loadBtn?.addEventListener('click', () => {
+    if (!playlistMount) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://open.spotify.com/embed/playlist/7bvt5vHquWCE3um3CWcIUo?utm_source=generator';
+    iframe.title = 'KSM — YVR Spotify Playlist';
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+    // ensure styling matches .playlist-embed iframe rules
+    iframe.style.width = '100%';
+    iframe.style.height = '400px';
+    iframe.style.border = '0';
+    iframe.style.borderRadius = '12px';
+    playlistMount.replaceChildren(iframe);
+  });
 </script>
 </body>
 </html>
