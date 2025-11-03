@@ -83,6 +83,7 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
 /* =========================
    SHOWS (poster grid)
    ========================= */
+#shows .card{background:transparent;border:0;padding:0}
 .shows-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:12px;margin-top:10px;
