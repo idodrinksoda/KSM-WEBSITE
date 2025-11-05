@@ -126,11 +126,6 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
 .platform-icons svg,.platform-icons img{width:32px;height:32px;display:block}
 .platform-icons a:hover img{transform:translateY(-1px)}
 
-/* Make Music section icons a bit smaller */
-#music .platform-icons{margin-top:0;margin-bottom:12px}
-#music .platform-icons svg,
-#music .platform-icons img{width:28px;height:28px}
-
 /* Make hero platform icons larger */
 .hero .platform-icons{gap:18px;margin-top:0}
 .hero .platform-icons svg,
@@ -193,25 +188,6 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
   .bandcamp-embed iframe{width:100%;height:360px}
 }
 .playlist-embed iframe{width:100%;height:400px;border:0;border-radius:12px}
-
-/* Larger direct buttons under Bandcamp embed */
-.platform-cta{
-  display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;
-  margin-top:12px
-}
-.platform-btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:10px 14px;border-radius:999px;border:1px solid #22222a;
-  background:#18181f;color:var(--fg);font-weight:800;
-  box-shadow:0 8px 24px rgba(0,0,0,.25);
-  transition:transform .15s ease, box-shadow .2s ease, opacity .15s ease, background .2s ease
-}
-.platform-btn img{width:22px;height:22px;display:block}
-.platform-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.35)}
-
-/* Brand tints for emphasis */
-.platform-btn.bc{background:linear-gradient(135deg,#6fb6c7,#7fc2d3);color:#0b0b0d}
-.platform-btn.qobuz{background:linear-gradient(135deg,#00A4E4,#7ed8f6);color:#0b0b0d}
 
 /* =========================
    FORMS
