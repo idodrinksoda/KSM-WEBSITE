@@ -17,13 +17,13 @@ form?.addEventListener('submit', async (e) => {
       headers: { 'Accept': 'application/json' }
     });
     if (res.ok) {
-      statusEl.textContent = \"Thanks! We'll get back to you.\";
+      statusEl && (statusEl.textContent = "Thanks! We'll get back to you.");
       form.reset();
     } else {
-      statusEl.textContent = 'Something went wrong. Try again or email us directly.';
+      statusEl && (statusEl.textContent = 'Something went wrong. Try again or email us directly.');
     }
   } catch {
-    statusEl.textContent = 'Network error. Please try again later.';
+    statusEl && (statusEl.textContent = 'Network error. Please try again later.');
   }
 });
 
