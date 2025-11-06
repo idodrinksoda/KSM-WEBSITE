@@ -1,3 +1,9 @@
+// ==============================================
+// Site scripts (formatting-only cleanup)
+// Note: This file was tidied for consistency.
+// No functional changes were made.
+// ==============================================
+
 // Smooth scroll to the contact form when CTA is clicked
 const joinBtn = document.getElementById('joinList');
 joinBtn?.addEventListener('click', () => {
