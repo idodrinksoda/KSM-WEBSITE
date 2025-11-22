@@ -1,3 +1,26 @@
+/* Socials section separation and spacing */
+.socials-separator {
+  margin: 40px 0 18px 0;
+  border: none;
+  border-top: 0.5px solid #eee;
+  width: 100%;
+  opacity: 0.5;
+}
+.socials-spaced {
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 18px 0;
+}
+.platform-text {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  color: #2BB7EA;
+}
 /* =========================
    THEME / TOKENS
    ========================= */
