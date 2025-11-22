@@ -6,6 +6,16 @@
   <title>Kama Sutra Murder — Official Site</title>
   <meta name="description" content="Kama Sutra Murder — heavy rock/grunge/alt-metal from Vancouver, BC. Shows, music, merch, contact." />
 
+  <!-- Open Graph / Twitter (single release placeholders) -->
+  <meta property="og:title" content="Kama Sutra Murder — Debut Single Coming Soon">
+  <meta property="og:description" content="Our first single drops on Nov 15, 2025. Pre-save now.">
+  <meta property="og:image" content="assets/single-cover-og.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kama Sutra Murder — Debut Single Coming Soon">
+  <meta name="twitter:description" content="Our first single drops on Nov 15, 2025. Pre-save now.">
+  <meta name="twitter:image" content="assets/single-cover-og.jpg">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +23,24 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- JSON-LD: MusicRecording (placeholder values; update when final) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicRecording",
+    "name": "Debut Single",
+    "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
+    "datePublished": "2025-11-15",
+    "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
+    "image": "assets/single-cover-og.jpg",
+    "url": "/"
+  }
+  </script>
 </head>
 <body>
+
+  
 
   <main>
     <!-- HERO -->
@@ -22,10 +48,48 @@
       <div class="container">
         <h1>Kama Sutra Murder</h1>
         <p>grunge/punk/psych/alt-metal from Vancouver, BC.</p>
-        <!-- Mailing list button moved below -->
       </div>
     </section>
 
+    
+
+    <!-- MUSIC (moved above Shows) -->
+    <section id="music">
+      <div class="container">
+        <h2>Music</h2>
+        <!-- Bandcamp embed (provided iframe for example track) -->
+        <div class="card bandcamp-embed">
+          <iframe style="border: 0; width: 350px; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/" seamless>
+            <a href="https://kamasutramurder.bandcamp.com/track/smile-thru">Smile-Thru by Kama Sutra Murder</a>
+          </iframe>
+        </div>
+        <!-- Streaming profile icons (use to link to band profiles) -->
+        <div class="platform-icons" aria-label="Find us on">
+          <a href="https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc" aria-label="Qobuz" data-tooltip="Qobuz" target="_blank" rel="noopener">
+            <span class="platform-text" style="display:inline-block;font-size:14px;font-weight:600;letter-spacing:.5px;color:#2BB7EA;">Qobuz</span>
+          </a>
+          <a href="https://kamasutramurder.bandcamp.com" aria-label="Bandcamp" data-tooltip="Bandcamp" target="_blank" rel="noopener">
+            <img class="platform-icon" src="https://cdn.simpleicons.org/bandcamp/629AA9" width="28" height="28" alt="Bandcamp" loading="lazy" />
+          </a>
+          <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="Apple Music" data-tooltip="Apple Music" target="_blank" rel="noopener">
+            <img class="platform-icon" src="https://cdn.simpleicons.org/applemusic/FA57C1" width="28" height="28" alt="Apple Music" loading="lazy" />
+          </a>
+          <a href="https://tidal.com/album/471357201/u" aria-label="Tidal" data-tooltip="Tidal" target="_blank" rel="noopener">
+            <img class="platform-icon" src="https://cdn.simpleicons.org/tidal/FFFFFF" width="28" height="28" alt="Tidal" loading="lazy" />
+          </a>
+          <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="iTunes" data-tooltip="iTunes" target="_blank" rel="noopener">
+            <img class="platform-icon" src="https://cdn.simpleicons.org/itunes/FB5BC5" width="28" height="28" alt="iTunes" loading="lazy" />
+          </a>
+           <a href="https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA" aria-label="Spotify" data-tooltip="Spotify" target="_blank" rel="noopener">
+            <img class="platform-icon" src="https://cdn.simpleicons.org/spotify/1DB954" width="28" height="28" alt="Spotify" loading="lazy" />
+          </a>
+          <a href="https://www.youtube.com/@kamasutramurder" aria-label="YouTube" data-tooltip="YouTube" target="_blank" rel="noopener">
+            <img class="qobuz" src="https://cdn.simpleicons.org/youtube/FF0000" width="28" height="28" alt="YouTube" loading="lazy" />
+          </a>
+        </div> 
+      </div>
+    </section>
+    
     <!-- SHOWS -->
     <section id="shows">
       <div class="container">
@@ -53,26 +117,10 @@
         </div>
       </div>
     </section>
-
-    <!-- MUSIC -->
-    <section id="music">
+    
+    <!-- VIDEO (separate from Music) -->
+    <section id="videos">
       <div class="container">
-        <h2>Music</h2>
-        <div class="music-embeds">
-          <iframe src="https://open.spotify.com/embed/playlist/7bvt5vHquWCE3um3CWcIUo?si=fi-sPZGPSAi_bigFljB-4g" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-          <iframe src="https://www.youtube.com/embed/EHyuJ257rb4" title="YouTube video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT / SOCIALS -->
-    <section id="contact">
-      <div class="container">
-        <div class="card">
-          <strong></strong>
-          <p class="muted"></p>
-          <div class="socials">
-            <a href="https://www.instagram.com/kamasutramurder" aria-label="Instagram" target="_blank" rel="noopener">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5z" stroke="currentColor"/></svg>
               <span class="sr-only">Instagram</span>
             </a>
@@ -88,10 +136,25 @@
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 17h8l6-10H9L3 17Z" stroke="currentColor"/></svg>
               <span class="sr-only">Bandcamp</span>
             </a>
-          </div>
           <div style="display: flex; justify-content: center; margin-top: 22px;">
             <button class="cta" id="joinList" data-open-mc style="margin: 0 auto;">Join the mailing list</button>
           </div>
+=======
+        <div class="socials" style="gap: 18px; align-items: center; justify-content: center; display: flex; flex-wrap: wrap; margin: 0 0 18px 0;">
+          <a href="https://www.instagram.com/kamasutramurder" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5z" stroke="currentColor"/></svg>
+            <span class="sr-only">Instagram</span>
+          </a>
+          <a href="https://www.youtube.com/watch?v=EHyuJ257rb4" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22.54 6.42a3 3 0 0 0-2.12-2.12C18.88 3.75 12 3.75 12 3.75s-6.88 0-8.42.55A3 3 0 0 0 1.46 6.42 31.1 31.1 0 0 0 .9 12a31.1 31.1 0 0 0 .56 5.58 3 3 0 0 0 2.12 2.12c1.54.55 8.42.55 8.42.55s6.88 0 8.42-.55a3 3 0 0 0 2.12-2.12A31.1 31.1 0 0 0 23.1 12a31.1 31.1 0 0 0-.56-5.58ZM9.75 15.02V8.98l5.5 3.02-5.5 3.02Z" stroke="currentColor"/></svg>
+            <span class="sr-only">YouTube</span>
+          </a>
+          <a href="https://kamasutramurder.bandcamp.com/" aria-label="Bandcamp" target="_blank" rel="noopener">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 17h8l6-10H9L3 17Z" stroke="currentColor"/></svg>
+            <span class="sr-only">Bandcamp</span>
+          </a>
+          <button class="cta" id="joinList" data-open-mc style="margin-left: 18px;">Join the mailing list</button>
+>>>>>>> feature/site-update-2025-11
         </div>
       </div>
     </section>
@@ -189,6 +252,10 @@
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  
+
+  
 </script>
 </body>
 </html>

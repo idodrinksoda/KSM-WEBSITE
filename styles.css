@@ -28,9 +28,9 @@ a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
 
 /* Give every top-level section vertical rhythm */
-main>section{padding:72px 0;border-top:1px solid var(--border)}
+main>section{padding:72px 0 0 0;border-top:0}
 /* Keep Shows tighter */
-#shows{padding:40px 0}
+#shows{padding:40px 0 0 0;border-top:0}
 
 /* =========================
    HERO
@@ -53,7 +53,7 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
 }
 
 .hero h1{font-size:clamp(38px,6vw,68px);line-height:1.02;margin:0 0 12px}
-.hero p{margin:0 0 24px;color:var(--muted);font-size:clamp(16px,2.3vw,20px)}
+.hero p{margin:0 0 6px;color:var(--muted);font-size:clamp(16px,2.3vw,20px)}
 
 /* =========================
    BUTTONS / CTA
@@ -64,7 +64,9 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
   background:linear-gradient(135deg,var(--accent),var(--accent-2));
   color:#0b0b0d;font-weight:800;cursor:pointer;
   box-shadow:0 8px 24px rgba(255,43,106,.25),0 4px 16px rgba(106,227,255,.15);
+  transition:transform .15s ease, box-shadow .2s ease;
 }
+.cta:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,43,106,.30),0 6px 18px rgba(106,227,255,.18) }
 .btn{
   display:inline-block;padding:8px 12px;border:none;border-radius:10px;
   background:#18181f;color:var(--fg);font-weight:600;cursor:pointer;
@@ -77,12 +79,13 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
    GRID / CARD
    ========================= */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
-.card{background:var(--card);border:1px solid #22222a;border-radius:16px;padding:18px}
+.card{background:transparent;border:0;box-shadow:none;padding:0}
 .span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}
 
 /* =========================
    SHOWS (poster grid)
    ========================= */
+#shows .card{background:transparent;border:0;padding:0}
 .shows-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:12px;margin-top:10px;
@@ -93,9 +96,8 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
   transition:transform .2s ease,box-shadow .2s ease;
 }
 .show-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.35)}
-.show-media{position:relative;aspect-ratio:3/4;margin:0;overflow:hidden}
-@media(max-width:480px){.show-media{aspect-ratio:1/1.2}}
-.show-media img{width:100%;height:100%;object-fit:cover;display:block}
+.show-media{position:relative;margin:0}
+.show-media img{width:100%;height:auto;object-fit:contain;display:block;background:#0f0f14}
 .show-meta{padding:8px 10px 0;display:grid;gap:4px}
 .show-meta time{font-weight:700;letter-spacing:.2px}
 .show-meta span{color:var(--muted);font-size:.9rem}
@@ -113,6 +115,79 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px
 }
 .music-embeds iframe{width:100%;height:400px;border:0;border-radius:12px}
+
+/* Make Bandcamp card blend with page background */
+.bandcamp-embed{background:transparent;border:0;padding:0}
+
+/* Platform icon row below Bandcamp embed */
+.platform-icons{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px}
+.platform-icons a{position:relative;color:var(--fg);transition:color .2s ease,transform .15s ease}
+.platform-icons a:hover{color:var(--accent);transform:translateY(-1px)}
+.platform-icons svg,.platform-icons img{width:32px;height:32px;display:block}
+.platform-icons a:hover img{transform:translateY(-1px)}
+
+/* Make hero platform icons larger */
+.hero .platform-icons{gap:18px;margin-top:0}
+.hero .platform-icons svg,
+.hero .platform-icons img{width:36px;height:36px}
+@media(max-width:520px){
+  .hero .platform-icons svg,
+  .hero .platform-icons img{width:34px;height:34px}
+}
+
+/* Simple CSS tooltip for platform icons */
+.platform-icons a[data-tooltip]::after{
+  content: attr(data-tooltip);
+  position:absolute;left:50%;bottom:100%;
+  transform: translate(-50%, -6px);
+  background: var(--card);
+  color: var(--fg);
+  border:1px solid #22222a;
+  border-radius:8px;
+  padding:4px 8px;
+  font-size:12px;line-height:1;white-space:nowrap;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;z-index:10;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.platform-icons a[data-tooltip]::before{
+  content:"";position:absolute;left:50%;bottom:100%;
+  transform: translate(-50%, 2px) rotate(45deg);
+  width:8px;height:8px;
+  background: var(--card);
+  border-left:1px solid #22222a;border-top:1px solid #22222a;
+  opacity:0;pointer-events:none;z-index:9;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.platform-icons a:hover[data-tooltip]::after,
+.platform-icons a:focus-visible[data-tooltip]::after,
+.platform-icons a:hover[data-tooltip]::before,
+.platform-icons a:focus-visible[data-tooltip]::before{
+  opacity:1;
+  transform: translate(-50%, -10px);
+}
+
+/* Listen platform buttons row */
+.platforms{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 16px}
+@media(max-width:640px){.platforms{justify-content:center;text-align:center}}
+
+/* Video section embed */
+.video-embed{background:transparent;border:0;padding:0}
+.video-embed iframe{width:100%;height:400px;border:0;border-radius:12px}
+
+/* Bandcamp and playlist embeds */
+.bandcamp-embed iframe{
+  display:block;
+  width:350px;
+  height:442px;
+  border:0;
+  border-radius:12px;
+  margin:0 auto;
+}
+@media(max-width:520px){
+  .bandcamp-embed iframe{width:100%;height:360px}
+}
+.playlist-embed iframe{width:100%;height:400px;border:0;border-radius:12px}
 
 /* =========================
    FORMS
@@ -225,4 +300,6 @@ section{scroll-margin-top:80px}
 /* === Social icons: keep icons white, only tint on hover === */
 .socials a { color: var(--fg); }
 .socials a:hover { color: var(--accent); }
+
+/* (Removed .single styles — section no longer used) */
 
