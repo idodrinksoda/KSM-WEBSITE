@@ -28,9 +28,9 @@ a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
 
 /* Give every top-level section vertical rhythm */
-main>section{padding:72px 0;border-top:1px solid var(--border)}
+main>section{padding:72px 0 0 0;border-top:0}
 /* Keep Shows tighter */
-#shows{padding:40px 0}
+#shows{padding:40px 0 0 0;border-top:0}
 
 /* =========================
    HERO
@@ -79,7 +79,7 @@ main>section{padding:72px 0;border-top:1px solid var(--border)}
    GRID / CARD
    ========================= */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
-.card{background:var(--card);border:1px solid #22222a;border-radius:16px;padding:18px}
+.card{background:transparent;border:0;box-shadow:none;padding:0}
 .span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}
 
 /* =========================
