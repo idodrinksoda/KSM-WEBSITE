@@ -33,7 +33,7 @@
      CHANGE THIS to adjust texture strength:
      --bgTextureOpacity: 0.06 → smaller = lighter, larger = stronger */
   --bgTextureTile: 320px;
-    --bgTextureOpacity: 0.02; /* <<< adjust intensity here (even less visible) */
+  --bgTextureOpacity: 0.015; /* <<< adjust intensity here (even less visible) */
   --bgTextureBlend: screen; /* screen keeps whites unchanged */
 }
 
@@ -84,6 +84,10 @@ main>section{padding:72px 0 0 0;border-top:0}
 
 .hero h1{font-size:clamp(38px,6vw,68px);line-height:1.02;margin:0 0 12px}
 .hero p{margin:0 0 6px;color:var(--muted);font-size:clamp(16px,2.3vw,20px)}
+/* Improve hero text readability over textured backgrounds */
+.hero h1,
+.hero p,
+main h2{ text-shadow: 0 2px 14px rgba(0,0,0,.45); }
 
 /* =========================
    BUTTONS / CTA
@@ -150,7 +154,14 @@ main>section{padding:72px 0 0 0;border-top:0}
 .bandcamp-embed{background:transparent;border:0;padding:0}
 
 /* Platform icon row below Bandcamp embed */
-.platform-icons{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px}
+.platform-icons{
+  display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px;
+  /* Subtle backdrop to keep icons readable over textured bg */
+  background: rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  border-radius:14px;
+  padding:8px 12px;
+}
 .platform-icons a{position:relative;color:var(--fg);transition:color .2s ease,transform .15s ease}
 .platform-icons a:hover{color:var(--accent);transform:translateY(-1px)}
 .platform-icons svg,.platform-icons img{width:32px;height:32px;display:block}
