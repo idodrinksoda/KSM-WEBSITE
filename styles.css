@@ -33,7 +33,7 @@
      CHANGE THIS to adjust texture strength:
      --bgTextureOpacity: 0.06 → smaller = lighter, larger = stronger */
   --bgTextureTile: 320px;
-    --bgTextureOpacity: 0.03; /* <<< adjust intensity here (less visible) */
+    --bgTextureOpacity: 0.02; /* <<< adjust intensity here (even less visible) */
   --bgTextureBlend: screen; /* screen keeps whites unchanged */
 }
 
@@ -331,6 +331,7 @@ body.bg-overlay-sticker{
   background-repeat: repeat;
   background-size: var(--bgTextureTile) var(--bgTextureTile);
   background-position: 0 0;
+  background-attachment: fixed; /* keep tiles steady while scrolling */
   /* Color layer controls the perceived opacity of the texture */
   background-color: rgba(255,255,255,var(--bgTextureOpacity)); /* <<< change this via the variable above */
   background-blend-mode: var(--bgTextureBlend);
