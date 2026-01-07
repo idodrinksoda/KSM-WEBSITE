@@ -33,7 +33,7 @@
      CHANGE THIS to adjust texture strength:
      --bgTextureOpacity: 0.06 → smaller = lighter, larger = stronger */
   --bgTextureTile: 320px;
-  --bgTextureOpacity: 0.012; /* <<< adjust intensity here (lower tile opacity) */
+  --bgTextureOpacity: 0.01; /* <<< adjust intensity here (lower tile opacity) */
   --bgTextureBlend: screen; /* screen keeps whites unchanged */
 }
 
@@ -93,7 +93,7 @@ main h2{ text-shadow: 0 2px 14px rgba(0,0,0,.45); }
 .hero h1,
 main h2{
   display:inline-block;
-  background: rgba(0,0,0,.96);
+  background: rgba(0,0,0,.75);
   border-radius:10px;
   padding:4px 10px;
 }
@@ -165,13 +165,14 @@ main h2{
 /* Platform icon row below Bandcamp embed */
 .platform-icons{
   display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px;
-  /* Subtle backdrop to keep icons readable over textured bg */
-  background: rgba(0,0,0,.96);
-  border:1px solid #22222a;
-  border-radius:14px;
-  padding:8px 12px;
 }
 .platform-icons a{position:relative;color:var(--fg);transition:color .2s ease,transform .15s ease}
+.platform-icons a{
+  background: rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  border-radius:10px;
+  padding:6px 8px;
+}
 .platform-icons a:hover{color:var(--accent);transform:translateY(-1px)}
 .platform-icons svg,.platform-icons img{width:32px;height:32px;display:block}
 .platform-icons a:hover img{transform:translateY(-1px)}
