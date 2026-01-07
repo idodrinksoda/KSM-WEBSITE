@@ -322,7 +322,7 @@ body.bg-overlay-sticker::before{
   content:"";position:fixed;inset:0;
   /* Tiled repeat across the entire viewport; gentler tile size and blend */
   background: url('assets/sticker.jpg') 0 0 / 320px 320px repeat;
-  opacity:.06;mix-blend-mode:soft-light;pointer-events:none;z-index:0;
+  opacity:.06;mix-blend-mode:screen;pointer-events:none;z-index:0;
 }
 
 /* === Mobile dropdown (needed for the .open class your JS toggles) === */
