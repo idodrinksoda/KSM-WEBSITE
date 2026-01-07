@@ -33,7 +33,7 @@
      CHANGE THIS to adjust texture strength:
      --bgTextureOpacity: 0.06 → smaller = lighter, larger = stronger */
   --bgTextureTile: 320px;
-  --bgTextureOpacity: 0.04; /* <<< adjust intensity here (a bit over half of 0.06) */
+    --bgTextureOpacity: 0.03; /* <<< adjust intensity here (less visible) */
   --bgTextureBlend: screen; /* screen keeps whites unchanged */
 }
 
