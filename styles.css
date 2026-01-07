@@ -318,11 +318,13 @@ section{scroll-margin-top:80px}
 }
 
 /* Subtle sitewide background overlay (toggle via body class) */
-body.bg-overlay-sticker::before{
-  content:"";position:fixed;inset:0;
-  /* Tiled repeat across the entire viewport; gentler tile size and blend */
-  background: url('assets/sticker.jpg') 0 0 / 320px 320px repeat;
-  opacity:.06;mix-blend-mode:screen;pointer-events:none;z-index:0;
+/* Sitewide tiled background, rendered behind all content */
+body.bg-overlay-sticker{
+  background-image: url('assets/sticker.jpg');
+  background-repeat: repeat;
+  background-size: 320px 320px;
+  background-position: 0 0;
+  background-blend-mode: screen;
 }
 
 /* === Mobile dropdown (needed for the .open class your JS toggles) === */
