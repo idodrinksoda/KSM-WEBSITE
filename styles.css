@@ -33,7 +33,7 @@
      CHANGE THIS to adjust texture strength:
      --bgTextureOpacity: 0.06 → smaller = lighter, larger = stronger */
   --bgTextureTile: 320px;
-  --bgTextureOpacity: 0.015; /* <<< adjust intensity here (even less visible) */
+  --bgTextureOpacity: 0.012; /* <<< adjust intensity here (lower tile opacity) */
   --bgTextureBlend: screen; /* screen keeps whites unchanged */
 }
 
@@ -88,6 +88,15 @@ main>section{padding:72px 0 0 0;border-top:0}
 .hero h1,
 .hero p,
 main h2{ text-shadow: 0 2px 14px rgba(0,0,0,.45); }
+
+/* Stronger readability: subtle backdrop behind titles */
+.hero h1,
+main h2{
+  display:inline-block;
+  background: rgba(0,0,0,.38);
+  border-radius:10px;
+  padding:4px 10px;
+}
 
 /* =========================
    BUTTONS / CTA
@@ -157,7 +166,7 @@ main h2{ text-shadow: 0 2px 14px rgba(0,0,0,.45); }
 .platform-icons{
   display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px;
   /* Subtle backdrop to keep icons readable over textured bg */
-  background: rgba(0,0,0,.28);
+  background: rgba(0,0,0,.36);
   border:1px solid #22222a;
   border-radius:14px;
   padding:8px 12px;
