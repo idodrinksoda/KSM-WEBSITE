@@ -32,8 +32,8 @@
   /* === Background texture controls ===
      CHANGE THIS to adjust texture strength:
      --bgTextureOpacity: 0.06 → smaller = lighter, larger = stronger */
-  --bgTextureTile: 400px;
-  --bgTextureOpacity: 0.004; /* <<< adjust intensity here (quite more subdued) */
+  --bgTextureTile: 360px;
+  --bgTextureOpacity: 0.002; /* more subtle: lower opacity further */
   --bgTextureBlend: soft-light; /* soft-light reduces white intensity vs screen */
 }
 
