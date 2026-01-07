@@ -35,7 +35,7 @@
   --bgTextureTile: 360px;
   --bgTextureOpacity: 0.002; /* more subtle: lower opacity further */
   --bgTextureBlend: soft-light; /* soft-light reduces white intensity vs screen */
-  --bgTextureOverlay: 0.22; /* dark glaze over the tiles to cut contrast */
+  --bgTextureOverlay: 0.14; /* slightly lighter glaze so a bit more white shows */
 }
 
 /* =========================
@@ -327,7 +327,7 @@ section{scroll-margin-top:80px}
 .hero.has-image::before{
   content:"";position:absolute;inset:0;
   background:url('assets/hero.jpg') center/cover no-repeat;
-  opacity:.85;z-index:0;transform:scale(1.05);pointer-events:none;
+  opacity:.78;z-index:0;transform:scale(1.05);pointer-events:none;
 }
 .hero.has-image::after{
   content:"";position:absolute;inset:0;
