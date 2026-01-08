@@ -57,11 +57,12 @@
 .socials a{position:relative}
 @media (max-width:520px){
   .socials{
-    grid-template-columns: repeat(3, minmax(32px,1fr));
-    gap:10px;
+    grid-template-columns: repeat(3, minmax(28px,1fr));
+    gap:8px;
   }
   .socials svg,
-  .socials img{width:32px;height:32px}
+  .socials img{width:28px;height:28px}
+  .socials-block{transform: translateX(-4px);} /* smaller nudge on mobile */
 }
 
 /* =========================
@@ -447,10 +448,16 @@ body.bg-overlay-sticker{
 /* Mobile adjustments: soften and shrink tiles for smaller screens */
 @media (max-width: 600px) {
   :root {
-    --bgTextureTile: 200px;
+    --bgTextureTile: 180px;
     --bgTextureOpacity: 0.002;
     --bgTextureOverlay: 0.14;
   }
+}
+
+/* Streaming icons row below Bandcamp: allow wrap and shrink on mobile */
+@media (max-width: 600px) {
+  .platform-icons{flex-wrap:wrap;gap:10px}
+  .platform-icons svg,.platform-icons img{width:26px;height:26px}
 }
 
 /* === Mobile dropdown (needed for the .open class your JS toggles) === */
