@@ -21,6 +21,7 @@
   align-items:center;
   justify-content:center;
   text-align:center;
+  transform: translateX(-8px); /* nudge socials slightly left */
 }
 .platform-text {
   display: inline-block;
