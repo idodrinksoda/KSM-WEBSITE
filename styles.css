@@ -328,8 +328,8 @@ footer,.site-footer{
 .footer-wrap{
   display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
 }
-.socials{display:flex;gap:14px}
-.socials svg,.socials img{width:32px;height:32px}
+.socials{display:flex;gap:18px}
+.socials svg,.socials img{width:64px;height:64px}
 .socials a{position:relative}
 /* Simple tooltip for socials icons */
 .socials a[data-tooltip]::after{
