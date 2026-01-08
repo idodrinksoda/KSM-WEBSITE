@@ -110,6 +110,21 @@ main h2{
   transition:transform .15s ease, box-shadow .2s ease;
 }
 .cta:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,43,106,.30),0 6px 18px rgba(106,227,255,.18) }
+
+/* Tone down the inline “Join the mailing list” CTA in socials so it blends in */
+#joinList.cta{
+  background: #191922;
+  color: var(--fg);
+  box-shadow: none;
+  border: 1px solid #22222a;
+  font-weight: 700;
+}
+#joinList.cta:hover{
+  background: #222232;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.35);
+}
+#joinList.cta:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 .btn{
   display:inline-block;padding:8px 12px;border:none;border-radius:10px;
   background:#18181f;color:var(--fg);font-weight:600;cursor:pointer;
