@@ -329,6 +329,7 @@ footer,.site-footer{
   display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
 }
 .socials{display:flex;gap:14px}
+.socials svg,.socials img{width:32px;height:32px}
 .muted{color:var(--muted)}
 section{scroll-margin-top:80px}
 
