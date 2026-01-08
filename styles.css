@@ -46,6 +46,21 @@
   --bgTextureBlend: soft-light; /* soft-light reduces white intensity vs screen */
   --bgTextureOverlay: 0.14; /* slightly lighter glaze so a bit more white shows */
 }
+.socials{
+  display:grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+}
+.socials svg,.socials img{width:40px;height:40px}
+.socials a{position:relative}
+@media (max-width:520px){
+  .socials{
+    grid-template-columns: repeat(3, minmax(40px,1fr));
+    gap:12px;
+  }
+}
 
 /* =========================
    BASE / RESET
@@ -425,6 +440,15 @@ body.bg-overlay-sticker{
   /* First layer darkens/softens edges; second layer is the texture */
   background-blend-mode: multiply, var(--bgTextureBlend);
   background-color: var(--bg);
+}
+
+/* Mobile adjustments: soften and shrink tiles for smaller screens */
+@media (max-width: 600px) {
+  :root {
+    --bgTextureTile: 240px;
+    --bgTextureOpacity: 0.0015;
+    --bgTextureOverlay: 0.12;
+  }
 }
 
 /* === Mobile dropdown (needed for the .open class your JS toggles) === */
