@@ -57,12 +57,12 @@
 .socials a{position:relative}
 @media (max-width:520px){
   .socials{
-    grid-template-columns: repeat(3, minmax(28px,1fr));
-    gap:8px;
+    grid-template-columns: repeat(3, minmax(24px,1fr));
+    gap:6px;
   }
   .socials svg,
-  .socials img{width:28px;height:28px}
-  .socials-block{transform: translateX(-4px);} /* smaller nudge on mobile */
+  .socials img{width:24px;height:24px}
+  .socials-block{transform: translateX(-2px);} /* smaller nudge on mobile */
 }
 
 /* =========================
