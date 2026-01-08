@@ -14,6 +14,14 @@
   flex-wrap: wrap;
   margin: 18px 0 18px 0; /* add breathing room from hero above */
 }
+
+.socials-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 .platform-text {
   display: inline-block;
   font-size: 14px;
