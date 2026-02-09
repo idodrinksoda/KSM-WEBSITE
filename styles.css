@@ -144,6 +144,19 @@ main h2{
 }
 .cta:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,43,106,.30),0 6px 18px rgba(106,227,255,.18) }
 
+.cta.cta-muted{
+  background:#1a1a22;
+  color:var(--fg);
+  box-shadow:none;
+  border:1px solid #24242c;
+  font-weight:700;
+}
+.cta.cta-muted:hover{
+  background:#232332;
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(0,0,0,.35);
+}
+
 /* Tone down the inline “Join the mailing list” CTA in socials so it blends in */
 #joinList.cta{
   background: #191922;
