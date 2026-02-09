@@ -41,10 +41,10 @@
   /* === Background texture controls ===
      CHANGE THIS to adjust texture strength:
      --bgTextureOpacity: 0.06 → smaller = lighter, larger = stronger */
-  --bgTextureTile: 360px;
-  --bgTextureOpacity: 0.002; /* more subtle: lower opacity further */
+  --bgTextureTile: 320px;
+  --bgTextureOpacity: 0.0012; /* more subtle: lower opacity further */
   --bgTextureBlend: soft-light; /* soft-light reduces white intensity vs screen */
-  --bgTextureOverlay: 0.14; /* slightly lighter glaze so a bit more white shows */
+  --bgTextureOverlay: 0.12; /* slightly lighter glaze so a bit more white shows */
 }
 .socials{
   display:grid;
@@ -175,6 +175,7 @@ main h2{
   display:inline-block;padding:8px 12px;border:none;border-radius:10px;
   background:#18181f;color:var(--fg);font-weight:600;cursor:pointer;
   transition:background .2s ease,transform .15s ease,opacity .15s ease;
+  will-change: transform;
 }
 .btn:hover{background:#262636;transform:translateY(-1px)}
 .btn:focus{outline:none;box-shadow:0 0 0 2px var(--accent-2)}
@@ -198,6 +199,7 @@ main h2{
   background:var(--card);border:1px solid #22222a;border-radius:8px;
   overflow:hidden;display:flex;flex-direction:column;
   transition:transform .2s ease,box-shadow .2s ease;
+  will-change: transform;
 }
 .show-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.35)}
 .show-media{position:relative;margin:0}
@@ -471,9 +473,15 @@ body.bg-overlay-sticker{
 /* Mobile adjustments: soften and shrink tiles for smaller screens */
 @media (max-width: 600px) {
   :root {
-    --bgTextureTile: 180px;
-    --bgTextureOpacity: 0.002;
-    --bgTextureOverlay: 0.14;
+    --bgTextureTile: 160px;
+    --bgTextureOpacity: 0.001;
+    --bgTextureOverlay: 0.12;
+  }
+
+  body.bg-overlay-sticker{
+    background-image: none;
+    background-color: var(--bg);
+    background-attachment: scroll;
   }
 }
 
