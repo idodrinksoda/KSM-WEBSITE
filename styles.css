@@ -122,7 +122,7 @@ h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
 .site-nav a:hover{background:#1e1e2a;color:var(--accent-2);transform:translateY(-1px)}
 .site-nav a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 @media (max-width:640px){
-  body{padding-top:56px}
+  body{padding-top  :56px}
   .site-top{top:8px;left:8px;right:8px;gap:8px}
   .top-socials{gap:6px}
   .top-socials a{padding:4px 6px;border-radius:10px}
@@ -307,6 +307,14 @@ main h2{
 @media(max-width:520px){
   .hero .platform-icons svg,
   .hero .platform-icons img{width:34px;height:34px}
+}
+
+@media(max-width:540px){
+  .platform-icons{gap:6px;justify-content:center;flex-wrap:nowrap}
+  .platform-icons a{padding:4px 6px}
+  .platform-icons svg,
+  .platform-icons img{width:24px;height:24px}
+  .platform-icons .platform-text{font-size:12px !important;letter-spacing:.2px !important}
 }
 
 /* Simple CSS tooltip for platform icons */
