@@ -91,6 +91,31 @@ a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 .section{padding:72px 0;border-top:1px solid var(--border)}
 h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
 
+/* Quick nav (top-right) */
+.site-nav{
+  position:fixed;top:16px;right:16px;z-index:50;
+}
+.site-nav-links{
+  display:flex;gap:10px;align-items:center;
+  padding:8px 10px;border-radius:999px;
+  background:rgba(19,19,24,.9);
+  border:1px solid rgba(255,255,255,.05);
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+  backdrop-filter:blur(10px);
+}
+.site-nav a{
+  color:var(--fg);font-weight:700;font-size:15px;letter-spacing:.2px;
+  padding:8px 12px;border-radius:999px;display:block;
+  transition:background .2s ease,color .2s ease,transform .15s ease;
+}
+.site-nav a:hover{background:#1e1e2a;color:var(--accent-2);transform:translateY(-1px)}
+.site-nav a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+@media (max-width:640px){
+  .site-nav{top:12px;right:12px;left:12px}
+  .site-nav-links{justify-content:center;flex-wrap:wrap}
+  .site-nav a{padding:8px 10px;font-size:14px}
+}
+
 /* Give every top-level section vertical rhythm */
 main>section{padding:72px 0 0 0;border-top:0}
 /* Keep Shows tighter */
