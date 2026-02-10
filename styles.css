@@ -15,14 +15,7 @@
   margin: 18px 0 18px 0; /* add breathing room from hero above */
 }
 
-.socials-block{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  transform: translateX(-8px); /* nudge socials slightly left */
-}
+.socials-block{display:none}
 .platform-text {
   display: inline-block;
   font-size: 14px;
@@ -91,48 +84,58 @@ a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 .section{padding:72px 0;border-top:1px solid var(--border)}
 h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
 
-/* Quick nav (top-right) */
-.site-nav{
-  position:fixed;top:16px;right:16px;z-index:50;
+/* Top bar with socials + nav */
+.site-top{
+  position:fixed;top:12px;left:12px;right:12px;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
 }
+.top-socials{
+  display:flex;align-items:center;gap:10px;flex-wrap:nowrap;
+}
+.top-socials a{
+  display:flex;align-items:center;justify-content:center;
+  padding:6px 8px;
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  border-radius:10px;
+  position:relative;
+  -webkit-tap-highlight-color: transparent;
+  transition:background .2s ease,transform .15s ease,color .2s ease;
+}
+.top-socials a:hover{background:#1e1e2a;transform:translateY(-1px)}
+.top-socials svg,.top-socials img{width:24px;height:24px}
+
+/* Quick nav inside top bar */
+.site-nav{position:static}
 .site-nav-links{
   display:flex;gap:10px;align-items:center;
-  padding:8px 10px;border-radius:999px;
-  background:rgba(19,19,24,.9);
-  border:1px solid rgba(255,255,255,.05);
-  box-shadow:0 12px 30px rgba(0,0,0,.45);
-  backdrop-filter:blur(10px);
+  padding:0;border-radius:999px;
+  background:none;border:none;box-shadow:none;backdrop-filter:none;
 }
 .site-nav a{
   color:var(--fg);font-weight:700;font-size:15px;letter-spacing:.2px;
-  padding:8px 12px;border-radius:999px;display:block;
-  background:rgba(0,0,0,.72);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 8px 18px rgba(0,0,0,.45);
-  transition:background .2s ease,color .2s ease,transform .15s ease,box-shadow .2s ease;
+  padding:6px 10px;border-radius:10px;display:block;
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  transition:background .2s ease,color .2s ease,transform .15s ease;
 }
-.site-nav a:hover{background:#1a1a24;color:var(--accent-2);transform:translateY(-1px);box-shadow:0 12px 22px rgba(0,0,0,.5)}
+.site-nav a:hover{background:#1e1e2a;color:var(--accent-2);transform:translateY(-1px)}
 .site-nav a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 @media (max-width:640px){
-  .site-nav{
-    position:sticky;
-    top:0;
-    right:auto;
-    left:0;
-    padding:8px 12px;
-    background:none;
-  }
+  body{padding-top:56px}
+  .site-top{top:8px;left:8px;right:8px;gap:8px}
+  .top-socials{gap:6px}
+  .top-socials a{padding:4px 6px;border-radius:10px}
+  .top-socials svg,.top-socials img{width:20px;height:20px}
+  .site-nav{position:static;padding:0;background:none}
   .site-nav-links{
-    justify-content:center;
-    flex-wrap:wrap;
-    width:100%;
-    background:none;
-    border:none;
-    box-shadow:none;
-    backdrop-filter:none;
+    justify-content:flex-end;
+    flex-wrap:nowrap;
+    gap:6px;
+    width:auto;
     padding:0;
   }
-  .site-nav a{padding:8px 10px;font-size:14px}
+  .site-nav a{padding:6px 10px;font-size:14px}
 
   /* Anchor offset on mobile so titles clear the sticky nav */
   #music, #shows, #videos{scroll-margin-top:6px}
@@ -183,14 +186,14 @@ main h2{
    BUTTONS / CTA
    ========================= */
 .cta{
-  display:inline-flex;align-items:center;gap:12px;
-  padding:14px 18px;border:none;border-radius:999px;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#0b0b0d;font-weight:800;cursor:pointer;
-  box-shadow:0 8px 24px rgba(255,43,106,.25),0 4px 16px rgba(106,227,255,.15);
-  transition:transform .15s ease, box-shadow .2s ease;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 14px;border:none;border-radius:10px;
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  color:var(--fg);font-weight:800;cursor:pointer;
+  transition:background .2s ease,transform .15s ease;
 }
-.cta:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,43,106,.30),0 6px 18px rgba(106,227,255,.18) }
+.cta:hover{ background:#1e1e2a; transform:translateY(-2px); }
 
 .cta.cta-muted{
   background:#1a1a22;
@@ -207,25 +210,26 @@ main h2{
 
 /* Tone down the inline “Join the mailing list” CTA in socials so it blends in */
 #joinList.cta{
-  background: #191922;
-  color: var(--fg);
-  box-shadow: none;
-  border: 1px solid #22222a;
-  font-weight: 700;
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  color:var(--fg);
+  box-shadow:none;
+  font-weight:700;
+  border-radius:10px;
 }
 #joinList.cta:hover{
-  background: #222232;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(0,0,0,.35);
+  background:#1e1e2a;
+  transform:translateY(-1px);
+  box-shadow:none;
 }
 #joinList.cta:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 .btn{
-  display:inline-block;padding:8px 12px;border:none;border-radius:10px;
-  background:#18181f;color:var(--fg);font-weight:600;cursor:pointer;
+  display:inline-block;padding:8px 12px;border:1px solid #22222a;border-radius:10px;
+  background:rgba(0,0,0,.28);color:var(--fg);font-weight:700;cursor:pointer;
   transition:background .2s ease,transform .15s ease,opacity .15s ease;
   will-change: transform;
 }
-.btn:hover{background:#262636;transform:translateY(-1px)}
+.btn:hover{background:#1e1e2a;transform:translateY(-1px)}
 .btn:focus{outline:none;box-shadow:0 0 0 2px var(--accent-2)}
 
 /* =========================
@@ -257,10 +261,18 @@ main h2{
 .show-meta span{color:var(--muted);font-size:.9rem}
 .show-actions{padding:8px 10px 10px;display:flex;gap:8px;flex-wrap:wrap}
 .btn-tickets{
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#0b0b0d;font-weight:700;border:none;border-radius:999px;padding:10px 14px;
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  color:var(--fg);
+  font-weight:700;
+  border-radius:10px;
+  padding:8px 12px;
 }
-.btn-map,.btn-details{background:#18181f;border-radius:999px}
+.btn-map,.btn-details{
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  border-radius:10px;
+}
 
 /* =========================
    MUSIC EMBEDS
@@ -327,6 +339,56 @@ main h2{
 .platform-icons a:focus-visible[data-tooltip]::before{
   opacity:1;
   transform: translate(-50%, -10px);
+}
+
+/* Tooltips for top-bar socials */
+.top-socials a[data-tooltip]::after{
+  content: attr(data-tooltip);
+  position:absolute;left:50%;top:100%;
+  transform: translate(-50%, 14px);
+  background: var(--card);
+  color: var(--fg);
+  border:1px solid #22222a;
+  border-radius:8px;
+  padding:4px 8px;
+  font-size:12px;line-height:1;white-space:nowrap;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;z-index:20;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.top-socials a[data-tooltip]::before{
+  content:"";position:absolute;left:50%;top:100%;
+  transform: translate(-50%, 4px) rotate(45deg);
+  width:8px;height:8px;
+  background: var(--card);
+  border-left:1px solid #22222a;border-top:1px solid #22222a;
+  opacity:0;pointer-events:none;z-index:19;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.top-socials a:hover[data-tooltip]::after,
+.top-socials a:hover[data-tooltip]::before{
+  opacity:1;
+  transform: translate(-50%, 18px);
+}
+
+@media (hover: none){
+  .top-socials a,
+  .top-socials a:hover,
+  .top-socials a:active,
+  .top-socials a:focus,
+  .top-socials a:focus-visible{
+    background:rgba(0,0,0,.28) !important;
+    color:var(--fg) !important;
+    border-color:#22222a !important;
+    box-shadow:none !important;
+    transform:none !important;
+    outline:none !important;
+    transition:none !important;
+  }
+  .top-socials a[data-tooltip]::after,
+  .top-socials a[data-tooltip]::before{
+    display:none!important;
+  }
 }
 
 /* Listen platform buttons row */
