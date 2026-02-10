@@ -106,18 +106,41 @@ h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
 .site-nav a{
   color:var(--fg);font-weight:700;font-size:15px;letter-spacing:.2px;
   padding:8px 12px;border-radius:999px;display:block;
-  transition:background .2s ease,color .2s ease,transform .15s ease;
+  background:rgba(0,0,0,.72);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 8px 18px rgba(0,0,0,.45);
+  transition:background .2s ease,color .2s ease,transform .15s ease,box-shadow .2s ease;
 }
-.site-nav a:hover{background:#1e1e2a;color:var(--accent-2);transform:translateY(-1px)}
+.site-nav a:hover{background:#1a1a24;color:var(--accent-2);transform:translateY(-1px);box-shadow:0 12px 22px rgba(0,0,0,.5)}
 .site-nav a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
 @media (max-width:640px){
-  .site-nav{top:12px;right:12px;left:12px}
-  .site-nav-links{justify-content:center;flex-wrap:wrap}
+  .site-nav{
+    position:sticky;
+    top:0;
+    right:auto;
+    left:0;
+    padding:8px 12px;
+    background:none;
+  }
+  .site-nav-links{
+    justify-content:center;
+    flex-wrap:wrap;
+    width:100%;
+    background:none;
+    border:none;
+    box-shadow:none;
+    backdrop-filter:none;
+    padding:0;
+  }
   .site-nav a{padding:8px 10px;font-size:14px}
+
+  /* Anchor offset on mobile so titles clear the sticky nav */
+  #music, #shows, #videos{scroll-margin-top:6px}
 }
 
 /* Give every top-level section vertical rhythm */
 main>section{padding:72px 0 0 0;border-top:0}
+#music, #shows, #videos{scroll-margin-top:4px}
 /* Keep Shows tighter */
 #shows{padding:40px 0 0 0;border-top:0}
 
