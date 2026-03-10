@@ -26,7 +26,7 @@ Push/merge to `main`. GitHub Pages serves the repo root with `CNAME` → `kamasu
 ## Key sections and patterns
 - Hero: background image from `assets/hero.jpg` (see `.hero.has-image::before`).
 - Music: Bandcamp embed + streaming icons (`.platform-icons` use Simple Icons CDN).
-- Shows: cards inside `#shows .shows-grid`.
+- Shows: cards inside `#shows .shows-grid`; enter ISO dates (`YYYY-MM-DD`) in the `<time>` content/`datetime`, the inline JS formats them to `Sat Mar 21, 2026` in UTC.
 - Videos: `youtube-nocookie` iframe inside `.video-embed`.
 - Mailchimp modal: `#mcModal` with `[data-open-mc]` and `[data-close-mc]` controls.
 
@@ -41,7 +41,7 @@ Append an `article.show-card` to `#shows .shows-grid`:
     </a>
   </figure>
   <div class="show-meta">
-    <time datetime="YYYY-MM-DD" id="show-id">Mon DD, YYYY</time>
+    <time datetime="YYYY-MM-DD" id="show-id">YYYY-MM-DD</time>
     <span>Venue – City, ST</span>
     <span>Doors X · Show Y · 19+</span>
   </div>

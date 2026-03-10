@@ -106,14 +106,13 @@
         <h2>Shows</h2>
         <div class="card">
           <div class="shows-grid">
-            <!-- (removed: Baggaclaim KW show) -->
 
             <article class="show-card" aria-labelledby="show-takeurtime">
               <figure class="show-media">
                 <img src="assets/TYTMarch21.jpg" alt="Poster — Take Your Time" loading="lazy" width="400" height="600">
               </figure>
               <div class="show-meta">
-                <time datetime="2026-03-21" id="show-takeurtime">Sat Mar 21, 2026</time>
+                <time datetime="2026-03-21" id="show-takeurtime">2026-03-21</time>
                 <span>Take Your Time – Vancouver, BC</span>
               </div>
               <div class="show-actions">
@@ -129,7 +128,7 @@
                 </a>
               </figure>
               <div class="show-meta">
-                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">Sat Mar 22, 2026</time>
+                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">2026-03-22</time>
                 <span>Green Auto – Vancouver, BC</span>
               </div>
               <div class="show-actions">
@@ -255,6 +254,22 @@
     });
     observer.observe(mcSuccess, { childList: true, attributes: true, subtree: true });
   }
+
+  // Format show dates from ISO text to readable string
+  const showDateFormatter = new Intl.DateTimeFormat('en-US', {
+    weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'
+  });
+  document.querySelectorAll('#shows time[datetime]').forEach(timeEl => {
+    const raw = (timeEl.getAttribute('datetime') || timeEl.textContent || '').trim();
+    const parts = raw.split('-').map(Number);
+    const isValidIso = parts.length === 3 && parts.every(n => !Number.isNaN(n));
+    if (isValidIso) {
+      const [y, m, d] = parts;
+      const parsed = new Date(Date.UTC(y, m - 1, d));
+      const formatted = showDateFormatter.format(parsed).replace(',', '');
+      timeEl.textContent = formatted;
+    }
+  });
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
