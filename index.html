@@ -162,10 +162,10 @@
         <h2 class="glitch-soft" data-text="Gallery">Gallery</h2>
         <div class="card gallery-card">
           <figure class="gallery-frame">
-            <img id="galleryImage" src="https://via.placeholder.com/960x640/111118/FFFFFF?text=Add+Dropbox+raw+links" alt="Gallery placeholder" loading="lazy" width="960" height="640">
+            <img id="galleryImage" src="assets/gallery/DSCF6225-Enhanced-NR.jpg" alt="Gallery photo 1" loading="lazy" width="640" height="426">
           </figure>
           <div class="gallery-meta">
-            <p>Photos will rotate from your Dropbox raw links. Replace the URLs in the script below and they will cycle automatically.</p>
+            <p>Live photos from the assets/gallery folder rotate automatically.</p>
             <div class="gallery-controls">
               <button class="btn" type="button" data-gallery-prev aria-label="Previous photo">Prev</button>
               <button class="btn" type="button" data-gallery-next aria-label="Next photo">Next</button>
@@ -248,7 +248,13 @@
   });
 
   // Gallery rotation using Dropbox raw links
-  const galleryImages = [];
+  const galleryImages = [
+    'assets/gallery/DSCF6225-Enhanced-NR.jpg',
+    'assets/gallery/DSCF6524-Enhanced-NR.jpg',
+    'assets/gallery/DSCF6790-Enhanced-NR.jpg',
+    'assets/gallery/DSCF6895-Enhanced-NR.jpg',
+    'assets/gallery/KAMA%20SUTRA%20MURDER%2024.jpg'
+  ];
   const galleryImgEl = document.getElementById('galleryImage');
   const galleryPrev = document.querySelector('[data-gallery-prev]');
   const galleryNext = document.querySelector('[data-gallery-next]');
