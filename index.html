@@ -56,7 +56,7 @@
     <!-- HERO -->
     <section class="hero has-image">
       <div class="container">
-        <h1>Kama Sutra Murder</h1>
+        <h1 class="glitch-title" data-text="Kama Sutra Murder">Kama Sutra Murder</h1>
         <p>grunge/punk/psych/alt-metal from Vancouver, BC.</p>
       </div>
     </section>
@@ -66,44 +66,57 @@
     <!-- MUSIC (moved above Shows) -->
     <section id="music">
       <div class="container">
-        <h2>Music</h2>
-        <!-- Bandcamp embed (provided iframe for example track) -->
-        <div class="card bandcamp-embed">
-          <iframe style="border: 0; width: 350px; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/" seamless>
-            <a href="https://kamasutramurder.bandcamp.com/track/smile-thru">Smile-Thru by Kama Sutra Murder</a>
-          </iframe>
+        <h2 class="glitch-soft" data-text="Music">Music</h2>
+        <div class="singles-grid">
+          <article class="single-card" aria-labelledby="single-smile-thru">
+            <h3 id="single-smile-thru">Smile-Thru</h3>
+            <div class="card bandcamp-embed">
+              <iframe style="border: 0; width: 350px; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/" seamless>
+                <a href="https://kamasutramurder.bandcamp.com/track/smile-thru">Smile-Thru by Kama Sutra Murder</a>
+              </iframe>
+            </div>
+            <div class="platform-icons" aria-label="Find Smile-Thru on">
+              <a href="https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc" aria-label="Qobuz" data-tooltip="Qobuz" target="_blank" rel="noopener">
+                <span class="platform-text" style="display:inline-block;font-size:14px;font-weight:600;letter-spacing:.5px;color:#2BB7EA;">Qobuz</span>
+              </a>
+              <a href="https://kamasutramurder.bandcamp.com" aria-label="Bandcamp" data-tooltip="Bandcamp" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/bandcamp/629AA9" width="28" height="28" alt="Bandcamp" loading="lazy" />
+              </a>
+              <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="Apple Music" data-tooltip="Apple Music" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/applemusic/FA57C1" width="28" height="28" alt="Apple Music" loading="lazy" />
+              </a>
+              <a href="https://tidal.com/album/471357201/u" aria-label="Tidal" data-tooltip="Tidal" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/tidal/FFFFFF" width="28" height="28" alt="Tidal" loading="lazy" />
+              </a>
+              <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="iTunes" data-tooltip="iTunes" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/itunes/FB5BC5" width="28" height="28" alt="iTunes" loading="lazy" />
+              </a>
+              <a href="https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA" aria-label="Spotify" data-tooltip="Spotify" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/spotify/1DB954" width="28" height="28" alt="Spotify" loading="lazy" />
+              </a>
+              <a href="https://www.youtube.com/watch?v=Ri7vws3DvBg" aria-label="YouTube" data-tooltip="YouTube" target="_blank" rel="noopener">
+                <img class="qobuz" src="https://cdn.simpleicons.org/youtube/FF0000" width="28" height="28" alt="YouTube" loading="lazy" />
+              </a>
+            </div>
+          </article>
+
+          <article class="single-card single-card-upcoming" aria-labelledby="single-next">
+            <h3 id="single-next">Next Single</h3>
+            <div class="card bandcamp-embed bandcamp-placeholder">
+              <p>New single dropping soon. Pre-save and streaming links will appear here at launch.</p>
+            </div>
+            <div class="platform-icons platform-icons-disabled" aria-label="Streaming links coming soon">
+              <span class="platform-text">Links unlock on release day</span>
+            </div>
+          </article>
         </div>
-        <!-- Streaming profile icons (use to link to band profiles) -->
-        <div class="platform-icons" aria-label="Find us on">
-          <a href="https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc" aria-label="Qobuz" data-tooltip="Qobuz" target="_blank" rel="noopener">
-            <span class="platform-text" style="display:inline-block;font-size:14px;font-weight:600;letter-spacing:.5px;color:#2BB7EA;">Qobuz</span>
-          </a>
-          <a href="https://kamasutramurder.bandcamp.com" aria-label="Bandcamp" data-tooltip="Bandcamp" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/bandcamp/629AA9" width="28" height="28" alt="Bandcamp" loading="lazy" />
-          </a>
-          <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="Apple Music" data-tooltip="Apple Music" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/applemusic/FA57C1" width="28" height="28" alt="Apple Music" loading="lazy" />
-          </a>
-          <a href="https://tidal.com/album/471357201/u" aria-label="Tidal" data-tooltip="Tidal" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/tidal/FFFFFF" width="28" height="28" alt="Tidal" loading="lazy" />
-          </a>
-          <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="iTunes" data-tooltip="iTunes" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/itunes/FB5BC5" width="28" height="28" alt="iTunes" loading="lazy" />
-          </a>
-           <a href="https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA" aria-label="Spotify" data-tooltip="Spotify" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/spotify/1DB954" width="28" height="28" alt="Spotify" loading="lazy" />
-          </a>
-          <a href="https://www.youtube.com/watch?v=Ri7vws3DvBg" aria-label="YouTube" data-tooltip="YouTube" target="_blank" rel="noopener">
-            <img class="qobuz" src="https://cdn.simpleicons.org/youtube/FF0000" width="28" height="28" alt="YouTube" loading="lazy" />
-          </a>
-        </div> 
       </div>
     </section>
-    
+
     <!-- SHOWS -->
     <section id="shows">
       <div class="container">
-        <h2>Shows</h2>
+        <h2 class="glitch-soft" data-text="Shows">Shows</h2>
         <div class="card">
           <div class="shows-grid">
             <!-- (removed: Baggaclaim KW show) -->
@@ -143,10 +156,29 @@
       </div>
     </section>
     
+    <!-- GALLERY (placeholder, wired for Dropbox raw links) -->
+    <section id="gallery">
+      <div class="container">
+        <h2 class="glitch-soft" data-text="Gallery">Gallery</h2>
+        <div class="card gallery-card">
+          <figure class="gallery-frame">
+            <img id="galleryImage" src="https://via.placeholder.com/960x640/111118/FFFFFF?text=Add+Dropbox+raw+links" alt="Gallery placeholder" loading="lazy" width="960" height="640">
+          </figure>
+          <div class="gallery-meta">
+            <p>Photos will rotate from your Dropbox raw links. Replace the URLs in the script below and they will cycle automatically.</p>
+            <div class="gallery-controls">
+              <button class="btn" type="button" data-gallery-prev aria-label="Previous photo">Prev</button>
+              <button class="btn" type="button" data-gallery-next aria-label="Next photo">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
     <!-- VIDEO (separate from Music) -->
     <section id="videos">
       <div class="container">
-        <h2>Videos</h2>
+        <h2 class="glitch-soft" data-text="Videos">Videos</h2>
         <div class="card video-embed">
           <iframe
             src="https://www.youtube-nocookie.com/embed/EHyuJ257rb4?rel=0&modestbranding=1&playsinline=1&color=white"
@@ -214,6 +246,29 @@
   joinBtn?.addEventListener('click', () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   });
+
+  // Gallery rotation using Dropbox raw links
+  const galleryImages = [];
+  const galleryImgEl = document.getElementById('galleryImage');
+  const galleryPrev = document.querySelector('[data-gallery-prev]');
+  const galleryNext = document.querySelector('[data-gallery-next]');
+  let galleryIndex = 0;
+
+  function showGalleryImage(nextIndex) {
+    if (!galleryImgEl || galleryImages.length === 0) return;
+    galleryIndex = (nextIndex + galleryImages.length) % galleryImages.length;
+    galleryImgEl.src = galleryImages[galleryIndex];
+    galleryImgEl.alt = `Gallery photo ${galleryIndex + 1}`;
+  }
+
+  if (galleryImages.length && galleryImgEl) {
+    showGalleryImage(0);
+    const galleryTimer = setInterval(() => showGalleryImage(galleryIndex + 1), 6000);
+    galleryPrev?.addEventListener('click', () => showGalleryImage(galleryIndex - 1));
+    galleryNext?.addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+    // Prevent interval from running if the element is missing later
+    galleryImgEl.addEventListener('error', () => clearInterval(galleryTimer), { once: true });
+  }
 
   // ===== Mailchimp modal controls (modal-only) =====
   const mcModal = document.getElementById('mcModal');
