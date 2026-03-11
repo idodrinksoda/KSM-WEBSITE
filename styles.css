@@ -138,12 +138,12 @@ h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
   .site-nav a{padding:6px 10px;font-size:14px}
 
   /* Anchor offset on mobile so titles clear the sticky nav */
-  #music, #shows, #videos{scroll-margin-top:6px}
+  #music, #press, #shows, #videos{scroll-margin-top:6px}
 }
 
 /* Give every top-level section vertical rhythm */
 main>section{padding:72px 0 0 0;border-top:0}
-#music, #shows, #videos{scroll-margin-top:4px}
+#music, #press, #shows, #videos{scroll-margin-top:4px}
 /* Keep Shows tighter */
 #shows{padding:40px 0 0 0;border-top:0}
 
@@ -370,6 +370,61 @@ main h2{
   background:rgba(0,0,0,.28);
   border:1px solid #22222a;
   border-radius:10px;
+}
+
+/* =========================
+   PRESS
+   ========================= */
+#press{padding:48px 0 0 0;border-top:0}
+.press-card{
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  border-radius:12px;
+  padding:14px;
+}
+.press-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+}
+.press-item{
+  background:rgba(0,0,0,.28);
+  border:1px solid #22222a;
+  border-radius:10px;
+  padding:12px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  height:100%;
+}
+.press-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  color:var(--muted);
+  font-size:.95rem;
+  letter-spacing:.2px;
+}
+.press-outlet{color:var(--fg);font-weight:700}
+.press-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 8px;
+  border:1px solid #22222a;
+  border-radius:999px;
+  font-size:.8rem;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.press-item h3{margin:0;font-size:clamp(16px,2.6vw,20px);letter-spacing:.3px}
+.press-item p{margin:0;color:var(--muted)}
+.press-actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.press-item .btn{padding:8px 12px}
+@media(max-width:520px){
+  .press-card{padding:12px}
 }
 
 /* =========================
