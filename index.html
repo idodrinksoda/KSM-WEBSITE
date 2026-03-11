@@ -161,15 +161,15 @@
       <div class="container">
         <h2 class="glitch-soft" data-text="Gallery">Gallery</h2>
         <div class="card gallery-card">
-          <figure class="gallery-frame">
-            <img id="galleryImage" src="assets/gallery/DSCF6225-Enhanced-NR.jpg" alt="Gallery photo 1" loading="lazy" width="640" height="426">
-          </figure>
           <div class="gallery-meta">
-            <p>Live photos from the assets/gallery folder rotate automatically.</p>
-            <div class="gallery-controls">
-              <button class="btn" type="button" data-gallery-prev aria-label="Previous photo">Prev</button>
-              <button class="btn" type="button" data-gallery-next aria-label="Next photo">Next</button>
-            </div>
+          </div>
+          <div class="gallery-grid" data-gallery-grid>
+            <figure class="gallery-item">
+              <img src="assets/gallery/DSCF6225-Enhanced-NR.jpg" alt="Gallery photo 1" loading="lazy">
+            </figure>
+            <figure class="gallery-item">
+              <img src="assets/gallery/DSCF6524-Enhanced-NR.jpg" alt="Gallery photo 2" loading="lazy">
+            </figure>
           </div>
         </div>
       </div>
@@ -205,6 +205,17 @@
       <small>Site by Kama Sutra Murder. Vancouver, BC.</small>
     </div>
   </footer>
+
+  <!-- Gallery lightbox -->
+  <div id="galleryModal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-gallery></div>
+    <div class="modal-panel modal-panel-gallery" role="dialog" aria-modal="true" aria-label="Gallery image">
+      <button class="modal-close" aria-label="Close" data-close-gallery>×</button>
+      <button class="gallery-nav gallery-nav-prev" type="button" data-gallery-prev aria-label="Previous image">‹</button>
+      <button class="gallery-nav gallery-nav-next" type="button" data-gallery-next aria-label="Next image">›</button>
+      <img id="galleryModalImage" src="" alt="Expanded gallery image" loading="lazy">
+    </div>
+  </div>
 
   <!-- Mailchimp Modal (modal-only) -->
   <div id="mcModal" class="modal" hidden>
@@ -247,33 +258,133 @@
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   });
 
-  // Gallery rotation using Dropbox raw links
-  const galleryImages = [
+  // Gallery grid sourced from assets/gallery
+  let galleryImages = [
     'assets/gallery/DSCF6225-Enhanced-NR.jpg',
     'assets/gallery/DSCF6524-Enhanced-NR.jpg',
     'assets/gallery/DSCF6790-Enhanced-NR.jpg',
     'assets/gallery/DSCF6895-Enhanced-NR.jpg',
     'assets/gallery/KAMA%20SUTRA%20MURDER%2024.jpg'
   ];
-  const galleryImgEl = document.getElementById('galleryImage');
-  const galleryPrev = document.querySelector('[data-gallery-prev]');
-  const galleryNext = document.querySelector('[data-gallery-next]');
-  let galleryIndex = 0;
+  const galleryGrid = document.querySelector('[data-gallery-grid]');
+  const galleryModal = document.getElementById('galleryModal');
+  const galleryModalImage = document.getElementById('galleryModalImage');
+  const galleryManifestUrl = 'assets/gallery/manifest.json';
+  const galleryPageSize = 12;
+  let galleryPage = 0;
+  let galleryTimer;
+  let galleryActiveIndex = 0;
 
-  function showGalleryImage(nextIndex) {
-    if (!galleryImgEl || galleryImages.length === 0) return;
-    galleryIndex = (nextIndex + galleryImages.length) % galleryImages.length;
-    galleryImgEl.src = galleryImages[galleryIndex];
-    galleryImgEl.alt = `Gallery photo ${galleryIndex + 1}`;
+  function shuffleGalleryImages() {
+    for (let i = galleryImages.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [galleryImages[i], galleryImages[j]] = [galleryImages[j], galleryImages[i]];
+    }
   }
 
-  if (galleryImages.length && galleryImgEl) {
-    showGalleryImage(0);
-    const galleryTimer = setInterval(() => showGalleryImage(galleryIndex + 1), 6000);
-    galleryPrev?.addEventListener('click', () => showGalleryImage(galleryIndex - 1));
-    galleryNext?.addEventListener('click', () => showGalleryImage(galleryIndex + 1));
-    // Prevent interval from running if the element is missing later
-    galleryImgEl.addEventListener('error', () => clearInterval(galleryTimer), { once: true });
+  function renderGalleryGrid() {
+    if (!galleryGrid || !galleryImages.length) return;
+    galleryGrid.innerHTML = '';
+    const pages = [];
+    for (let i = 0; i < galleryImages.length; i += galleryPageSize) {
+      pages.push(galleryImages.slice(i, i + galleryPageSize));
+    }
+
+    pages.forEach((pageImages, pageIdx) => {
+      const pageEl = document.createElement('div');
+      pageEl.className = 'gallery-page';
+      if (pageIdx === galleryPage) pageEl.classList.add('is-active');
+
+      pageImages.forEach((src, idx) => {
+        const figure = document.createElement('figure');
+        figure.className = 'gallery-item';
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Gallery photo ${pageIdx * galleryPageSize + idx + 1}`;
+        img.loading = 'lazy';
+        img.dataset.index = String(pageIdx * galleryPageSize + idx);
+
+        figure.appendChild(img);
+        pageEl.appendChild(figure);
+      });
+
+      galleryGrid.appendChild(pageEl);
+    });
+  }
+
+  function showGalleryPage(nextPage) {
+    const pages = galleryGrid?.querySelectorAll('.gallery-page');
+    if (!pages || !pages.length) return;
+    galleryPage = (nextPage + pages.length) % pages.length;
+    pages.forEach((page, idx) => {
+      page.classList.toggle('is-active', idx === galleryPage);
+    });
+  }
+
+  function startGalleryTimer() {
+    if (galleryTimer) clearInterval(galleryTimer);
+    galleryTimer = setInterval(() => showGalleryPage(galleryPage + 1), 8500);
+  }
+
+  async function fetchGalleryList() {
+    try {
+      const res = await fetch(`${galleryManifestUrl}?v=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) return;
+      const data = await res.json();
+      const urls = Array.isArray(data) ? data.filter(src => typeof src === 'string') : [];
+      if (urls.length) {
+        galleryImages = urls;
+        shuffleGalleryImages();
+        galleryPage = 0;
+        renderGalleryGrid();
+        startGalleryTimer();
+      }
+    } catch (e) {
+      // fall back to baked-in list silently
+    }
+  }
+
+  if (galleryGrid) {
+    shuffleGalleryImages();
+    renderGalleryGrid();
+    fetchGalleryList();
+    startGalleryTimer();
+    galleryGrid.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target instanceof HTMLImageElement) {
+        const idx = Number.parseInt(target.dataset.index || '0', 10);
+        openGalleryModal(galleryImages[idx] || target.src, target.alt, idx >= 0 ? idx : 0);
+      }
+    });
+  }
+
+  function setScrollLock() {
+    const anyOpen = (mcModal && !mcModal.hidden) || (galleryModal && !galleryModal.hidden);
+    document.body.style.overflow = anyOpen ? 'hidden' : '';
+  }
+
+  function openGalleryModal(src, alt, idx) {
+    if (!galleryModal || !galleryModalImage) return;
+    if (typeof idx === 'number') galleryActiveIndex = idx;
+    const nextSrc = galleryImages[galleryActiveIndex] || src;
+    galleryModalImage.src = nextSrc;
+    galleryModalImage.alt = alt || `Gallery photo ${galleryActiveIndex + 1}`;
+    galleryModal.hidden = false;
+    setScrollLock();
+  }
+
+  function closeGalleryModal() {
+    if (!galleryModal) return;
+    galleryModal.hidden = true;
+    setScrollLock();
+  }
+
+  function stepGalleryModal(delta) {
+    if (!galleryImages.length) return;
+    galleryActiveIndex = (galleryActiveIndex + delta + galleryImages.length) % galleryImages.length;
+    const nextSrc = galleryImages[galleryActiveIndex];
+    openGalleryModal(nextSrc, `Gallery photo ${galleryActiveIndex + 1}`, galleryActiveIndex);
   }
 
   // ===== Mailchimp modal controls (modal-only) =====
@@ -284,12 +395,12 @@
   function openMcModal() {
     if (!mcModal) return;
     mcModal.hidden = false;
-    document.body.style.overflow = 'hidden';
+    setScrollLock();
     setTimeout(() => emailField?.focus(), 50);
   }
   function closeMcModal() {
     mcModal.hidden = true;
-    document.body.style.overflow = '';
+    setScrollLock();
   }
 
   // Any element with data-open-mc opens the modal
@@ -302,9 +413,27 @@
     if (e.target.matches('[data-close-mc], .modal-backdrop')) closeMcModal();
   });
 
+  galleryModal?.addEventListener('click', (e) => {
+    if (e.target.matches('[data-close-gallery], .modal-backdrop')) closeGalleryModal();
+  });
+
+  document.querySelector('[data-gallery-prev]')?.addEventListener('click', () => stepGalleryModal(-1));
+  document.querySelector('[data-gallery-next]')?.addEventListener('click', () => stepGalleryModal(1));
+
   // Close modal on Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mcModal && !mcModal.hidden) closeMcModal();
+    if (e.key === 'Escape') {
+      if (galleryModal && !galleryModal.hidden) return closeGalleryModal();
+      if (mcModal && !mcModal.hidden) return closeMcModal();
+    }
+    if (e.key === 'ArrowLeft' && galleryModal && !galleryModal.hidden) {
+      e.preventDefault();
+      return stepGalleryModal(-1);
+    }
+    if (e.key === 'ArrowRight' && galleryModal && !galleryModal.hidden) {
+      e.preventDefault();
+      return stepGalleryModal(1);
+    }
   });
 
   // Auto-close modal after Mailchimp success appears

@@ -1,0 +1,48 @@
+name: Update gallery manifest
+
+on:
+  push:
+    branches: [main, future-update]
+  workflow_dispatch:
+
+jobs:
+  build-manifest:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate manifest from assets/gallery
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from urllib.parse import quote
+
+          gallery_dir = Path('assets/gallery')
+          exts = {'.jpg', '.jpeg', '.png', '.webp'}
+          files = sorted(
+              p for p in gallery_dir.iterdir()
+              if p.is_file() and p.suffix.lower() in exts and p.name != 'manifest.json'
+          )
+
+          def encode_path(path: Path) -> str:
+              # Percent-encode spaces and other unsafe chars, keep slashes and dots.
+              return quote(str(path).replace('\\', '/'), safe='/.')
+
+          manifest = [encode_path(p) for p in files]
+
+          out_path = gallery_dir / 'manifest.json'
+          out_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding='utf-8')
+          PY
+
+      - name: Commit manifest if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update gallery manifest"
+          file_pattern: assets/gallery/manifest.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
