@@ -10,7 +10,8 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Saira:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero/hero.webp" type="image/webp" fetchpriority="high">
 
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css?v=2">
@@ -24,7 +25,7 @@
     "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
     "datePublished": "2025-11-15",
     "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
-    "image": "assets/single-cover-og.jpg",
+    "image": "assets/hero/hero.jpg",
     "url": "/"
   }
   </script>
@@ -46,6 +47,7 @@
       <div class="site-nav-links">
         <a href="#shows">Shows</a>
         <a href="#music">Music</a>
+        <a href="#press">Press</a>
         <a href="#videos">Videos</a>
       </div>
     </nav>
@@ -56,7 +58,7 @@
     <!-- HERO -->
     <section class="hero has-image">
       <div class="container">
-        <h1>Kama Sutra Murder</h1>
+        <h1 class="glitch-title" data-text="Kama Sutra Murder">Kama Sutra Murder</h1>
         <p>grunge/punk/psych/alt-metal from Vancouver, BC.</p>
       </div>
     </section>
@@ -66,70 +68,104 @@
     <!-- MUSIC (moved above Shows) -->
     <section id="music">
       <div class="container">
-        <h2>Music</h2>
-        <!-- Bandcamp embed (provided iframe for example track) -->
-        <div class="card bandcamp-embed">
-          <iframe style="border: 0; width: 350px; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/" seamless>
-            <a href="https://kamasutramurder.bandcamp.com/track/smile-thru">Smile-Thru by Kama Sutra Murder</a>
-          </iframe>
+        <h2 class="glitch-soft" data-text="Music">Music</h2>
+        <div class="singles-grid">
+          <article class="single-card" aria-labelledby="single-smile-thru">
+            <h3 id="single-smile-thru">Smile-Thru</h3>
+            <div class="card bandcamp-embed">
+              <iframe style="border: 0; width: 350px; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/" seamless>
+                <a href="https://kamasutramurder.bandcamp.com/track/smile-thru">Smile-Thru by Kama Sutra Murder</a>
+              </iframe>
+            </div>
+            <div class="platform-icons" aria-label="Find Smile-Thru on">
+              <a href="https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc" aria-label="Qobuz" data-tooltip="Qobuz" target="_blank" rel="noopener">
+                <span class="platform-text" style="display:inline-block;font-size:14px;font-weight:600;letter-spacing:.5px;color:#2BB7EA;">Qobuz</span>
+              </a>
+              <a href="https://kamasutramurder.bandcamp.com" aria-label="Bandcamp" data-tooltip="Bandcamp" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/bandcamp/629AA9" width="28" height="28" alt="Bandcamp" loading="lazy" />
+              </a>
+              <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="Apple Music" data-tooltip="Apple Music" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/applemusic/FA57C1" width="28" height="28" alt="Apple Music" loading="lazy" />
+              </a>
+              <a href="https://tidal.com/album/471357201/u" aria-label="Tidal" data-tooltip="Tidal" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/tidal/FFFFFF" width="28" height="28" alt="Tidal" loading="lazy" />
+              </a>
+              <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="iTunes" data-tooltip="iTunes" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/itunes/FB5BC5" width="28" height="28" alt="iTunes" loading="lazy" />
+              </a>
+              <a href="https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA" aria-label="Spotify" data-tooltip="Spotify" target="_blank" rel="noopener">
+                <img class="platform-icon" src="https://cdn.simpleicons.org/spotify/1DB954" width="28" height="28" alt="Spotify" loading="lazy" />
+              </a>
+              <a href="https://www.youtube.com/watch?v=Ri7vws3DvBg" aria-label="YouTube" data-tooltip="YouTube" target="_blank" rel="noopener">
+                <img class="qobuz" src="https://cdn.simpleicons.org/youtube/FF0000" width="28" height="28" alt="YouTube" loading="lazy" />
+              </a>
+            </div>
+          </article>
         </div>
-        <!-- Streaming profile icons (use to link to band profiles) -->
-        <div class="platform-icons" aria-label="Find us on">
-          <a href="https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc" aria-label="Qobuz" data-tooltip="Qobuz" target="_blank" rel="noopener">
-            <span class="platform-text" style="display:inline-block;font-size:14px;font-weight:600;letter-spacing:.5px;color:#2BB7EA;">Qobuz</span>
-          </a>
-          <a href="https://kamasutramurder.bandcamp.com" aria-label="Bandcamp" data-tooltip="Bandcamp" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/bandcamp/629AA9" width="28" height="28" alt="Bandcamp" loading="lazy" />
-          </a>
-          <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="Apple Music" data-tooltip="Apple Music" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/applemusic/FA57C1" width="28" height="28" alt="Apple Music" loading="lazy" />
-          </a>
-          <a href="https://tidal.com/album/471357201/u" aria-label="Tidal" data-tooltip="Tidal" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/tidal/FFFFFF" width="28" height="28" alt="Tidal" loading="lazy" />
-          </a>
-          <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="iTunes" data-tooltip="iTunes" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/itunes/FB5BC5" width="28" height="28" alt="iTunes" loading="lazy" />
-          </a>
-           <a href="https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA" aria-label="Spotify" data-tooltip="Spotify" target="_blank" rel="noopener">
-            <img class="platform-icon" src="https://cdn.simpleicons.org/spotify/1DB954" width="28" height="28" alt="Spotify" loading="lazy" />
-          </a>
-          <a href="https://www.youtube.com/watch?v=Ri7vws3DvBg" aria-label="YouTube" data-tooltip="YouTube" target="_blank" rel="noopener">
-            <img class="qobuz" src="https://cdn.simpleicons.org/youtube/FF0000" width="28" height="28" alt="YouTube" loading="lazy" />
-          </a>
-        </div> 
       </div>
     </section>
-    
+
     <!-- SHOWS -->
     <section id="shows">
       <div class="container">
-        <h2>Shows</h2>
+        <h2 class="glitch-soft" data-text="Shows">Shows</h2>
         <div class="card">
           <div class="shows-grid">
+            <!-- (removed: Baggaclaim KW show) -->
 
-            <article class="show-card" aria-labelledby="show-takeurtime">
-              <figure class="show-media">
-                <img src="assets/TYTMarch21.jpg" alt="Poster — Take Your Time" loading="lazy" width="400" height="600">
-              </figure>
-              <div class="show-meta">
-                <time datetime="2026-03-21" id="show-takeurtime">2026-03-21</time>
-                <span>Take Your Time – Vancouver, BC</span>
-              </div>
-              <div class="show-actions">
-                <span class="btn-tickets" aria-disabled="true">Tickets soon</span>
-                <a class="btn-map btn" href="https://www.google.com/maps/place/Take+Your+Time+Back/@49.2569217,-123.0933066,631m/data=!3m1!1e3!4m7!3m6!1s0x54867100593bdd5b:0x9211a73b9b8196b8!8m2!3d49.2569182!4d-123.0907317!10e1!16s%2Fg%2F11xtjz26f2?entry=ttu&g_ep=EgoyMDI2MDMwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Map</a>
-              </div>
-            </article>
+              <article class="show-card" aria-labelledby="show-takeurtime">
+                <figure class="show-media">
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/shows/tyt-320.webp 320w, assets/shows/tyt-611.webp 611w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px">
+                    <img
+                      src="assets/shows/tyt-611.jpg"
+                      srcset="assets/shows/tyt-320.jpg 320w, assets/shows/tyt-611.jpg 611w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px"
+                      alt="Poster — Takeurtime"
+                      loading="lazy"
+                      decoding="async"
+                      fetchpriority="low"
+                      width="400"
+                      height="600">
+                  </picture>
+                </figure>
+                <div class="show-meta">
+                  <time datetime="2026-03-21" id="show-takeurtime">Sat Mar 21, 2026</time>
+                  <span>Take Your Time Back – Vancouver,BC</span>
+                </div>
+                <div class="show-actions">
+                  <span class="btn-tickets" aria-disabled="true">Tickets soon</span>
+                  <a class="btn-map btn" href="https://www.google.com/maps/place/Take+Your+Time+Back/@49.2569217,-123.0933066,631m/data=!3m2!1e3!4b1!4m6!3m5!1s0x54867100593bdd5b:0x9211a73b9b8196b8!8m2!3d49.2569182!4d-123.0907317!16s%2Fg%2F11xtjz26f2?entry=ttu&g_ep=EgoyMDI2MDMwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Map</a>
+                </div>
+              </article>
 
             <article class="show-card" aria-labelledby="show-2026-03-22-green-auto">
               <figure class="show-media">
                 <a href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener">
-                  <img src="assets/Mar%2022%20Green%20Auto%20poster%20still.jpg" alt="Poster — Green Auto — Mar 22" loading="lazy" width="400" height="600">
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/shows/green-auto-320.webp 320w, assets/shows/green-auto-640.webp 640w, assets/shows/green-auto-960.webp 960w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px">
+                    <img
+                      src="assets/shows/green-auto-640.jpg"
+                      srcset="assets/shows/green-auto-320.jpg 320w, assets/shows/green-auto-640.jpg 640w, assets/shows/green-auto-960.jpg 960w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px"
+                      alt="Poster — Green Auto — Mar 22"
+                      loading="lazy"
+                      decoding="async"
+                      fetchpriority="low"
+                      width="400"
+                      height="600">
+                  </picture>
                 </a>
               </figure>
               <div class="show-meta">
-                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">2026-03-22</time>
-                <span>Green Auto – Vancouver, BC</span>
+                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">Sun Mar 22, 2026</time>
+                <span>Green Auto – Vancouver, BC</span> 
               </div>
               <div class="show-actions">
                 <a class="btn-tickets" href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener">Tickets</a>
@@ -141,11 +177,30 @@
         </div>
       </div>
     </section>
+
+    <!-- GALLERY (placeholder, wired for Dropbox raw links) -->
+    <section id="gallery">
+      <div class="container">
+        <h2 class="glitch-soft" data-text="Gallery">Gallery</h2>
+        <div class="card gallery-card">
+          <div class="gallery-meta">
+          </div>
+          <div class="gallery-grid" data-gallery-grid>
+            <figure class="gallery-item">
+              <img src="assets/gallery/webp/DSCF6225-Enhanced-NR.webp" alt="Gallery photo 1" loading="lazy" decoding="async" fetchpriority="low" width="1800" height="1200">
+            </figure>
+            <figure class="gallery-item">
+              <img src="assets/gallery/webp/DSCF6524-Enhanced-NR.webp" alt="Gallery photo 2" loading="lazy" decoding="async" fetchpriority="low" width="1200" height="1800">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
     
     <!-- VIDEO (separate from Music) -->
     <section id="videos">
       <div class="container">
-        <h2>Videos</h2>
+        <h2 class="glitch-soft" data-text="Videos">Videos</h2>
         <div class="card video-embed">
           <iframe
             src="https://www.youtube-nocookie.com/embed/EHyuJ257rb4?rel=0&modestbranding=1&playsinline=1&color=white"
@@ -155,6 +210,40 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
           </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESS -->
+    <section id="press">
+      <div class="container">
+        <h2 class="glitch-soft" data-text="Press">Press</h2>
+        <div class="card press-card">
+          <div class="press-grid">
+            <article class="press-item">
+              <div class="press-meta">
+                <span class="press-outlet">Quockerwodger</span>
+                <span class="press-tag">Review</span>
+                <time datetime="2026-03-22">Mar 22, 2026</time>
+              </div>
+              <h3>Queenpin debut show at Green Auto</h3>
+              <div class="press-actions">
+                <a class="btn" href="https://quockerwodger.ca/post/queenpin-debut-show-at-green-auto/#:~:text=Kama%20Sutra%20Murder" target="_blank" rel="noopener">Read review</a>
+              </div>
+            </article>
+
+            <article class="press-item">
+              <div class="press-meta">
+                <span class="press-outlet">Elder God</span>
+                <span class="press-tag">Recap</span>
+                <time datetime="2024-05-11">May 11, 2024</time>
+              </div>
+              <h3>Show reaction — 648 Kingsway</h3>
+              <div class="press-actions">
+                <a class="btn" href="https://eldergod.ca/show-reaction/24-05-11-648-kingsway/#:~:text=Kama%20Sutra%20Murder" target="_blank" rel="noopener">Read recap</a>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -172,6 +261,17 @@
       <small>Site by Kama Sutra Murder. Vancouver, BC.</small>
     </div>
   </footer>
+
+  <!-- Gallery lightbox -->
+  <div id="galleryModal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-gallery></div>
+    <div class="modal-panel modal-panel-gallery" role="dialog" aria-modal="true" aria-label="Gallery image">
+      <button class="modal-close" aria-label="Close" data-close-gallery>×</button>
+      <button class="gallery-nav gallery-nav-prev" type="button" data-gallery-prev aria-label="Previous image">‹</button>
+      <button class="gallery-nav gallery-nav-next" type="button" data-gallery-next aria-label="Next image">›</button>
+      <img id="galleryModalImage" src="" alt="Expanded gallery image" loading="lazy">
+    </div>
+  </div>
 
   <!-- Mailchimp Modal (modal-only) -->
   <div id="mcModal" class="modal" hidden>
@@ -208,11 +308,173 @@
 
  <!-- Scripts -->
 <script>
-  // Smooth scroll from hero CTA to contact
-  const joinBtn = document.getElementById('joinList');
-  joinBtn?.addEventListener('click', () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  });
+  // Gallery grid sourced from assets/gallery
+  let galleryImages = [
+    'assets/gallery/webp/DSCF6225-Enhanced-NR.webp',
+    'assets/gallery/webp/DSCF6524-Enhanced-NR.webp',
+    'assets/gallery/webp/DSCF6790-Enhanced-NR.webp',
+    'assets/gallery/webp/DSCF6895-Enhanced-NR.webp',
+    'assets/gallery/webp/KAMA%20SUTRA%20MURDER%2024.webp'
+  ];
+  const galleryGrid = document.querySelector('[data-gallery-grid]');
+  const galleryModal = document.getElementById('galleryModal');
+  const galleryModalImage = document.getElementById('galleryModalImage');
+  const galleryManifestUrl = 'assets/gallery/manifest.json';
+  const galleryPageSize = 8;
+  let galleryPage = 0;
+  let galleryTimer;
+  let galleryActiveIndex = 0;
+
+  function toJpegFallback(src) {
+    return String(src)
+      .replace('assets/gallery/webp/', 'assets/gallery/')
+      .replace(/\.webp$/i, '.jpg');
+  }
+
+  function handleGalleryImageError(img) {
+    if (!(img instanceof HTMLImageElement)) return;
+    if (img.dataset.triedFallback !== '1') {
+      img.dataset.triedFallback = '1';
+      const fallback = img.dataset.fallback || toJpegFallback(img.src);
+      if (fallback && fallback !== img.src) {
+        img.src = fallback;
+        return;
+      }
+    }
+
+    // Keep gallery slots filled: rotate to another source instead of removing the tile.
+    if (!galleryImages.length) return;
+    const currentIdx = Number.parseInt(img.dataset.index || '0', 10);
+    const retryCount = Number.parseInt(img.dataset.retryCount || '0', 10) + 1;
+    img.dataset.retryCount = String(retryCount);
+    if (retryCount > galleryImages.length) return;
+    const nextIdx = (currentIdx + retryCount) % galleryImages.length;
+    const nextSrc = galleryImages[nextIdx];
+    img.dataset.index = String(nextIdx);
+    img.dataset.fallback = toJpegFallback(nextSrc);
+    img.dataset.triedFallback = '0';
+    img.src = nextSrc;
+  }
+
+  function shuffleGalleryImages() {
+    for (let i = galleryImages.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [galleryImages[i], galleryImages[j]] = [galleryImages[j], galleryImages[i]];
+    }
+  }
+
+  function renderGalleryGrid() {
+    if (!galleryGrid || !galleryImages.length) return;
+    galleryGrid.innerHTML = '';
+    const pageCount = Math.max(1, Math.ceil(galleryImages.length / galleryPageSize));
+
+    for (let pageIdx = 0; pageIdx < pageCount; pageIdx += 1) {
+      const pageEl = document.createElement('div');
+      pageEl.className = 'gallery-page';
+      if (pageIdx === galleryPage) pageEl.classList.add('is-active');
+
+      const startIdx = pageIdx * galleryPageSize;
+      for (let slotIdx = 0; slotIdx < galleryPageSize; slotIdx += 1) {
+        const imageIdx = (startIdx + slotIdx) % galleryImages.length;
+        const src = galleryImages[imageIdx];
+        const figure = document.createElement('figure');
+        figure.className = 'gallery-item';
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Gallery photo ${imageIdx + 1}`;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.fetchPriority = 'low';
+        img.dataset.index = String(imageIdx);
+        img.dataset.retryCount = '0';
+        img.dataset.fallback = toJpegFallback(src);
+        img.dataset.triedFallback = '0';
+        img.addEventListener('error', () => handleGalleryImageError(img));
+
+        figure.appendChild(img);
+        pageEl.appendChild(figure);
+      }
+
+      galleryGrid.appendChild(pageEl);
+    }
+  }
+
+  function showGalleryPage(nextPage) {
+    const pages = galleryGrid?.querySelectorAll('.gallery-page');
+    if (!pages || !pages.length) return;
+    galleryPage = (nextPage + pages.length) % pages.length;
+    pages.forEach((page, idx) => {
+      page.classList.toggle('is-active', idx === galleryPage);
+    });
+  }
+
+  function startGalleryTimer() {
+    if (galleryTimer) clearInterval(galleryTimer);
+    galleryTimer = setInterval(() => showGalleryPage(galleryPage + 1), 8500);
+  }
+
+  async function fetchGalleryList() {
+    try {
+      const res = await fetch(galleryManifestUrl, { cache: 'force-cache' });
+      if (!res.ok) return;
+      const data = await res.json();
+      const urls = Array.isArray(data) ? data.filter(src => typeof src === 'string') : [];
+      if (urls.length) {
+        galleryImages = urls;
+        shuffleGalleryImages();
+        galleryPage = 0;
+        renderGalleryGrid();
+        startGalleryTimer();
+      }
+    } catch (e) {
+      // fall back to baked-in list silently
+    }
+  }
+
+  if (galleryGrid) {
+    shuffleGalleryImages();
+    renderGalleryGrid();
+    fetchGalleryList();
+    startGalleryTimer();
+    galleryGrid.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target instanceof HTMLImageElement) {
+        const idx = Number.parseInt(target.dataset.index || '0', 10);
+        openGalleryModal(galleryImages[idx] || target.src, target.alt, idx >= 0 ? idx : 0);
+      }
+    });
+  }
+
+  function setScrollLock() {
+    const anyOpen = (mcModal && !mcModal.hidden) || (galleryModal && !galleryModal.hidden);
+    document.body.style.overflow = anyOpen ? 'hidden' : '';
+  }
+
+  function openGalleryModal(src, alt, idx) {
+    if (!galleryModal || !galleryModalImage) return;
+    if (typeof idx === 'number') galleryActiveIndex = idx;
+    const nextSrc = galleryImages[galleryActiveIndex] || src;
+    galleryModalImage.dataset.fallback = toJpegFallback(nextSrc);
+    galleryModalImage.dataset.triedFallback = '0';
+    galleryModalImage.src = nextSrc;
+    galleryModalImage.alt = alt || `Gallery photo ${galleryActiveIndex + 1}`;
+    galleryModal.hidden = false;
+    setScrollLock();
+  }
+
+  function closeGalleryModal() {
+    if (!galleryModal) return;
+    galleryModal.hidden = true;
+    setScrollLock();
+  }
+
+  function stepGalleryModal(delta) {
+    if (!galleryImages.length) return;
+    galleryActiveIndex = (galleryActiveIndex + delta + galleryImages.length) % galleryImages.length;
+    const nextSrc = galleryImages[galleryActiveIndex];
+    openGalleryModal(nextSrc, `Gallery photo ${galleryActiveIndex + 1}`, galleryActiveIndex);
+  }
 
   // ===== Mailchimp modal controls (modal-only) =====
   const mcModal = document.getElementById('mcModal');
@@ -222,12 +484,12 @@
   function openMcModal() {
     if (!mcModal) return;
     mcModal.hidden = false;
-    document.body.style.overflow = 'hidden';
+    setScrollLock();
     setTimeout(() => emailField?.focus(), 50);
   }
   function closeMcModal() {
     mcModal.hidden = true;
-    document.body.style.overflow = '';
+    setScrollLock();
   }
 
   // Any element with data-open-mc opens the modal
@@ -240,9 +502,39 @@
     if (e.target.matches('[data-close-mc], .modal-backdrop')) closeMcModal();
   });
 
+  galleryModal?.addEventListener('click', (e) => {
+    if (e.target.matches('[data-close-gallery], .modal-backdrop')) closeGalleryModal();
+  });
+
+  document.querySelector('[data-gallery-prev]')?.addEventListener('click', () => stepGalleryModal(-1));
+  document.querySelector('[data-gallery-next]')?.addEventListener('click', () => stepGalleryModal(1));
+
+  galleryModalImage?.addEventListener('error', () => {
+    if (galleryModalImage.dataset.triedFallback !== '1') {
+      galleryModalImage.dataset.triedFallback = '1';
+      const fallback = galleryModalImage.dataset.fallback || toJpegFallback(galleryModalImage.src);
+      if (fallback && fallback !== galleryModalImage.src) {
+        galleryModalImage.src = fallback;
+        return;
+      }
+    }
+    stepGalleryModal(1);
+  });
+
   // Close modal on Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mcModal && !mcModal.hidden) closeMcModal();
+    if (e.key === 'Escape') {
+      if (galleryModal && !galleryModal.hidden) return closeGalleryModal();
+      if (mcModal && !mcModal.hidden) return closeMcModal();
+    }
+    if (e.key === 'ArrowLeft' && galleryModal && !galleryModal.hidden) {
+      e.preventDefault();
+      return stepGalleryModal(-1);
+    }
+    if (e.key === 'ArrowRight' && galleryModal && !galleryModal.hidden) {
+      e.preventDefault();
+      return stepGalleryModal(1);
+    }
   });
 
   // Auto-close modal after Mailchimp success appears
@@ -255,22 +547,6 @@
     observer.observe(mcSuccess, { childList: true, attributes: true, subtree: true });
   }
 
-  // Format show dates from ISO text to readable string
-  const showDateFormatter = new Intl.DateTimeFormat('en-US', {
-    weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'
-  });
-  document.querySelectorAll('#shows time[datetime]').forEach(timeEl => {
-    const raw = (timeEl.getAttribute('datetime') || timeEl.textContent || '').trim();
-    const parts = raw.split('-').map(Number);
-    const isValidIso = parts.length === 3 && parts.every(n => !Number.isNaN(n));
-    if (isValidIso) {
-      const [y, m, d] = parts;
-      const parsed = new Date(Date.UTC(y, m - 1, d));
-      const formatted = showDateFormatter.format(parsed).replace(',', '');
-      timeEl.textContent = formatted;
-    }
-  });
-
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
   // Prevent sticky focus/hover on top social buttons for touch devices
@@ -280,6 +556,61 @@
       link.addEventListener(evt, () => link.blur(), { passive: true });
     });
   });
+
+  // Click flicker burst on hero title
+  const heroTitle = document.querySelector('.glitch-title');
+  let flickerTimer;
+  function triggerTitleFlicker() {
+    if (!heroTitle) return;
+    heroTitle.classList.remove('is-click-flicker');
+    void heroTitle.offsetWidth;
+    heroTitle.classList.add('is-click-flicker');
+    if (flickerTimer) clearTimeout(flickerTimer);
+    flickerTimer = setTimeout(() => heroTitle.classList.remove('is-click-flicker'), 430);
+  }
+  heroTitle?.addEventListener('click', triggerTitleFlicker);
+  heroTitle?.addEventListener('touchend', triggerTitleFlicker, { passive: true });
+
+  // Randomized auto flicker bursts: uneven spacing, 2-4 rapid flickers per burst
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroTitle && !reduceMotion) {
+    let autoFlickerTimer;
+
+    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+    function queueNextBurst() {
+      const nextDelay = randInt(3800, 9800);
+      autoFlickerTimer = setTimeout(runBurst, nextDelay);
+    }
+
+    function runBurst() {
+      const flickerCount = randInt(2, 4);
+      let completed = 0;
+
+      function flickOnce() {
+        heroTitle.style.opacity = '0';
+        const offMs = randInt(14, 34);
+        setTimeout(() => {
+          heroTitle.style.opacity = '';
+          completed += 1;
+          if (completed >= flickerCount) {
+            queueNextBurst();
+            return;
+          }
+          const gapMs = randInt(22, 66);
+          setTimeout(flickOnce, gapMs);
+        }, offMs);
+      }
+
+      flickOnce();
+    }
+
+    queueNextBurst();
+
+    window.addEventListener('beforeunload', () => {
+      if (autoFlickerTimer) clearTimeout(autoFlickerTimer);
+    });
+  }
 
   
 </script>

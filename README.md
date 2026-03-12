@@ -6,7 +6,13 @@ Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a tou
 - `index.html` — Main page with all sections, inline JS for modal/year/scroll.
 - `styles.css` — Global styles, CSS tokens in `:root`, utilities, embeds, modal.
 - `script.js` — Legacy helpers (not referenced by `index.html`).
-- `assets/` — Images and icons (e.g., `hero.jpg`, `KW.jpg`, `assets/icons/`).
+- `assets/` — Images and icons, organized by type:
+  - `assets/hero/` — hero images (`hero.jpg`, `hero.webp`)
+  - `assets/textures/` — background textures (e.g., `sticker.jpg`)
+  - `assets/shows/` — show posters and responsive variants
+  - `assets/shows/originals/` — source poster exports (archival)
+  - `assets/gallery/` and `assets/gallery/webp/` — gallery JPG fallbacks + optimized WebP
+  - `assets/icons/` — optional local icons
 - `CNAME` — Custom domain mapping to `kamasutramurder.com` (do not remove).
 
 ## Local preview
@@ -24,7 +30,7 @@ Then open http://localhost:8000.
 Push/merge to `main`. GitHub Pages serves the repo root with `CNAME` → `kamasutramurder.com`.
 
 ## Key sections and patterns
-- Hero: background image from `assets/hero.jpg` (see `.hero.has-image::before`).
+- Hero: background image from `assets/hero/hero.jpg` + `assets/hero/hero.webp` (see `.hero.has-image::before`).
 - Music: Bandcamp embed + streaming icons (`.platform-icons` use Simple Icons CDN).
 - Shows: cards inside `#shows .shows-grid`; enter ISO dates (`YYYY-MM-DD`) in the `<time>` content/`datetime`, the inline JS formats them to `Sat Mar 21, 2026` in UTC.
 - Videos: `youtube-nocookie` iframe inside `.video-embed`.
@@ -37,7 +43,7 @@ Append an `article.show-card` to `#shows .shows-grid`:
 <article class="show-card" aria-labelledby="show-id">
   <figure class="show-media">
     <a href="https://tickets.example" target="_blank" rel="noopener">
-      <img src="assets/poster.jpg" alt="Poster — Event" loading="lazy" width="400" height="600">
+      <img src="assets/shows/green-auto-640.jpg" alt="Poster — Event" loading="lazy" width="400" height="600">
     </a>
   </figure>
   <div class="show-meta">
@@ -75,7 +81,7 @@ Structured data lives in the `<head>` of `index.html` as JSON‑LD. Update this 
   "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
   "datePublished": "2025-11-15",
   "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
-  "image": "assets/single-cover-og.jpg",
+  "image": "assets/hero/hero.jpg",
   "url": "/"
 }
 </script>
@@ -102,7 +108,7 @@ Example (single):
   "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
   "datePublished": "2025-12-06",
   "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
-  "image": "assets/smile-thru-og.jpg",
+  "image": "assets/hero/hero.jpg",
   "url": "https://kamasutramurder.bandcamp.com/track/smile-thru"
 }
 ```
@@ -113,14 +119,21 @@ Optional (multiple releases): use `@graph` with an array of items — list the l
 {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "MusicRecording", "name": "New Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-12-06", "image": "assets/new-single-og.jpg", "url": "https://…" },
-    { "@type": "MusicRecording", "name": "Previous Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-11-15", "image": "assets/prev-single-og.jpg", "url": "https://…" }
+    { "@type": "MusicRecording", "name": "New Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-12-06", "image": "assets/hero/hero.jpg", "url": "https://…" },
+    { "@type": "MusicRecording", "name": "Previous Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-11-15", "image": "assets/shows/green-auto-640.jpg", "url": "https://…" }
   ]
 }
 ```
 
-Tips
+## Asset conventions
 - Keep filenames lowercased and hyphenated (e.g., `smile-thru-og.jpg`).
+- Place hero files in `assets/hero/` as `hero.jpg` and `hero.webp`.
+- Place textures in `assets/textures/`.
+- Place generated show variants in `assets/shows/` and keep source poster exports in `assets/shows/originals/`.
+- For gallery, keep WebP files in `assets/gallery/webp/` and matching JPG fallbacks in `assets/gallery/` with the same basename.
+- Avoid spaces in new filenames; prefer kebab-case.
+
+Tips
 - Reuse the existing `byArtist` block; only update fields that change per release.
 - Validate JSON (e.g., copy into a linter) and test with Google’s Rich Results Test.
 
@@ -129,3 +142,34 @@ Tips
 
 ## Notes
 - Keep things framework-free and lightweight. If you introduce JS beyond the modal/year, prefer inline scripts at the end of `index.html`.
+
+## Asset quality checks
+The repo includes a lightweight asset audit and pre-commit guard.
+
+- `scripts/audit-assets.sh`
+  - Verifies all `assets/...` references in repo text files resolve to real files.
+  - Optional checks for spaces in staged asset paths or all asset filenames.
+
+- `.githooks/pre-commit`
+  - Runs the audit before each commit.
+  - Blocks commit if staged asset paths contain spaces.
+
+- GitHub Actions workflow: `.github/workflows/asset-audit.yml`
+  - Runs on pull requests and manually via workflow dispatch.
+  - Enforces missing-reference checks in CI.
+  - Fails PRs that introduce new `assets/` paths containing spaces.
+
+### One-time setup
+
+```bash
+./scripts/install-githooks.sh
+```
+
+### Run manually
+
+```bash
+./scripts/audit-assets.sh
+./scripts/audit-assets.sh --missing-only
+./scripts/audit-assets.sh --spaces-only
+./scripts/audit-assets.sh --spaces-all
+```
