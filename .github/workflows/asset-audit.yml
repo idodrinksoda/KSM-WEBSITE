@@ -1,0 +1,31 @@
+name: Asset Audit
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run missing-reference audit
+        run: bash scripts/audit-assets.sh --missing-only
+
+      - name: Fail if PR introduces asset filenames with spaces
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.sha }}" || true)"
+          bad="$(printf '%s\n' "$changed" | grep '^assets/.* .*' || true)"
+          if [ -n "$bad" ]; then
+            echo "PR introduces asset paths with spaces:"
+            echo "$bad"
+            exit 1
+          fi
+          echo "No new asset paths with spaces in this PR."

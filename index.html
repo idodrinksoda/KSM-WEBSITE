@@ -10,7 +10,8 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Saira:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero/hero.webp" type="image/webp" fetchpriority="high">
 
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css?v=2">
@@ -24,7 +25,7 @@
     "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
     "datePublished": "2025-11-15",
     "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
-    "image": "assets/single-cover-og.jpg",
+    "image": "assets/hero/hero.jpg",
     "url": "/"
   }
   </script>
@@ -100,16 +101,6 @@
               </a>
             </div>
           </article>
-
-          <article class="single-card single-card-upcoming" aria-labelledby="single-next">
-            <h3 id="single-next">Next Single</h3>
-            <div class="card bandcamp-embed bandcamp-placeholder">
-              <p>New single dropping soon. Pre-save and streaming links will appear here at launch.</p>
-            </div>
-            <div class="platform-icons platform-icons-disabled" aria-label="Streaming links coming soon">
-              <span class="platform-text">Links unlock on release day</span>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -122,28 +113,27 @@
           <div class="shows-grid">
             <!-- (removed: Baggaclaim KW show) -->
 
-            <article class="show-card" aria-labelledby="show-2026-03-22-green-auto">
-              <figure class="show-media">
-                <a href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener">
-                  <img src="assets/Mar%2022%20Green%20Auto%20poster%20still.jpg" alt="Poster — Green Auto — Mar 22" loading="lazy" width="400" height="600">
-                </a>
-              </figure>
-              <div class="show-meta">
-                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">Sat Mar 22, 2026</time>
-                <span>Green Auto – Vancouver, BC</span> 
-              </div>
-              <div class="show-actions">
-                <a class="btn-tickets" href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener">Tickets</a>
-                <a class="btn-map btn" href="https://www.google.com/maps/place/green+auto/data=!4m2!3m1!1s0x548671006d91b771:0x5af86ca349312e19?sa=X&ved=1t:242&ictx=111" target="_blank" rel="noopener">Map</a>
-              </div>
-            </article>
-
               <article class="show-card" aria-labelledby="show-takeurtime">
                 <figure class="show-media">
-                  <img src="assets/TYTMarch21.jpg" alt="Poster — Takeurtime" loading="lazy" width="400" height="600">
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/shows/tyt-320.webp 320w, assets/shows/tyt-611.webp 611w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px">
+                    <img
+                      src="assets/shows/tyt-611.jpg"
+                      srcset="assets/shows/tyt-320.jpg 320w, assets/shows/tyt-611.jpg 611w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px"
+                      alt="Poster — Takeurtime"
+                      loading="lazy"
+                      decoding="async"
+                      fetchpriority="low"
+                      width="400"
+                      height="600">
+                  </picture>
                 </figure>
                 <div class="show-meta">
-                  <time id="show-takeurtime">Friday March 21, 2026</time>
+                  <time datetime="2026-03-21" id="show-takeurtime">Sat Mar 21, 2026</time>
                   <span>Take Your Time Back – Vancouver,BC</span>
                 </div>
                 <div class="show-actions">
@@ -152,47 +142,42 @@
                 </div>
               </article>
 
+            <article class="show-card" aria-labelledby="show-2026-03-22-green-auto">
+              <figure class="show-media">
+                <a href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener">
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/shows/green-auto-320.webp 320w, assets/shows/green-auto-640.webp 640w, assets/shows/green-auto-960.webp 960w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px">
+                    <img
+                      src="assets/shows/green-auto-640.jpg"
+                      srcset="assets/shows/green-auto-320.jpg 320w, assets/shows/green-auto-640.jpg 640w, assets/shows/green-auto-960.jpg 960w"
+                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px"
+                      alt="Poster — Green Auto — Mar 22"
+                      loading="lazy"
+                      decoding="async"
+                      fetchpriority="low"
+                      width="400"
+                      height="600">
+                  </picture>
+                </a>
+              </figure>
+              <div class="show-meta">
+                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">Sun Mar 22, 2026</time>
+                <span>Green Auto – Vancouver, BC</span> 
+              </div>
+              <div class="show-actions">
+                <a class="btn-tickets" href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener">Tickets</a>
+                <a class="btn-map btn" href="https://www.google.com/maps/place/green+auto/data=!4m2!3m1!1s0x548671006d91b771:0x5af86ca349312e19?sa=X&ved=1t:242&ictx=111" target="_blank" rel="noopener">Map</a>
+              </div>
+            </article>
+
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PRESS -->
-    <section id="press">
-      <div class="container">
-        <h2 class="glitch-soft" data-text="Press">Press</h2>
-        <div class="card press-card">
-          <div class="press-grid">
-            <article class="press-item">
-              <div class="press-meta">
-                <span class="press-outlet">Quockerwodger</span>
-                <span class="press-tag">Review</span>
-                <time datetime="2026-03-22">Mar 22, 2026</time>
-              </div>
-              <h3>Queenpin debut show at Green Auto</h3>
-              <p>Show review covering the Green Auto bill with a section on Kama Sutra Murder’s set.</p>
-              <div class="press-actions">
-                <a class="btn" href="https://quockerwodger.ca/post/queenpin-debut-show-at-green-auto/#:~:text=Kama%20Sutra%20Murder" target="_blank" rel="noopener">Read review</a>
-              </div>
-            </article>
-
-            <article class="press-item">
-              <div class="press-meta">
-                <span class="press-outlet">Elder God</span>
-                <span class="press-tag">Recap</span>
-                <time datetime="2024-05-11">May 11, 2024</time>
-              </div>
-              <h3>Show reaction — 648 Kingsway</h3>
-              <p>Includes a section on Kama Sutra Murder — scroll within the recap to reach our part.</p>
-              <div class="press-actions">
-                <a class="btn" href="https://eldergod.ca/show-reaction/24-05-11-648-kingsway/#:~:text=Kama%20Sutra%20Murder" target="_blank" rel="noopener">Read recap</a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-    
     <!-- GALLERY (placeholder, wired for Dropbox raw links) -->
     <section id="gallery">
       <div class="container">
@@ -202,10 +187,10 @@
           </div>
           <div class="gallery-grid" data-gallery-grid>
             <figure class="gallery-item">
-              <img src="assets/gallery/DSCF6225-Enhanced-NR.jpg" alt="Gallery photo 1" loading="lazy">
+              <img src="assets/gallery/webp/DSCF6225-Enhanced-NR.webp" alt="Gallery photo 1" loading="lazy" decoding="async" fetchpriority="low" width="1800" height="1200">
             </figure>
             <figure class="gallery-item">
-              <img src="assets/gallery/DSCF6524-Enhanced-NR.jpg" alt="Gallery photo 2" loading="lazy">
+              <img src="assets/gallery/webp/DSCF6524-Enhanced-NR.webp" alt="Gallery photo 2" loading="lazy" decoding="async" fetchpriority="low" width="1200" height="1800">
             </figure>
           </div>
         </div>
@@ -225,6 +210,40 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
           </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESS -->
+    <section id="press">
+      <div class="container">
+        <h2 class="glitch-soft" data-text="Press">Press</h2>
+        <div class="card press-card">
+          <div class="press-grid">
+            <article class="press-item">
+              <div class="press-meta">
+                <span class="press-outlet">Quockerwodger</span>
+                <span class="press-tag">Review</span>
+                <time datetime="2026-03-22">Mar 22, 2026</time>
+              </div>
+              <h3>Queenpin debut show at Green Auto</h3>
+              <div class="press-actions">
+                <a class="btn" href="https://quockerwodger.ca/post/queenpin-debut-show-at-green-auto/#:~:text=Kama%20Sutra%20Murder" target="_blank" rel="noopener">Read review</a>
+              </div>
+            </article>
+
+            <article class="press-item">
+              <div class="press-meta">
+                <span class="press-outlet">Elder God</span>
+                <span class="press-tag">Recap</span>
+                <time datetime="2024-05-11">May 11, 2024</time>
+              </div>
+              <h3>Show reaction — 648 Kingsway</h3>
+              <div class="press-actions">
+                <a class="btn" href="https://eldergod.ca/show-reaction/24-05-11-648-kingsway/#:~:text=Kama%20Sutra%20Murder" target="_blank" rel="noopener">Read recap</a>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -289,28 +308,53 @@
 
  <!-- Scripts -->
 <script>
-  // Smooth scroll from hero CTA to contact
-  const joinBtn = document.getElementById('joinList');
-  joinBtn?.addEventListener('click', () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  });
-
   // Gallery grid sourced from assets/gallery
   let galleryImages = [
-    'assets/gallery/DSCF6225-Enhanced-NR.jpg',
-    'assets/gallery/DSCF6524-Enhanced-NR.jpg',
-    'assets/gallery/DSCF6790-Enhanced-NR.jpg',
-    'assets/gallery/DSCF6895-Enhanced-NR.jpg',
-    'assets/gallery/KAMA%20SUTRA%20MURDER%2024.jpg'
+    'assets/gallery/webp/DSCF6225-Enhanced-NR.webp',
+    'assets/gallery/webp/DSCF6524-Enhanced-NR.webp',
+    'assets/gallery/webp/DSCF6790-Enhanced-NR.webp',
+    'assets/gallery/webp/DSCF6895-Enhanced-NR.webp',
+    'assets/gallery/webp/KAMA%20SUTRA%20MURDER%2024.webp'
   ];
   const galleryGrid = document.querySelector('[data-gallery-grid]');
   const galleryModal = document.getElementById('galleryModal');
   const galleryModalImage = document.getElementById('galleryModalImage');
   const galleryManifestUrl = 'assets/gallery/manifest.json';
-  const galleryPageSize = 12;
+  const galleryPageSize = 8;
   let galleryPage = 0;
   let galleryTimer;
   let galleryActiveIndex = 0;
+
+  function toJpegFallback(src) {
+    return String(src)
+      .replace('assets/gallery/webp/', 'assets/gallery/')
+      .replace(/\.webp$/i, '.jpg');
+  }
+
+  function handleGalleryImageError(img) {
+    if (!(img instanceof HTMLImageElement)) return;
+    if (img.dataset.triedFallback !== '1') {
+      img.dataset.triedFallback = '1';
+      const fallback = img.dataset.fallback || toJpegFallback(img.src);
+      if (fallback && fallback !== img.src) {
+        img.src = fallback;
+        return;
+      }
+    }
+
+    // Keep gallery slots filled: rotate to another source instead of removing the tile.
+    if (!galleryImages.length) return;
+    const currentIdx = Number.parseInt(img.dataset.index || '0', 10);
+    const retryCount = Number.parseInt(img.dataset.retryCount || '0', 10) + 1;
+    img.dataset.retryCount = String(retryCount);
+    if (retryCount > galleryImages.length) return;
+    const nextIdx = (currentIdx + retryCount) % galleryImages.length;
+    const nextSrc = galleryImages[nextIdx];
+    img.dataset.index = String(nextIdx);
+    img.dataset.fallback = toJpegFallback(nextSrc);
+    img.dataset.triedFallback = '0';
+    img.src = nextSrc;
+  }
 
   function shuffleGalleryImages() {
     for (let i = galleryImages.length - 1; i > 0; i -= 1) {
@@ -322,32 +366,38 @@
   function renderGalleryGrid() {
     if (!galleryGrid || !galleryImages.length) return;
     galleryGrid.innerHTML = '';
-    const pages = [];
-    for (let i = 0; i < galleryImages.length; i += galleryPageSize) {
-      pages.push(galleryImages.slice(i, i + galleryPageSize));
-    }
+    const pageCount = Math.max(1, Math.ceil(galleryImages.length / galleryPageSize));
 
-    pages.forEach((pageImages, pageIdx) => {
+    for (let pageIdx = 0; pageIdx < pageCount; pageIdx += 1) {
       const pageEl = document.createElement('div');
       pageEl.className = 'gallery-page';
       if (pageIdx === galleryPage) pageEl.classList.add('is-active');
 
-      pageImages.forEach((src, idx) => {
+      const startIdx = pageIdx * galleryPageSize;
+      for (let slotIdx = 0; slotIdx < galleryPageSize; slotIdx += 1) {
+        const imageIdx = (startIdx + slotIdx) % galleryImages.length;
+        const src = galleryImages[imageIdx];
         const figure = document.createElement('figure');
         figure.className = 'gallery-item';
 
         const img = document.createElement('img');
         img.src = src;
-        img.alt = `Gallery photo ${pageIdx * galleryPageSize + idx + 1}`;
+        img.alt = `Gallery photo ${imageIdx + 1}`;
         img.loading = 'lazy';
-        img.dataset.index = String(pageIdx * galleryPageSize + idx);
+        img.decoding = 'async';
+        img.fetchPriority = 'low';
+        img.dataset.index = String(imageIdx);
+        img.dataset.retryCount = '0';
+        img.dataset.fallback = toJpegFallback(src);
+        img.dataset.triedFallback = '0';
+        img.addEventListener('error', () => handleGalleryImageError(img));
 
         figure.appendChild(img);
         pageEl.appendChild(figure);
-      });
+      }
 
       galleryGrid.appendChild(pageEl);
-    });
+    }
   }
 
   function showGalleryPage(nextPage) {
@@ -366,7 +416,7 @@
 
   async function fetchGalleryList() {
     try {
-      const res = await fetch(`${galleryManifestUrl}?v=${Date.now()}`, { cache: 'no-store' });
+      const res = await fetch(galleryManifestUrl, { cache: 'force-cache' });
       if (!res.ok) return;
       const data = await res.json();
       const urls = Array.isArray(data) ? data.filter(src => typeof src === 'string') : [];
@@ -405,6 +455,8 @@
     if (!galleryModal || !galleryModalImage) return;
     if (typeof idx === 'number') galleryActiveIndex = idx;
     const nextSrc = galleryImages[galleryActiveIndex] || src;
+    galleryModalImage.dataset.fallback = toJpegFallback(nextSrc);
+    galleryModalImage.dataset.triedFallback = '0';
     galleryModalImage.src = nextSrc;
     galleryModalImage.alt = alt || `Gallery photo ${galleryActiveIndex + 1}`;
     galleryModal.hidden = false;
@@ -457,6 +509,18 @@
   document.querySelector('[data-gallery-prev]')?.addEventListener('click', () => stepGalleryModal(-1));
   document.querySelector('[data-gallery-next]')?.addEventListener('click', () => stepGalleryModal(1));
 
+  galleryModalImage?.addEventListener('error', () => {
+    if (galleryModalImage.dataset.triedFallback !== '1') {
+      galleryModalImage.dataset.triedFallback = '1';
+      const fallback = galleryModalImage.dataset.fallback || toJpegFallback(galleryModalImage.src);
+      if (fallback && fallback !== galleryModalImage.src) {
+        galleryModalImage.src = fallback;
+        return;
+      }
+    }
+    stepGalleryModal(1);
+  });
+
   // Close modal on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -492,6 +556,61 @@
       link.addEventListener(evt, () => link.blur(), { passive: true });
     });
   });
+
+  // Click flicker burst on hero title
+  const heroTitle = document.querySelector('.glitch-title');
+  let flickerTimer;
+  function triggerTitleFlicker() {
+    if (!heroTitle) return;
+    heroTitle.classList.remove('is-click-flicker');
+    void heroTitle.offsetWidth;
+    heroTitle.classList.add('is-click-flicker');
+    if (flickerTimer) clearTimeout(flickerTimer);
+    flickerTimer = setTimeout(() => heroTitle.classList.remove('is-click-flicker'), 430);
+  }
+  heroTitle?.addEventListener('click', triggerTitleFlicker);
+  heroTitle?.addEventListener('touchend', triggerTitleFlicker, { passive: true });
+
+  // Randomized auto flicker bursts: uneven spacing, 2-4 rapid flickers per burst
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroTitle && !reduceMotion) {
+    let autoFlickerTimer;
+
+    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+    function queueNextBurst() {
+      const nextDelay = randInt(3800, 9800);
+      autoFlickerTimer = setTimeout(runBurst, nextDelay);
+    }
+
+    function runBurst() {
+      const flickerCount = randInt(2, 4);
+      let completed = 0;
+
+      function flickOnce() {
+        heroTitle.style.opacity = '0';
+        const offMs = randInt(14, 34);
+        setTimeout(() => {
+          heroTitle.style.opacity = '';
+          completed += 1;
+          if (completed >= flickerCount) {
+            queueNextBurst();
+            return;
+          }
+          const gapMs = randInt(22, 66);
+          setTimeout(flickOnce, gapMs);
+        }, offMs);
+      }
+
+      flickOnce();
+    }
+
+    queueNextBurst();
+
+    window.addEventListener('beforeunload', () => {
+      if (autoFlickerTimer) clearTimeout(autoFlickerTimer);
+    });
+  }
 
   
 </script>

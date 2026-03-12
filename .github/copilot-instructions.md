@@ -10,13 +10,13 @@ Use these project-specific rules to be productive immediately. Keep changes mini
 ## Architecture and patterns
 - Sections in `index.html`: hero, `#music` (Bandcamp + platform icons), `#shows` (card grid), `#videos` (YouTube), socials, footer, Mailchimp modal.
 - Styling uses CSS tokens in `:root` (e.g., `--bg`, `--fg`, `--accent`). Reuse existing utilities: `.container`, `.card`, `.platform-icons`, `.btn`, `.cta`.
-- Hero background comes from `assets/hero.jpg` via `.hero.has-image::before`.
-- Inline JS in `index.html` is the source of truth (modal + year + smooth scroll). `script.js` exists but is currently not referenced by `index.html` and may contain legacy helpers.
+- Hero background comes from `assets/hero/hero.jpg` + `assets/hero/hero.webp` via `.hero.has-image::before`.
+- Inline JS in `index.html` is the source of truth (gallery + modal + year). `script.js` exists but is currently not referenced by `index.html` and may contain legacy helpers.
 
 ## Developer workflow
 - Local preview: serve statically (any simple HTTP server). No build step.
 - Deployment: commit to `main`; Pages will serve root. Do not remove/rename `CNAME`.
-- Asset paths are relative (e.g., `assets/KW.jpg`). Optimize images offline; keep widths appropriate for layout.
+- Asset paths are relative (e.g., `assets/shows/green-auto-640.jpg`). Optimize images offline; keep widths appropriate for layout.
 
 ## Shows section pattern
 - Add shows by appending an `article.show-card` inside `#shows .shows-grid` following the existing structure:
@@ -24,7 +24,7 @@ Use these project-specific rules to be productive immediately. Keep changes mini
   <article class="show-card" aria-labelledby="show-id">
     <figure class="show-media">
       <a href="https://tickets.example" target="_blank" rel="noopener">
-        <img src="assets/poster.jpg" alt="Poster — Event" loading="lazy" width="400" height="600">
+        <img src="assets/shows/green-auto-640.jpg" alt="Poster — Event" loading="lazy" width="400" height="600">
       </a>
     </figure>
     <div class="show-meta">
