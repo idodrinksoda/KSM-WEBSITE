@@ -710,6 +710,7 @@ textarea{min-height:120px;resize:vertical}
 }
 .modal-panel-gallery{
   max-width:min(96vw,1100px);
+  margin:clamp(12px,6vh,48px) auto;
   padding:12px;
   display:block;
   position:relative;
@@ -717,12 +718,17 @@ textarea{min-height:120px;resize:vertical}
 .modal-panel-gallery img{
   width:auto;
   height:auto;
-  max-width:90vw;
-  max-height:90vh;
+  max-width:min(96vw,1100px);
+  max-height:calc(100vh - 140px);
   display:block;
   border-radius:12px;
   object-fit:contain;
   margin:0 auto;
+}
+.modal-panel-gallery .modal-close{top:4px;right:6px}
+@media(max-width:720px){
+  .modal-panel-gallery{margin:16px auto}
+  .modal-panel-gallery img{max-height:calc(100vh - 170px)}
 }
 .gallery-nav{
   position:absolute;

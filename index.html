@@ -319,6 +319,11 @@
   const galleryGrid = document.querySelector('[data-gallery-grid]');
   const galleryModal = document.getElementById('galleryModal');
   const galleryModalImage = document.getElementById('galleryModalImage');
+  // Ensure modal starts closed even if caches kept a previous state
+  if (galleryModal) {
+    galleryModal.hidden = true;
+    galleryModalImage?.removeAttribute('src');
+  }
   const galleryManifestUrl = 'assets/gallery/manifest.json';
   const galleryPageSize = 8;
   let galleryPage = 0;
