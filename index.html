@@ -329,6 +329,7 @@
   let galleryPage = 0;
   let galleryTimer;
   let galleryActiveIndex = 0;
+  let galleryUserOpened = false;
 
   function toJpegFallback(src) {
     return String(src)
@@ -446,7 +447,8 @@
       const target = e.target;
       if (target instanceof HTMLImageElement) {
         const idx = Number.parseInt(target.dataset.index || '0', 10);
-        openGalleryModal(galleryImages[idx] || target.src, target.alt, idx >= 0 ? idx : 0);
+        galleryUserOpened = true;
+        openGalleryModal(galleryImages[idx] || target.src, target.alt, idx >= 0 ? idx : 0, { force: true });
       }
     });
   }
@@ -456,8 +458,9 @@
     document.body.style.overflow = anyOpen ? 'hidden' : '';
   }
 
-  function openGalleryModal(src, alt, idx) {
+  function openGalleryModal(src, alt, idx, options = {}) {
     if (!galleryModal || !galleryModalImage) return;
+    if (!galleryUserOpened && !options.force) return;
     if (typeof idx === 'number') galleryActiveIndex = idx;
     const nextSrc = galleryImages[galleryActiveIndex] || src;
     galleryModalImage.dataset.fallback = toJpegFallback(nextSrc);
@@ -470,15 +473,16 @@
 
   function closeGalleryModal() {
     if (!galleryModal) return;
+    galleryUserOpened = false;
     galleryModal.hidden = true;
     setScrollLock();
   }
 
   function stepGalleryModal(delta) {
-    if (!galleryImages.length) return;
+    if (!galleryUserOpened || !galleryImages.length) return;
     galleryActiveIndex = (galleryActiveIndex + delta + galleryImages.length) % galleryImages.length;
     const nextSrc = galleryImages[galleryActiveIndex];
-    openGalleryModal(nextSrc, `Gallery photo ${galleryActiveIndex + 1}`, galleryActiveIndex);
+    openGalleryModal(nextSrc, `Gallery photo ${galleryActiveIndex + 1}`, galleryActiveIndex, { force: true });
   }
 
   // ===== Mailchimp modal controls (modal-only) =====
@@ -515,6 +519,7 @@
   document.querySelector('[data-gallery-next]')?.addEventListener('click', () => stepGalleryModal(1));
 
   galleryModalImage?.addEventListener('error', () => {
+    if (!galleryUserOpened) return;
     if (galleryModalImage.dataset.triedFallback !== '1') {
       galleryModalImage.dataset.triedFallback = '1';
       const fallback = galleryModalImage.dataset.fallback || toJpegFallback(galleryModalImage.src);
