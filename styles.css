@@ -1084,3 +1084,118 @@ body.bg-overlay-sticker{
 
 /* (Removed .single styles — section no longer used) */
 
+/* =========================
+   MOBILE OPTIMISATION
+   ========================= */
+
+/* --- Touch-device feedback (replaces :hover which sticks on tap) --- */
+@media (hover: none) {
+  /* Disable card lift on tap — avoid the "stuck hover" effect on iOS/Android */
+  .show-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  /* Tactile press feedback for arrows */
+  .shows-arrow:active {
+    opacity: 1;
+    color: var(--accent-2);
+    background: rgba(30, 30, 46, 0.9);
+  }
+  /* Button press feedback */
+  .btn-tickets:active,
+  .btn-map:active,
+  .btn-details:active {
+    opacity: 0.72;
+  }
+  /* Platform icon press */
+  .platform-icons a:active {
+    color: var(--accent);
+    transform: none;
+  }
+}
+
+/* --- Phones ≤ 640px --- */
+@media (max-width: 640px) {
+  /* Shows arrows: wider touch target (was 28px from 900px rule) */
+  .shows-arrow {
+    width: 36px;
+    min-width: 36px;
+    height: 48px;
+    min-height: 44px;
+  }
+
+  /* Show meta: tighten text + prevent overflow on narrow single-card view */
+  .show-meta {
+    padding: 6px 8px 0;
+    gap: 3px;
+  }
+  .show-meta time {
+    font-size: .85rem;
+  }
+  .show-meta span {
+    font-size: .8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .show-actions {
+    padding: 6px 8px 8px;
+    gap: 6px;
+  }
+  .btn-tickets,
+  .btn-map,
+  .btn-details {
+    font-size: .82rem;
+    padding: 7px 10px;
+  }
+
+  /* Video: slightly softer corners on small screens */
+  .video-facade,
+  .video-embed iframe {
+    border-radius: 8px;
+  }
+
+  /* Video: full-bleed within container, no excess side gaps */
+  #videos .video-embed {
+    width: 100%;
+  }
+}
+
+/* --- Small phones ≤ 520px --- */
+@media (max-width: 520px) {
+  /* Gallery: switch to 2-col × 4-row so all 8 images are visible */
+  .gallery-page {
+    grid-template-rows: repeat(4, 1fr);
+    gap: 6px;
+  }
+  /* Gallery arrows: narrower so grid gets maximum width */
+  .gallery-row-wrap .shows-arrow {
+    width: 26px;
+    min-width: 26px;
+    height: 40px;
+    min-height: 40px;
+    font-size: .95rem;
+  }
+  /* Gallery card: reduce padding so more image area shown */
+  .gallery-card {
+    padding: 8px;
+  }
+}
+
+/* --- Very small phones ≤ 400px --- */
+@media (max-width: 400px) {
+  /* Shows arrows: slightly smaller to reclaim grid width */
+  .shows-arrow {
+    width: 30px;
+    min-width: 30px;
+  }
+  /* Show card: fit cleanly in available grid width */
+  .show-card {
+    flex: 0 0 calc(90vw - 24px);
+  }
+  /* Tighter meta text */
+  .show-meta span {
+    font-size: .75rem;
+  }
+}
+
