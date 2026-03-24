@@ -1,0 +1,84 @@
+Pro-Level Polish Prompt (Use This As-Is)
+
+Prompt:
+
+Do a final polish pass on this band website to make it feel like a modern, high-end artist/label site. Keep the existing structure and features—this is a refinement, not a rebuild.
+
+1. Motion & Interactions (High Priority)
+
+Add subtle, smooth animations across the site:
+
+Use ease-in-out timing and short durations (150–300ms)
+Add:
+Hover effects on cards (slight scale, brightness, or lift)
+Smooth transitions for buttons and arrows
+Scroll-based fade/slide-in for sections
+Avoid anything flashy or distracting—keep it minimal and premium
+2. Shows Section (Make It Feel Premium)
+Add:
+Smooth horizontal scrolling feel (slight easing)
+Card hover:
+Slight scale up
+Soft shadow or glow
+Active vs expired:
+Active = crisp + responsive
+Expired = dimmed but still clean (not ugly grey)
+Improve spacing so cards feel intentional and evenly distributed
+3. Gallery Section (Modern Feel)
+Add:
+Smooth transitions when images change/randomize
+Slight zoom or parallax feel on hover
+Ensure:
+No layout shifting
+Clean grid alignment at all times
+Keep motion subtle and fluid
+4. Video Section (Fix + Upgrade)
+Ensure:
+Correct aspect ratio (no stretching)
+Proper centering
+Add:
+Clean responsive container
+Optional subtle fade-in on load
+Make it feel like a featured content block, not an afterthought
+5. Typography & Spacing
+Improve:
+Consistent spacing between sections
+Clean alignment across all elements
+Slightly refine:
+Font sizes
+Letter spacing
+Section hierarchy
+6. Buttons & Arrows
+Upgrade arrows:
+Smooth hover transitions
+Slight opacity/brightness shift on hover
+Keep them minimal and not intrusive
+Ensure they feel intentional and responsive
+7. Performance-Safe Animations
+Use:
+CSS transforms (translate, scale, opacity)
+Avoid:
+Heavy JS animations
+Layout-thrashing properties
+8. Overall Feel
+
+Goal:
+
+Clean
+Modern
+Smooth
+Slightly “music industry / label” aesthetic
+
+Avoid:
+
+Over-animating
+Gimmicky effects
+Anything that hurts performance
+Constraints
+Do NOT break existing functionality
+Do NOT rewrite entire components
+Keep code clean and modular
+Only enhance what exists
+Output
+Return updated code only
+No explanations unless necessary
