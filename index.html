@@ -163,19 +163,125 @@
       <div class="container">
         <h2 class="glitch-soft" data-text="Shows">Shows</h2>
         <div class="card">
-          <div class="shows-grid">
+          <button class="shows-arrow left" aria-label="Scroll left" type="button">&#8592;</button>
+          <div class="shows-grid" tabindex="0">
+            <!-- Expired Shows: order not by date -->
+                        <article class="show-card expired-show no-jump" aria-labelledby="show-2025-09-26-bullys" data-show-date="2025-09-26">
+                          <figure class="show-media">
+                            <img
+                              src="assets/shows/previous-shows/BULLYS-SEPT26TH2025.jpg"
+                              alt="Poster — Bully's — Sep 26"
+                              loading="lazy"
+                              decoding="async"
+                              fetchpriority="low"
+                              width="400"
+                              height="600">
+                          </figure>
+                          <div class="show-meta">
+                            <time datetime="2025-09-26" id="show-2025-09-26-bullys">Fri Sep 26, 2025</time>
+                            <span>Bully's – Vancouver, BC</span>
+                          </div>
+                          <div class="show-actions">
+                            <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+                          </div>
+                        </article>
 
-            <!-- (removed: Baggaclaim KW show) -->
-            <article class="show-card" aria-labelledby="show-takeurtime" data-show-date="2026-03-21">
+                        <article class="show-card expired-show no-jump" aria-labelledby="show-2025-09-19-astoria" data-show-date="2025-09-19">
+                          <figure class="show-media">
+                            <img
+                              src="assets/shows/previous-shows/ASTORIA-SEP19TH2025.jpg"
+                              alt="Poster — Astoria — Sep 19"
+                              loading="lazy"
+                              decoding="async"
+                              fetchpriority="low"
+                              width="400"
+                              height="600">
+                          </figure>
+                          <div class="show-meta">
+                            <time datetime="2025-09-19" id="show-2025-09-19-astoria">Fri Sep 19, 2025</time>
+                            <span>Astoria – Vancouver, BC</span>
+                          </div>
+                          <div class="show-actions">
+                            <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+                          </div>
+                        </article>
+
+                        <article class="show-card expired-show no-jump" aria-labelledby="show-2025-08-07-648" data-show-date="2025-08-07">
+                          <figure class="show-media">
+                            <img
+                              src="assets/shows/previous-shows/648-AUG7TH2025.jpg"
+                              alt="Poster — 648 Kingsway — Aug 7"
+                              loading="lazy"
+                              decoding="async"
+                              fetchpriority="low"
+                              width="400"
+                              height="600">
+                          </figure>
+                          <div class="show-meta">
+                            <time datetime="2025-08-07" id="show-2025-08-07-648">Thu Aug 7, 2025</time>
+                            <span>648 Kingsway – Vancouver, BC</span>
+                          </div>
+                          <div class="show-actions">
+                            <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+                          </div>
+                        </article>
+
+                        <article class="show-card expired-show no-jump" aria-labelledby="show-2025-06-28-cblt" data-show-date="2025-06-28">
+                          <figure class="show-media">
+                            <img
+                              src="assets/shows/previous-shows/CBLT-JUNE28TH2025.webp"
+                              alt="Poster — CBLT — Jun 28"
+                              loading="lazy"
+                              decoding="async"
+                              fetchpriority="low"
+                              width="400"
+                              height="600">
+                          </figure>
+                          <div class="show-meta">
+                            <time datetime="2025-06-28" id="show-2025-06-28-cblt">Sat Jun 28, 2025</time>
+                            <span>CBLT – Vancouver, BC</span>
+                          </div>
+                          <div class="show-actions">
+                            <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+                          </div>
+                        </article>
+            <article class="show-card expired-show no-jump" aria-labelledby="show-2026-03-22-green-auto" data-show-date="2026-03-22">
               <figure class="show-media">
                 <picture>
                   <source
                     type="image/webp"
-                    srcset="assets/shows/tyt-320.webp 320w, assets/shows/tyt-611.webp 611w"
+                    srcset="assets/shows/green-auto-320.webp 320w, assets/shows/green-auto-640.webp 640w, assets/shows/green-auto-960.webp 960w"
                     sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px">
                   <img
-                    src="assets/shows/tyt-611.jpg"
-                    srcset="assets/shows/tyt-320.jpg 320w, assets/shows/tyt-611.jpg 611w"
+                    src="assets/shows/green-auto-640.jpg"
+                    srcset="assets/shows/green-auto-320.jpg 320w, assets/shows/green-auto-640.jpg 640w, assets/shows/green-auto-960.jpg 960w"
+                    sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px"
+                    alt="Poster — Green Auto — Mar 22"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
+                    width="400"
+                    height="600">
+                </picture>
+              </figure>
+              <div class="show-meta">
+                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">Sun Mar 22, 2026</time>
+                <span>Green Auto – Vancouver, BC</span> 
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+              </div>
+            </article>
+            <article class="show-card expired-show no-jump" aria-labelledby="show-takeurtime" data-show-date="2026-03-21">
+              <figure class="show-media">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="assets/shows/previous-shows/tyt-320.webp 320w, assets/shows/previous-shows/tyt-611.webp 611w"
+                    sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px">
+                  <img
+                    src="assets/shows/previous-shows/tyt-611.jpg"
+                    srcset="assets/shows/previous-shows/tyt-320.jpg 320w, assets/shows/previous-shows/tyt-611.jpg 611w"
                     sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px"
                     alt="Poster — Takeurtime"
                     loading="lazy"
@@ -190,43 +296,162 @@
                 <span>Take Your Time Back – Vancouver,BC</span>
               </div>
               <div class="show-actions">
-                <span class="btn-tickets" aria-disabled="true">Tickets soon</span>
-                <a class="btn-map btn" href="https://www.google.com/maps/place/Take+Your+Time+Back/@49.2569217,-123.0933066,631m/data=!3m2!1e3!4b1!4m6!3m5!1s0x54867100593bdd5b:0x9211a73b9b8196b8!8m2!3d49.2569182!4d-123.0907317!16s%2Fg%2F11xtjz26f2?entry=ttu&g_ep=EgoyMDI2MDMwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Map</a>
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+              </div>
+            </article>
+            <article class="show-card expired-show no-jump" aria-labelledby="show-2026-02-20-green-auto" data-show-date="2026-02-20">
+              <figure class="show-media">
+                <img
+                  src="assets/shows/previous-shows/GA-FEB20TH2026.jpg"
+                  alt="Poster — Green Auto — Feb 20"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  width="400"
+                  height="600">
+              </figure>
+              <div class="show-meta">
+                <time datetime="2026-02-20" id="show-2026-02-20-green-auto">Fri Feb 20, 2026</time>
+                <span>Green Auto – Vancouver, BC</span>
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
               </div>
             </article>
 
-            <article class="show-card" aria-labelledby="show-2026-03-22-green-auto" data-show-date="2026-03-22">
+            <article class="show-card expired-show no-jump" aria-labelledby="show-2026-01-22-green-auto" data-show-date="2026-01-22">
               <figure class="show-media">
-                <a href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener noreferrer">
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcset="assets/shows/green-auto-320.webp 320w, assets/shows/green-auto-640.webp 640w, assets/shows/green-auto-960.webp 960w"
-                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px">
-                    <img
-                      src="assets/shows/green-auto-640.jpg"
-                      srcset="assets/shows/green-auto-320.jpg 320w, assets/shows/green-auto-640.jpg 640w, assets/shows/green-auto-960.jpg 960w"
-                      sizes="(max-width: 600px) 90vw, (max-width: 980px) 44vw, 320px"
-                      alt="Poster — Green Auto — Mar 22"
-                      loading="lazy"
-                      decoding="async"
-                      fetchpriority="low"
-                      width="400"
-                      height="600">
-                  </picture>
-                </a>
+                <img
+                  src="assets/shows/previous-shows/GA-JAN222026.jpg"
+                  alt="Poster — Queentide, Ears, Kama Sutra Murder — Jan 22"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  width="400"
+                  height="600">
               </figure>
               <div class="show-meta">
-                <time datetime="2026-03-22" id="show-2026-03-22-green-auto">Sun Mar 22, 2026</time>
-                <span>Green Auto – Vancouver, BC</span> 
+                <time datetime="2026-01-22" id="show-2026-01-22-green-auto">Thu Jan 22, 2026</time>
+                <span>Green Auto – Vancouver, BC</span>
+                <span>Queentide, Ears, Kama Sutra Murder</span>
               </div>
               <div class="show-actions">
-                <a class="btn-tickets" href="https://www.bandsintown.com/e/108045282?app_id=linktree_1773077241926&came_from=267&utm_medium=api&utm_source=public_api&utm_campaign=event" target="_blank" rel="noopener noreferrer">Tickets</a>
-                <a class="btn-map btn" href="https://www.google.com/maps/place/green+auto/data=!4m2!3m1!1s0x548671006d91b771:0x5af86ca349312e19?sa=X&ved=1t:242&ictx=111" target="_blank" rel="noopener noreferrer">Map</a>
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+              </div>
+            </article>
+
+            <article class="show-card expired-show no-jump" aria-labelledby="show-2025-08-23-tyt" data-show-date="2025-08-23">
+              <figure class="show-media">
+                <img
+                  src="assets/shows/previous-shows/TYT-AUG23RD2025.jpg"
+                  alt="Poster — Take Ur Time Back — Aug 23"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  width="400"
+                  height="600">
+              </figure>
+              <div class="show-meta">
+                <time datetime="2025-08-23" id="show-2025-08-23-tyt">Sat Aug 23, 2025</time>
+                <span>Take Ur Time Back – Vancouver, BC</span>
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+              </div>
+            </article>
+
+            <article class="show-card expired-show no-jump" aria-labelledby="show-2025-10-11-bullys" data-show-date="2025-10-11">
+              <figure class="show-media">
+                <img
+                  src="assets/shows/previous-shows/BULLYS-OCT11TH2025.jpg"
+                  alt="Poster — Bully's — Oct 11"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  width="400"
+                  height="600">
+              </figure>
+              <div class="show-meta">
+                <time datetime="2025-10-11" id="show-2025-10-11-bullys">Sat Oct 11, 2025</time>
+                <span>Bully's – Vancouver, BC</span>
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+              </div>
+            </article>
+
+            <article class="show-card expired-show no-jump" aria-labelledby="show-2025-10-31-pnktbr" data-show-date="2025-10-31">
+              <figure class="show-media">
+                <img
+                  src="assets/shows/previous-shows/PNKTBR-OCT31ST2025.webp"
+                  alt="Poster — Pink Tabernacle — Oct 31"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  width="400"
+                  height="600">
+              </figure>
+              <div class="show-meta">
+                <time datetime="2025-10-31" id="show-2025-10-31-pnktbr">Fri Oct 31, 2025</time>
+                <span>Pink Tabernacle – Vancouver, BC</span>
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+              </div>
+            </article>
+
+            <article class="show-card expired-show no-jump" aria-labelledby="show-2025-12-06-kw" data-show-date="2025-12-06">
+              <figure class="show-media">
+                <img
+                  src="assets/shows/previous-shows/KW-DEC6TH2025.jpg"
+                  alt="Poster — KW — Dec 6"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  width="400"
+                  height="600">
+              </figure>
+              <div class="show-meta">
+                <time datetime="2025-12-06" id="show-2025-12-06-kw">Sat Dec 6, 2025</time>
+                <span>KW – Vancouver, BC</span>
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets expired" aria-disabled="true">Show complete</span>
+              </div>
+            </article>
+
+            <!-- Placeholder: upcoming show slot 1 -->
+            <article class="show-card" aria-labelledby="show-placeholder-1" data-show-date="2026-06-01">
+              <figure class="show-media">
+                <div class="show-poster-placeholder" aria-hidden="true">?</div>
+              </figure>
+              <div class="show-meta">
+                <time datetime="2026-06-01" id="show-placeholder-1">Coming Soon</time>
+                <span>TBA – Vancouver, BC</span>
+                <span>Details TBA</span>
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets">TBA</span>
+              </div>
+            </article>
+
+            <!-- Placeholder: upcoming show slot 2 -->
+            <article class="show-card" aria-labelledby="show-placeholder-2" data-show-date="2026-08-01">
+              <figure class="show-media">
+                <div class="show-poster-placeholder" aria-hidden="true">?</div>
+              </figure>
+              <div class="show-meta">
+                <time datetime="2026-08-01" id="show-placeholder-2">Coming Soon</time>
+                <span>TBA – Vancouver, BC</span>
+                <span>Details TBA</span>
+              </div>
+              <div class="show-actions">
+                <span class="btn-tickets">TBA</span>
               </div>
             </article>
 
           </div>
+          <button class="shows-arrow right" aria-label="Scroll right" type="button">&#8594;</button>
         </div>
       </div>
     </section>
@@ -238,13 +463,17 @@
         <div class="card gallery-card">
           <div class="gallery-meta">
           </div>
-          <div class="gallery-grid" data-gallery-grid>
-            <figure class="gallery-item">
-              <img src="assets/gallery/webp/DSCF6225-Enhanced-NR.webp" alt="Gallery photo 1" loading="lazy" decoding="async" fetchpriority="low" width="1800" height="1200">
-            </figure>
-            <figure class="gallery-item">
-              <img src="assets/gallery/webp/DSCF6524-Enhanced-NR.webp" alt="Gallery photo 2" loading="lazy" decoding="async" fetchpriority="low" width="1200" height="1800">
-            </figure>
+          <div class="gallery-row-wrap">
+            <button class="shows-arrow" type="button" aria-label="Previous gallery page">&#8592;</button>
+            <div class="gallery-grid" data-gallery-grid>
+              <figure class="gallery-item">
+                <img src="assets/gallery/webp/DSCF6225-Enhanced-NR.webp" alt="Gallery photo 1" loading="lazy" decoding="async" fetchpriority="low" width="1800" height="1200">
+              </figure>
+              <figure class="gallery-item">
+                <img src="assets/gallery/webp/DSCF6524-Enhanced-NR.webp" alt="Gallery photo 2" loading="lazy" decoding="async" fetchpriority="low" width="1200" height="1800">
+              </figure>
+            </div>
+            <button class="shows-arrow" type="button" aria-label="Next gallery page">&#8594;</button>
           </div>
         </div>
       </div>
@@ -310,6 +539,66 @@
     </section>
 
   </main>
+  <script>
+    // Shows: sort, classify active/expired, and handle arrow navigation
+    (function initShowsCarousel() {
+      var grid = document.querySelector('.shows-grid');
+      var leftBtn = document.querySelector('.shows-arrow.left');
+      var rightBtn = document.querySelector('.shows-arrow.right');
+      if (!grid || !leftBtn || !rightBtn) return;
+
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // Classify all dated cards into active vs expired
+      var cards = Array.from(grid.querySelectorAll('.show-card[data-show-date]'));
+      var active = [];
+      var expired = [];
+
+      cards.forEach(function(card) {
+        var dateStr = card.getAttribute('data-show-date');
+        // Parse as local date to avoid timezone shifts
+        var parts = dateStr.split('-');
+        var showDate = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+        card.classList.remove('expired-show', 'no-jump', 'show-expired');
+        if (showDate >= today) {
+          active.push({ card: card, date: showDate });
+        } else {
+          card.classList.add('expired-show', 'no-jump');
+          expired.push({ card: card, date: showDate });
+        }
+      });
+
+      // Active: soonest first; Expired: most recent first
+      active.sort(function(a, b) { return a.date - b.date; });
+      expired.sort(function(a, b) { return b.date - a.date; });
+
+      // Re-order DOM: active first, then expired
+      active.concat(expired).forEach(function(item) {
+        grid.appendChild(item.card);
+      });
+
+      // Arrow navigation
+      function scrollByCard(dir) {
+        var card = grid.querySelector('.show-card');
+        var cardWidth = card ? card.offsetWidth + 20 : 300;
+        var amount = cardWidth * 4;
+        grid.scrollBy({ left: dir * amount, behavior: 'smooth' });
+      }
+
+      function updateArrows() {
+        leftBtn.disabled = grid.scrollLeft < 2;
+        rightBtn.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 2;
+      }
+
+      leftBtn.addEventListener('click', function() { scrollByCard(-1); });
+      rightBtn.addEventListener('click', function() { scrollByCard(1); });
+      grid.addEventListener('scroll', updateArrows, { passive: true });
+      window.addEventListener('resize', updateArrows);
+      // Initial state after layout
+      requestAnimationFrame(function() { setTimeout(updateArrows, 150); });
+    })();
+  </script>
 
   <footer>
     <div class="container footer-wrap footer-stack">
@@ -367,20 +656,6 @@
 
  <!-- Scripts -->
 <script>
-  // Remove/hide expired day pass shows (auto after date passes)
-  (function removeExpiredShows() {
-    const today = new Date();
-    today.setHours(0,0,0,0); // Only compare date, not time
-    document.querySelectorAll('.show-card[data-show-date]').forEach(card => {
-      const dateStr = card.getAttribute('data-show-date');
-      if (!dateStr) return;
-      const showDate = new Date(dateStr);
-      showDate.setHours(0,0,0,0);
-      if (showDate < today) {
-        card.remove(); // Remove from DOM
-      }
-    });
-  })();
   // Gallery grid sourced from assets/gallery
   let galleryImages = [
     'assets/gallery/webp/DSCF6225-Enhanced-NR.webp',
@@ -453,8 +728,9 @@
       if (pageIdx === galleryPage) pageEl.classList.add('is-active');
 
       const startIdx = pageIdx * galleryPageSize;
-      for (let slotIdx = 0; slotIdx < galleryPageSize; slotIdx += 1) {
-        const imageIdx = (startIdx + slotIdx) % galleryImages.length;
+      const endIdx = Math.min(startIdx + galleryPageSize, galleryImages.length);
+      // Only use unique images for each page, no wrapping
+      for (let imageIdx = startIdx; imageIdx < endIdx; imageIdx++) {
         const src = galleryImages[imageIdx];
         const figure = document.createElement('figure');
         figure.className = 'gallery-item';
@@ -524,6 +800,17 @@
         openGalleryModal(galleryImages[idx] || target.src, target.alt, idx >= 0 ? idx : 0, { force: true });
       }
     });
+
+    // Gallery arrow buttons — re-shuffle and render fresh random images
+    const galleryPrevBtn = document.querySelector('.gallery-row-wrap .shows-arrow:first-child');
+    const galleryNextBtn = document.querySelector('.gallery-row-wrap .shows-arrow:last-child');
+    function advanceGallery() {
+      shuffleGalleryImages();
+      renderGalleryGrid();
+      startGalleryTimer();
+    }
+    galleryPrevBtn?.addEventListener('click', advanceGallery);
+    galleryNextBtn?.addEventListener('click', advanceGallery);
   }
 
   function setScrollLock() {
