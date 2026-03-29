@@ -43,7 +43,7 @@ Append an `article.show-card` to `#shows .shows-grid`:
 <article class="show-card" aria-labelledby="show-id">
   <figure class="show-media">
     <a href="https://tickets.example" target="_blank" rel="noopener">
-      <img src="assets/shows/green-auto-640.jpg" alt="Poster — Event" loading="lazy" width="400" height="600">
+      <img src="assets/shows/previous-shows/green-auto-640.jpg" alt="Poster — Event" loading="lazy" width="400" height="600">
     </a>
   </figure>
   <div class="show-meta">
@@ -120,7 +120,7 @@ Optional (multiple releases): use `@graph` with an array of items — list the l
   "@context": "https://schema.org",
   "@graph": [
     { "@type": "MusicRecording", "name": "New Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-12-06", "image": "assets/hero/hero.jpg", "url": "https://…" },
-    { "@type": "MusicRecording", "name": "Previous Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-11-15", "image": "assets/shows/green-auto-640.jpg", "url": "https://…" }
+    { "@type": "MusicRecording", "name": "Previous Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-11-15", "image": "assets/shows/previous-shows/green-auto-640.jpg", "url": "https://…" }
   ]
 }
 ```
