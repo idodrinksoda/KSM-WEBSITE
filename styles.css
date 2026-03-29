@@ -419,9 +419,16 @@ main h2{
     gap: 12px;
     padding-bottom: 8px;
   }
+  /* Card: container(92vw) minus arrows+gaps(80px) minus 28px peek = grid - 28px */
   .show-card {
-    flex: 0 0 calc(85vw - 28px);
-    min-width: 200px;
+    flex: 0 0 calc(92vw - 108px);
+    min-width: 0;
+  }
+  /* On mobile use cover so non-poster images don't distort */
+  .show-media img,
+  .show-media > img {
+    object-fit: cover;
+    object-position: top center;
   }
 }
 .show-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.35)}
@@ -613,8 +620,11 @@ main h2{
 }
 .platform-icons-disabled .platform-text{color:var(--muted)}
 @media(max-width:520px){
+  /* === Smile-Thru section: constrain to screen width === */
   .singles-grid{grid-template-columns:1fr}
-  .single-card{max-width:100%}
+  .single-card{max-width:100%;overflow:hidden}
+  /* Force Bandcamp iframe to fit card — overrides inline width:350px */
+  .single-card .bandcamp-embed iframe{width:100% !important}
 }
 
 /* Make Bandcamp card blend with page background */
@@ -695,7 +705,7 @@ main h2{
 }
 
 @media(max-width:540px){
-  .platform-icons{gap:6px;justify-content:center;flex-wrap:nowrap}
+  .platform-icons{gap:6px;justify-content:center;flex-wrap:wrap}
   .platform-icons a{padding:4px 6px}
   .platform-icons svg,
   .platform-icons img{width:24px;height:24px}
@@ -882,7 +892,7 @@ textarea{min-height:120px;resize:vertical}
    MODAL (Mailchimp)
    ========================= */
 .modal[hidden]{display:none!important}
-.modal{position:fixed;inset:0;z-index:1000}
+.modal{position:fixed;inset:0;z-index:1000;overscroll-behavior:none}
 .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(2px)}
 .modal-panel{
   position:relative;max-width:680px;margin:8vh auto;background:var(--card);
@@ -911,6 +921,50 @@ textarea{min-height:120px;resize:vertical}
   .modal-panel-gallery{margin:16px auto}
   .modal-panel-gallery img{max-height:calc(100vh - 170px)}
 }
+/* Gallery lightbox: fullscreen + centered on mobile */
+@media (max-width: 640px) {
+  .modal-panel-gallery {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    background: transparent;
+    /* let taps on empty areas pass through to the backdrop (closes modal) */
+    pointer-events: none;
+  }
+  .modal-panel-gallery img {
+    max-width: 94vw;
+    max-height: 90vh;   /* fallback */
+    max-height: 90svh;  /* excludes browser chrome on mobile */
+    border-radius: 6px;
+    pointer-events: auto;
+    margin: 0;
+  }
+  /* Arrows: fixed to viewport edges so pointer-events:none on the panel doesn't block them */
+  .gallery-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    z-index: 1002;
+  }
+  .gallery-nav-prev { left: 8px; }
+  .gallery-nav-next { right: 8px; }
+  .modal-panel-gallery .modal-close {
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top, 12px));
+    right: 12px;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 50%;
+    z-index: 1001;
+  }
+}
 .gallery-nav{
   position:absolute;
   top:50%;
@@ -925,6 +979,7 @@ textarea{min-height:120px;resize:vertical}
   place-items:center;
   font-size:24px;
   cursor:pointer;
+  z-index:2;
   transition:background .2s ease,transform .15s ease;
 }
 .gallery-nav:hover{background:rgba(0,0,0,.75);transform:translateY(-50%) scale(1.02)}
@@ -1047,7 +1102,7 @@ footer,.site-footer{
 body.bg-overlay-sticker{
   background-image:
     linear-gradient(rgba(11,11,13,var(--bgTextureOverlay)), rgba(11,11,13,var(--bgTextureOverlay))),
-    url('assets/textures/sticker.jpg');
+    url('assets/textures/logo.JPEG');
   background-repeat: repeat;
   background-size: auto, var(--bgTextureTile) var(--bgTextureTile);
   background-position: 0 0;
@@ -1189,9 +1244,9 @@ body.bg-overlay-sticker{
     width: 30px;
     min-width: 30px;
   }
-  /* Show card: fit cleanly in available grid width */
+  /* Card: container(92vw) minus narrower arrows+gaps(68px) minus 30px peek */
   .show-card {
-    flex: 0 0 calc(90vw - 24px);
+    flex: 0 0 calc(92vw - 98px);
   }
   /* Tighter meta text */
   .show-meta span {
