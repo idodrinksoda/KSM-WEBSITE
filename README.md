@@ -11,7 +11,7 @@ Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a tou
   - `assets/textures/` — background textures (e.g., `sticker.jpg`)
   - `assets/shows/` — show posters and responsive variants
   - `assets/shows/originals/` — source poster exports (archival)
-  - `assets/gallery/` and `assets/gallery/webp/` — gallery JPG fallbacks + optimized WebP
+  - `assets/gallery/` — local gallery fallbacks (gallery now served from Cloudinary)
   - `assets/icons/` — optional local icons
 - `CNAME` — Custom domain mapping to `kamasutramurder.com` (do not remove).
 
@@ -130,7 +130,7 @@ Optional (multiple releases): use `@graph` with an array of items — list the l
 - Place hero files in `assets/hero/` as `hero.jpg` and `hero.webp`.
 - Place textures in `assets/textures/`.
 - Place generated show variants in `assets/shows/` and keep source poster exports in `assets/shows/originals/`.
-- For gallery, keep WebP files in `assets/gallery/webp/` and matching JPG fallbacks in `assets/gallery/` with the same basename.
+- Gallery images are hosted on Cloudinary (cloud: dgxgi8bga, tag: gallery). Upload new images to the KSM-Gallery folder with the ksm-gallery-auto preset to auto-tag and serve them.
 - Avoid spaces in new filenames; prefer kebab-case.
 
 Tips

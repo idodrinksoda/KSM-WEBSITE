@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://kamasutramurder.com/" />
   <meta property="og:title" content="Kama Sutra Murder — Official Site" />
   <meta property="og:description" content="Heavy rock/grunge/alt-metal from Vancouver, BC. Shows, music, contact." />
-  <meta property="og:image" content="https://kamasutramurder.com/assets/hero/hero.jpg" />
+  <meta property="og:image" content="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Kama Sutra Murder" />
@@ -21,7 +21,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Kama Sutra Murder — Official Site" />
   <meta name="twitter:description" content="Heavy rock/grunge/alt-metal from Vancouver, BC. Shows, music, contact." />
-  <meta name="twitter:image" content="https://kamasutramurder.com/assets/hero/hero.jpg" />
+  <meta name="twitter:image" content="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm" />
 
   <!-- Canonical URL + Web App Manifest + Favicon -->
   <link rel="canonical" href="https://kamasutramurder.com/" />
@@ -64,7 +64,7 @@
       { "@type": "OrganizationRole", "member": { "@type": "Person", "name": "Adolfo Ruiz" } },
       { "@type": "OrganizationRole", "member": { "@type": "Person", "name": "Nim Chattree" } }
     ],
-    "image": "https://kamasutramurder.com/assets/hero/hero.jpg",
+    "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm",
     "sameAs": [
       "https://www.instagram.com/kamasutramurder",
       "https://www.youtube.com/channel/UC9xu3OuSIVgUzQ9wIv0OgKg",
@@ -768,10 +768,10 @@
             <button class="shows-arrow" type="button" aria-label="Previous gallery page">&#8592;</button>
             <div class="gallery-grid" data-gallery-grid>
               <figure class="gallery-item">
-                <img src="assets/gallery/webp/DSCF6225-Enhanced-NR.webp" alt="Gallery photo 1" loading="lazy" decoding="async" fetchpriority="low" width="1800" height="1200">
+                <img src="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/1_gpm2rv" alt="Gallery photo 1" loading="lazy" decoding="async" fetchpriority="low" width="1200" height="1200">
               </figure>
               <figure class="gallery-item">
-                <img src="assets/gallery/webp/DSCF6524-Enhanced-NR.webp" alt="Gallery photo 2" loading="lazy" decoding="async" fetchpriority="low" width="1200" height="1800">
+                <img src="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/2_wg76ht" alt="Gallery photo 2" loading="lazy" decoding="async" fetchpriority="low" width="1200" height="1200">
               </figure>
             </div>
             <button class="shows-arrow" type="button" aria-label="Next gallery page">&#8594;</button>
@@ -965,14 +965,8 @@
     return `${CLOUDINARY_BASE}/${CLOUDINARY_XFORM}/${publicId}`;
   }
 
-  // Fallback list used until Cloudinary responds
-  let galleryImages = [
-    'assets/gallery/webp/DSCF6225-Enhanced-NR.webp',
-    'assets/gallery/webp/DSCF6524-Enhanced-NR.webp',
-    'assets/gallery/webp/DSCF6790-Enhanced-NR.webp',
-    'assets/gallery/webp/DSCF6895-Enhanced-NR.webp',
-    'assets/gallery/webp/KAMA%20SUTRA%20MURDER%2024.webp'
-  ];
+  // Fallback list used until Cloudinary responds (populated from Cloudinary tag API)
+  let galleryImages = [];
   const galleryGrid = document.querySelector('[data-gallery-grid]');
   const galleryModal = document.getElementById('galleryModal');
   const galleryModalImage = document.getElementById('galleryModalImage');

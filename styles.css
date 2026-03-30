@@ -526,7 +526,7 @@ main h2{
   position:absolute;inset:0;
   background:
     linear-gradient(180deg,rgba(11,11,13,.42),rgba(11,11,13,.62)),
-    image-set(url('assets/hero/DSCF5952-Enhanced-NR.webp') type('image/webp'), url('assets/hero/DSCF5952-Enhanced-NR.jpg') type('image/jpeg'));
+    url('https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1920/DSCF5952-Enhanced-NR_gqq4av');
   background-size:cover;
   background-position:center;
   filter:saturate(1.12) brightness(.9);
@@ -1049,7 +1049,7 @@ footer,.site-footer{
 .hero.has-image{overflow:hidden}
 .hero.has-image::before{
   content:"";position:absolute;inset:0;
-  background-image:image-set(url('assets/hero/hero.webp') type('image/webp'), url('assets/hero/hero.jpg') type('image/jpeg'));
+  background-image:url('https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1920/hero_tot2cm');
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
@@ -1102,7 +1102,7 @@ footer,.site-footer{
 body.bg-overlay-sticker{
   background-image:
     linear-gradient(rgba(11,11,13,var(--bgTextureOverlay)), rgba(11,11,13,var(--bgTextureOverlay))),
-    url('assets/textures/logo.JPEG');
+    url('https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto/logo_1_u37yvy');
   background-repeat: repeat;
   background-size: auto, var(--bgTextureTile) var(--bgTextureTile);
   background-position: 0 0;
