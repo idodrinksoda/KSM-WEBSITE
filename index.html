@@ -955,7 +955,17 @@
 
  <!-- Scripts -->
 <script>
-  // Gallery grid sourced from assets/gallery
+  // Gallery grid sourced from Cloudinary (tag: gallery)
+  const CLOUDINARY_CLOUD = 'dgxgi8bga';
+  const CLOUDINARY_TAG   = 'gallery';
+  const CLOUDINARY_BASE  = `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload`;
+  const CLOUDINARY_XFORM = 'f_auto,q_auto,w_1200';
+
+  function cloudinaryUrl(publicId) {
+    return `${CLOUDINARY_BASE}/${CLOUDINARY_XFORM}/${publicId}`;
+  }
+
+  // Fallback list used until Cloudinary responds
   let galleryImages = [
     'assets/gallery/webp/DSCF6225-Enhanced-NR.webp',
     'assets/gallery/webp/DSCF6524-Enhanced-NR.webp',
@@ -971,28 +981,13 @@
     galleryModal.hidden = true;
     galleryModalImage?.removeAttribute('src');
   }
-  const galleryManifestUrl = 'assets/gallery/manifest.json';
   const galleryPageSize = 8;
   let galleryTimer;
   let galleryActiveIndex = 0;
   let galleryUserOpened = false;
 
-  function toJpegFallback(src) {
-    return String(src)
-      .replace('assets/gallery/webp/', 'assets/gallery/')
-      .replace(/\.webp$/i, '.jpg');
-  }
-
   function handleGalleryImageError(img) {
     if (!(img instanceof HTMLImageElement)) return;
-    if (img.dataset.triedFallback !== '1') {
-      img.dataset.triedFallback = '1';
-      const fallback = img.dataset.fallback || toJpegFallback(img.src);
-      if (fallback && fallback !== img.src) {
-        img.src = fallback;
-        return;
-      }
-    }
     // Keep gallery slots filled: rotate to another source instead of removing the tile.
     if (!galleryImages.length) return;
     const currentIdx = Number.parseInt(img.dataset.index || '0', 10);
@@ -1000,11 +995,9 @@
     img.dataset.retryCount = String(retryCount);
     if (retryCount > galleryImages.length) return;
     const nextIdx = (currentIdx + retryCount) % galleryImages.length;
-    const nextSrc = galleryImages[nextIdx];
     img.dataset.index = String(nextIdx);
-    img.dataset.fallback = toJpegFallback(nextSrc);
     img.dataset.triedFallback = '0';
-    img.src = nextSrc;
+    img.src = galleryImages[nextIdx];
   }
 
   function shuffleGalleryImages() {
@@ -1034,8 +1027,6 @@
       img.fetchPriority = 'low';
       img.dataset.index = String(imageIdx);
       img.dataset.retryCount = '0';
-      img.dataset.fallback = toJpegFallback(src);
-      img.dataset.triedFallback = '0';
       img.addEventListener('error', () => handleGalleryImageError(img));
       figure.appendChild(img);
       pageEl.appendChild(figure);
@@ -1057,10 +1048,11 @@
 
   async function fetchGalleryList() {
     try {
-      const res = await fetch(galleryManifestUrl, { cache: 'force-cache' });
+      const tagUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/${CLOUDINARY_TAG}.json`;
+      const res = await fetch(tagUrl);
       if (!res.ok) return;
       const data = await res.json();
-      const urls = Array.isArray(data) ? data.filter(src => typeof src === 'string') : [];
+      const urls = (data.resources || []).map(r => cloudinaryUrl(r.public_id));
       if (urls.length) {
         galleryImages = urls;
         advanceGallery();
