@@ -43,7 +43,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Saira:wght@500;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/hero/hero.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1920/hero_tot2cm" fetchpriority="high">
   <link rel="preload" as="image" href="assets/shows/current-shows/GA-MAY28TH2026.webp" type="image/webp">
 
   <!-- Site styles -->
@@ -121,7 +121,7 @@
 
     <!-- MUSIC (moved above Shows) -->
     <section id="music">
-      <div class="container">
+      <div class="container reveal">
         <h2 class="glitch-soft" data-text="Music">Music</h2>
         <div class="singles-grid">
           <article class="single-card" aria-labelledby="single-smile-thru">
@@ -161,7 +161,7 @@
 
     <!-- SHOWS -->
     <section id="shows">
-      <div class="container">
+      <div class="container reveal">
         <h2 class="glitch-soft" data-text="Shows">Shows</h2>
         <div class="card">
           <button class="shows-arrow left" aria-label="Scroll left" type="button">&#8592;</button>
@@ -759,7 +759,7 @@
 
     <!-- GALLERY (placeholder, wired for Dropbox raw links) -->
     <section id="gallery">
-      <div class="container">
+      <div class="container reveal">
         <h2 class="glitch-soft" data-text="Gallery">Gallery</h2>
         <div class="card gallery-card">
           <div class="gallery-meta">
@@ -782,7 +782,7 @@
     
     <!-- VIDEO (separate from Music) -->
     <section id="videos">
-      <div class="container">
+      <div class="container reveal">
         <h2 class="glitch-soft" data-text="Videos">Videos</h2>
         <div class="card video-embed">
           <div class="video-facade" data-video-id="EHyuJ257rb4" role="button" tabindex="0" aria-label="Play: KSM — YouTube video">
@@ -797,7 +797,7 @@
 
     <!-- PRESS -->
     <section id="press">
-      <div class="container">
+      <div class="container reveal">
         <h2 class="glitch-soft" data-text="Press">Press</h2>
         <div class="card press-card">
           <div class="press-grid">
@@ -831,7 +831,7 @@
 
     <!-- CONTACT -->
     <section id="contact">
-      <div class="container">
+      <div class="container reveal">
         <h2 class="glitch-soft" data-text="Contact">Contact</h2>
         <div class="card contact-card">
           <a class="contact-email" href="mailto:kamasutramurder@gmail.com" aria-label="Email kamasutramurder@gmail.com">kamasutramurder@gmail.com</a>
@@ -1004,10 +1004,9 @@
   // Render a single page of exactly galleryPageSize images, wrapping if needed
   function renderGalleryGrid() {
     if (!galleryGrid || !galleryImages.length) return;
-    galleryGrid.innerHTML = '';
+    const total = galleryImages.length;
     const pageEl = document.createElement('div');
     pageEl.className = 'gallery-page is-active';
-    const total = galleryImages.length;
     for (let slot = 0; slot < galleryPageSize; slot++) {
       const imageIdx = slot % total;
       const src = galleryImages[imageIdx];
@@ -1025,7 +1024,19 @@
       figure.appendChild(img);
       pageEl.appendChild(figure);
     }
-    galleryGrid.appendChild(pageEl);
+    const existing = galleryGrid.querySelector('.gallery-page');
+    if (existing) {
+      existing.classList.remove('is-visible');
+      setTimeout(() => {
+        galleryGrid.innerHTML = '';
+        galleryGrid.appendChild(pageEl);
+        requestAnimationFrame(() => requestAnimationFrame(() => pageEl.classList.add('is-visible')));
+      }, 380);
+    } else {
+      galleryGrid.innerHTML = '';
+      galleryGrid.appendChild(pageEl);
+      requestAnimationFrame(() => requestAnimationFrame(() => pageEl.classList.add('is-visible')));
+    }
   }
 
   // Shuffle + render + reset timer
@@ -1096,8 +1107,6 @@
     if (!galleryUserOpened && !options.force) return;
     if (typeof idx === 'number') galleryActiveIndex = idx;
     const nextSrc = galleryImages[galleryActiveIndex] || src;
-    galleryModalImage.dataset.fallback = toJpegFallback(nextSrc);
-    galleryModalImage.dataset.triedFallback = '0';
     galleryModalImage.src = nextSrc;
     galleryModalImage.alt = alt || `Gallery photo ${galleryActiveIndex + 1}`;
     galleryModal.hidden = false;
@@ -1118,8 +1127,6 @@
     galleryActiveIndex = (galleryActiveIndex + delta + galleryImages.length) % galleryImages.length;
     const nextSrc = galleryImages[galleryActiveIndex];
     if (galleryModalImage) {
-      galleryModalImage.dataset.fallback = toJpegFallback(nextSrc);
-      galleryModalImage.dataset.triedFallback = '0';
       galleryModalImage.src = nextSrc;
       galleryModalImage.alt = `Gallery photo ${galleryActiveIndex + 1}`;
     } else {
@@ -1180,14 +1187,6 @@
 
   galleryModalImage?.addEventListener('error', () => {
     if (!galleryUserOpened) return;
-    if (galleryModalImage.dataset.triedFallback !== '1') {
-      galleryModalImage.dataset.triedFallback = '1';
-      const fallback = galleryModalImage.dataset.fallback || toJpegFallback(galleryModalImage.src);
-      if (fallback && fallback !== galleryModalImage.src) {
-        galleryModalImage.src = fallback;
-        return;
-      }
-    }
     stepGalleryModal(1);
   });
 
@@ -1216,6 +1215,24 @@
     });
     observer.observe(mcSuccess, { childList: true, attributes: true, subtree: true });
   }
+
+  // Scroll-reveal: fade+slide sections into view
+  (function() {
+    const revealEls = document.querySelectorAll('.reveal');
+    if (!revealEls.length || !window.IntersectionObserver) {
+      revealEls.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.07 });
+    revealEls.forEach(el => observer.observe(el));
+  })();
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();

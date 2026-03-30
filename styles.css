@@ -2,8 +2,8 @@
 .show-card.expired-show,
 .show-card.expired-show.no-jump {
   pointer-events: none;
-  opacity: 0.7;
-  filter: grayscale(0.7);
+  opacity: 0.52;
+  filter: grayscale(0.4) brightness(0.88);
   box-shadow: none;
   transition: none;
 }
@@ -431,7 +431,7 @@ main h2{
     object-position: top center;
   }
 }
-.show-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.35)}
+.show-card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 14px 36px rgba(0,0,0,.48),0 0 0 1px rgba(106,227,255,.13)}
 .show-media{position:relative;margin:0;aspect-ratio:2/3;background:#0f0f14;overflow:hidden}
 .show-media picture{display:block;width:100%;height:100%}
 .show-media img{width:100%;height:100%;object-fit:fill;display:block}
@@ -650,13 +650,15 @@ main h2{
 .gallery-grid{position:relative}
 .gallery-page{
   display:none;
-  opacity:0;
-  transition:opacity .25s ease;
   grid-template-columns:repeat(4,1fr);
   grid-template-rows:repeat(2,1fr);
   gap:8px;
 }
-.gallery-page.is-active{display:grid;opacity:1}
+.gallery-page.is-active{display:grid;opacity:0}
+.gallery-page.is-active.is-visible{
+  opacity:1;
+  transition:opacity 0.42s ease;
+}
 .gallery-item{
   margin:0;
   border-radius:10px;
@@ -665,13 +667,16 @@ main h2{
   border:1px solid #22222a;
   width:100%;
   aspect-ratio:3 / 2;
+  cursor:pointer;
 }
 .gallery-item img{
   width:100%;
   height:100%;
   display:block;
   object-fit:cover;
+  transition:transform 0.32s ease;
 }
+.gallery-item:hover img{transform:scale(1.07)}
 @media(max-width:520px){
   .gallery-card{padding:12px}
   .gallery-page{grid-template-columns:repeat(2,1fr)}
@@ -805,6 +810,11 @@ main h2{
   position:relative;
   display:block;
   aspect-ratio:16/9;
+  transition:box-shadow 0.25s ease, transform 0.2s ease;
+}
+.video-facade:hover{
+  box-shadow:0 12px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(106,227,255,.1);
+  transform:translateY(-2px);
 }
 .video-facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .video-facade-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
@@ -823,7 +833,7 @@ main h2{
   border-radius: 6px;
   opacity: 0.75;
   cursor: pointer;
-  transition: opacity 0.2s, color 0.2s;
+  transition: opacity 0.2s ease, color 0.2s ease, transform 0.15s ease;
   user-select: none;
   height: 50px;
   width: 34px;
@@ -839,6 +849,7 @@ main h2{
 .shows-arrow:focus-visible {
   opacity: 1;
   color: var(--accent-2);
+  transform: scale(1.08);
 }
 /* =========================
    FORMS
@@ -1252,5 +1263,21 @@ body.bg-overlay-sticker{
   .show-meta span {
     font-size: .75rem;
   }
+}
+
+/* =========================
+   SCROLL REVEAL
+   ========================= */
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:none;
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
 }
 

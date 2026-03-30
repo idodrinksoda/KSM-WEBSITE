@@ -7,12 +7,10 @@ Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a tou
 - `styles.css` — Global styles, CSS tokens in `:root`, utilities, embeds, modal.
 - `script.js` — Legacy helpers (not referenced by `index.html`).
 - `assets/` — Images and icons, organized by type:
-  - `assets/hero/` — hero images (`hero.jpg`, `hero.webp`)
-  - `assets/textures/` — background textures (e.g., `sticker.jpg`)
   - `assets/shows/` — show posters and responsive variants
-  - `assets/shows/originals/` — source poster exports (archival)
-  - `assets/gallery/` — local gallery fallbacks (gallery now served from Cloudinary)
-  - `assets/icons/` — optional local icons
+  - `assets/gallery/` — manifest.json only; images served from Cloudinary
+  - `assets/icons/` — favicon and app icons
+- Hero image, gallery photos, and background texture are hosted on Cloudinary (cloud: dgxgi8bga).
 - `CNAME` — Custom domain mapping to `kamasutramurder.com` (do not remove).
 
 ## Local preview
@@ -30,7 +28,7 @@ Then open http://localhost:8000.
 Push/merge to `main`. GitHub Pages serves the repo root with `CNAME` → `kamasutramurder.com`.
 
 ## Key sections and patterns
-- Hero: background image from `assets/hero/hero.jpg` + `assets/hero/hero.webp` (see `.hero.has-image::before`).
+- Hero: background image served from Cloudinary via `.hero.has-image::before` in `styles.css`.
 - Music: Bandcamp embed + streaming icons (`.platform-icons` use Simple Icons CDN).
 - Shows: cards inside `#shows .shows-grid`; enter ISO dates (`YYYY-MM-DD`) in the `<time>` content/`datetime`, the inline JS formats them to `Sat Mar 21, 2026` in UTC.
 - Videos: `youtube-nocookie` iframe inside `.video-embed`.
@@ -81,7 +79,7 @@ Structured data lives in the `<head>` of `index.html` as JSON‑LD. Update this 
   "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
   "datePublished": "2025-11-15",
   "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
-  "image": "assets/hero/hero.jpg",
+  "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm",
   "url": "/"
 }
 </script>
@@ -108,7 +106,7 @@ Example (single):
   "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
   "datePublished": "2025-12-06",
   "inAlbum": { "@type": "MusicAlbum", "name": "Single" },
-  "image": "assets/hero/hero.jpg",
+  "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm",
   "url": "https://kamasutramurder.bandcamp.com/track/smile-thru"
 }
 ```
@@ -119,7 +117,7 @@ Optional (multiple releases): use `@graph` with an array of items — list the l
 {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "MusicRecording", "name": "New Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-12-06", "image": "assets/hero/hero.jpg", "url": "https://…" },
+    { "@type": "MusicRecording", "name": "New Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-12-06", "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm", "url": "https://…" },
     { "@type": "MusicRecording", "name": "Previous Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-11-15", "image": "assets/shows/previous-shows/green-auto-640.jpg", "url": "https://…" }
   ]
 }
@@ -127,9 +125,7 @@ Optional (multiple releases): use `@graph` with an array of items — list the l
 
 ## Asset conventions
 - Keep filenames lowercased and hyphenated (e.g., `smile-thru-og.jpg`).
-- Place hero files in `assets/hero/` as `hero.jpg` and `hero.webp`.
-- Place textures in `assets/textures/`.
-- Place generated show variants in `assets/shows/` and keep source poster exports in `assets/shows/originals/`.
+- Place show poster variants in `assets/shows/current-shows/` (active) or `assets/shows/previous-shows/` (expired).
 - Gallery images are hosted on Cloudinary (cloud: dgxgi8bga, tag: gallery). Upload new images to the KSM-Gallery folder with the ksm-gallery-auto preset to auto-tag and serve them.
 - Avoid spaces in new filenames; prefer kebab-case.
 

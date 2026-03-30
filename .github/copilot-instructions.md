@@ -10,7 +10,7 @@ Use these project-specific rules to be productive immediately. Keep changes mini
 ## Architecture and patterns
 - Sections in `index.html`: hero, `#music` (Bandcamp + platform icons), `#shows` (card grid), `#videos` (YouTube), socials, footer, Mailchimp modal.
 - Styling uses CSS tokens in `:root` (e.g., `--bg`, `--fg`, `--accent`). Reuse existing utilities: `.container`, `.card`, `.platform-icons`, `.btn`, `.cta`.
-- Hero background comes from `assets/hero/hero.jpg` + `assets/hero/hero.webp` via `.hero.has-image::before`.
+- Hero background is served from Cloudinary via `.hero.has-image::before` in `styles.css`.
 - Inline JS in `index.html` is the source of truth (gallery + modal + year). `script.js` exists but is currently not referenced by `index.html` and may contain legacy helpers.
 
 ## Developer workflow
