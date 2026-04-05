@@ -641,7 +641,7 @@ main h2{
 }
 .single-card h3{margin:0;font-size:clamp(18px,3vw,22px);letter-spacing:.3px}
 .single-card .bandcamp-embed{width:100%}
-.single-card .bandcamp-embed iframe{width:100%;max-width:350px;margin:0 auto;display:block}
+.single-card .bandcamp-embed iframe{width:100%;max-width:350px;height:350px;margin:0 auto;display:block}
 .bandcamp-placeholder{
   background:#0f0f14;
   border:1px dashed #2a2a34;
