@@ -594,6 +594,32 @@ main h2{
   .press-card::before{animation:none}
 }
 
+/* Featured / latest release highlight */
+.featured-release{
+  display:flex;flex-direction:column;align-items:center;
+  margin-top:16px;margin-bottom:8px;
+  position:relative;
+}
+.featured-label{
+  display:inline-block;
+  font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--accent);
+  border:1px solid rgba(106,227,255,.35);
+  border-radius:20px;
+  padding:3px 14px;
+  margin-bottom:12px;
+}
+.single-card.featured{
+  max-width:520px;
+  border-color:rgba(106,227,255,.3);
+  box-shadow:0 0 0 1px rgba(106,227,255,.1), 0 8px 32px rgba(0,0,0,.5);
+}
+.releases-subheading{
+  font-size:clamp(13px,2vw,15px);font-weight:600;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--muted);
+  margin:24px 0 8px;text-align:center;
+}
+
 .singles-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;
   justify-items:center;margin-top:12px;
