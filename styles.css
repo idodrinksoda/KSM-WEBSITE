@@ -84,7 +84,7 @@
 *{box-sizing:border-box}
 html,body{
   margin:0;padding:0;background:var(--bg);color:var(--fg);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-family:'Saira',Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   line-height:1.6;
   overflow-x:hidden;
 }
@@ -595,10 +595,15 @@ main h2{
 }
 
 /* Featured / latest release highlight */
+@keyframes musicFadeUp{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
 .featured-release{
   display:flex;flex-direction:column;align-items:center;
   margin-top:16px;margin-bottom:8px;
   position:relative;
+  animation:musicFadeUp 0.32s ease both;
 }
 .featured-label{
   display:inline-block;
@@ -610,14 +615,22 @@ main h2{
   margin-bottom:12px;
 }
 .single-card.featured{
-  max-width:520px;
-  border-color:rgba(106,227,255,.3);
-  box-shadow:0 0 0 1px rgba(106,227,255,.1), 0 8px 32px rgba(0,0,0,.5);
+  max-width:420px;
+  border:none;
+  box-shadow:none;
 }
 .releases-subheading{
   font-size:clamp(13px,2vw,15px);font-weight:600;letter-spacing:1.2px;
   text-transform:uppercase;color:var(--muted);
-  margin:24px 0 8px;text-align:center;
+  margin:32px 0 8px;text-align:center;
+  position:relative;
+}
+.releases-subheading::before{
+  content:'';
+  display:block;
+  width:48px;height:1px;
+  background:rgba(106,227,255,.22);
+  margin:0 auto 14px;
 }
 
 .singles-grid{
@@ -625,23 +638,22 @@ main h2{
   justify-items:center;margin-top:12px;
 }
 .single-card{
-  width:100%;max-width:460px;
+  width:100%;max-width:420px;
   background:rgba(0,0,0,.28);
-  border:1px solid #22222a;
+  border:none;
   border-radius:12px;
   padding:14px 14px 16px;
   display:flex;flex-direction:column;align-items:center;gap:12px;
   text-align:center;
-  transition:transform 0.2s ease,box-shadow 0.2s ease,border-color 0.2s ease;
+  transition:transform 0.2s ease,box-shadow 0.2s ease;
 }
 .single-card:hover{
   transform:translateY(-3px);
-  box-shadow:0 12px 32px rgba(0,0,0,.45),0 0 0 1px rgba(106,227,255,.12);
-  border-color:rgba(106,227,255,.14);
+  box-shadow:0 12px 32px rgba(0,0,0,.45);
 }
-.single-card h3{margin:0;font-size:clamp(18px,3vw,22px);letter-spacing:.3px}
+.single-card h3{margin:0;font-size:clamp(15px,2.5vw,18px);letter-spacing:.3px}
 .single-card .bandcamp-embed{width:100%}
-.single-card .bandcamp-embed iframe{width:100%;max-width:350px;height:350px;margin:0 auto;display:block}
+.single-card .bandcamp-embed iframe{width:100%;max-width:300px;height:300px;margin:0 auto;display:block}
 .bandcamp-placeholder{
   background:#0f0f14;
   border:1px dashed #2a2a34;
@@ -661,32 +673,72 @@ main h2{
   /* === Smile-Thru section: constrain to screen width === */
   .singles-grid{grid-template-columns:1fr}
   .single-card{max-width:100%;overflow:hidden}
-  /* Force Bandcamp iframe to fit card — overrides inline width:350px */
+  /* Force Bandcamp iframe to fit card — overrides inline width:300px */
   .single-card .bandcamp-embed iframe{width:100% !important}
 }
 
 /* Make Bandcamp card blend with page background */
 .bandcamp-embed{background:transparent;border:0;padding:0}
 
+/* Scale down platform icons inside the music/releases section */
+#music .platform-icons svg,
+#music .platform-icons img{width:24px;height:24px}
+#music .platform-icons{gap:10px}
+#music .platform-icons .platform-text{font-size:12px;letter-spacing:.2px}
+
 /* Previous releases — compact clickable tiles */
-.releases-prev-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+.releases-prev-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:12px}
 .prev-release-tile{
-  background:rgba(0,0,0,.3);border:1px solid #22222a;border-radius:10px;
-  padding:8px;width:110px;cursor:pointer;text-align:center;
-  transition:border-color 0.2s ease,transform 0.2s ease;
+  background:rgba(0,0,0,.3);border:none;border-radius:10px;
+  padding:9px;width:165px;cursor:pointer;text-align:center;
+  transition:transform 0.22s ease,box-shadow 0.22s ease;
   display:flex;flex-direction:column;align-items:center;gap:6px;
   color:inherit;font-family:inherit;
 }
-.prev-release-tile:hover{border-color:rgba(106,227,255,.3);transform:translateY(-2px)}
+.prev-release-tile:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,.45);
+}
 .prev-release-art{
-  width:90px;height:90px;border-radius:6px;
+  width:147px;height:147px;border-radius:7px;
   background:linear-gradient(135deg,#1a1a24,#2a2a3a);
   display:flex;align-items:center;justify-content:center;
-  overflow:hidden;margin:0;
+  overflow:hidden;margin:0;position:relative;
 }
-.prev-release-art img{width:100%;height:100%;object-fit:cover;border-radius:6px}
-.art-initials{font-size:22px;font-weight:700;color:var(--muted);letter-spacing:1px}
-.prev-release-name{font-size:11px;color:var(--fg);font-weight:600;line-height:1.2;word-break:break-word}
+.prev-release-art img{width:100%;height:100%;object-fit:cover;border-radius:7px}
+/* 'View' overlay on hover */
+.prev-release-tile:hover .prev-release-art::after{
+  content:'View';
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.52);
+  color:var(--accent);
+  font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+  border-radius:7px;
+  display:grid;place-items:center;
+}
+.art-initials{font-size:28px;font-weight:700;color:var(--muted);letter-spacing:1px}
+.prev-release-name{font-size:12px;color:var(--fg);font-weight:600;line-height:1.2;word-break:break-word}
+/* New Song badge on latest featured release */
+.new-song-badge{
+  font-size:clamp(14px,2vw,21px);
+  font-weight:800;
+  letter-spacing:0.04em;
+  margin-bottom:-4px;
+  filter:
+    saturate(1.8)
+    brightness(1.4)
+    drop-shadow(0 0 12px rgba(255,43,106,.9))
+    drop-shadow(0 0 22px rgba(106,227,255,.75));
+}
+/* Back-to-latest link shown when viewing an older release */
+.back-to-latest{
+  margin-top:10px;
+  background:none;border:none;cursor:pointer;
+  font-size:12px;font-weight:600;letter-spacing:.6px;
+  color:var(--muted);font-family:inherit;
+  transition:color 0.18s ease;padding:4px 8px;
+}
+.back-to-latest:hover{color:var(--accent)}
 
 /* Gallery section */
 #gallery{padding:32px 0 0 0}

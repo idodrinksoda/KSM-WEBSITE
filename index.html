@@ -100,7 +100,7 @@
     <nav class="site-nav" aria-label="Page sections">
       <div class="site-nav-links">
         <a href="#shows">Shows</a>
-        <a href="#music">Music</a>
+        <a href="#music">Discography</a>
         <a href="#videos">Videos</a>
         <a href="#contact">Contact</a>
       </div>
@@ -122,11 +122,10 @@
     <!-- MUSIC (moved above Shows) -->
     <section id="music">
       <div class="container reveal">
-        <h2 class="glitch-soft" data-text="Music">Music</h2>
+        <h2 class="glitch-soft" data-text="Discography">Discography</h2>
         <!-- Populated by initMusicSection() in inline script -->
         <div id="music-featured-slot"></div>
         <div id="music-prev-wrap" hidden>
-          <h3 class="releases-subheading">Previous Releases</h3>
           <div id="music-prev-grid" class="releases-prev-grid"></div>
         </div>
       </div>
@@ -1304,7 +1303,23 @@
         id: 'smile-thru',
         title: 'Smile-Thru',
         embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/',
-        art: '', // set to artwork image URL when available
+        art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SMILETHRUCOVER_e6pq2n',
+        platforms: [
+          { href: 'https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc', label: 'Qobuz', tooltip: 'Qobuz', text: 'Qobuz' },
+          { href: 'https://kamasutramurder.bandcamp.com', label: 'Bandcamp', tooltip: 'Bandcamp', icon: 'https://cdn.simpleicons.org/bandcamp/629AA9', alt: 'Bandcamp' },
+          { href: 'https://music.apple.com/ca/album/smile-thru-single/1851463044', label: 'Apple Music', tooltip: 'Apple Music', icon: 'https://cdn.simpleicons.org/applemusic/FA57C1', alt: 'Apple Music' },
+          { href: 'https://tidal.com/album/471357201/u', label: 'Tidal', tooltip: 'Tidal', icon: 'https://cdn.simpleicons.org/tidal/FFFFFF', alt: 'Tidal' },
+          { href: 'https://music.apple.com/ca/album/smile-thru-single/1851463044', label: 'iTunes', tooltip: 'iTunes', icon: 'https://cdn.simpleicons.org/itunes/FB5BC5', alt: 'iTunes' },
+          { href: 'https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA', label: 'Spotify', tooltip: 'Spotify', icon: 'https://cdn.simpleicons.org/spotify/1DB954', alt: 'Spotify' },
+          { href: 'https://www.youtube.com/watch?v=Ri7vws3DvBg', label: 'YouTube', tooltip: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/FF0000', alt: 'YouTube' }
+        ]
+      },
+      // ── PLACEHOLDER — swap Bandcamp embedSrc + platform links when SYKE drops ──
+      {
+        id: 'syke',
+        title: 'SYKE',
+        embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/',
+        art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls',
         platforms: [
           { href: 'https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc', label: 'Qobuz', tooltip: 'Qobuz', text: 'Qobuz' },
           { href: 'https://kamasutramurder.bandcamp.com', label: 'Bandcamp', tooltip: 'Bandcamp', icon: 'https://cdn.simpleicons.org/bandcamp/629AA9', alt: 'Bandcamp' },
@@ -1315,6 +1330,7 @@
           { href: 'https://www.youtube.com/watch?v=Ri7vws3DvBg', label: 'YouTube', tooltip: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/FF0000', alt: 'YouTube' }
         ]
       }
+      // ─────────────────────────────────────────────────────────────────────
     ];
     // ────────────────────────────────────────────────────────────────────────
 
@@ -1333,6 +1349,7 @@
 
     function renderFeatured(r) {
       var id = 'featured-' + r.id;
+      var label = featuredIdx === 0 ? 'Latest Release' : 'Viewing Release';
       var platformsHtml = r.platforms.map(function(p) {
         if (p.text) {
           return '<a href="'+esc(p.href)+'" aria-label="'+esc(p.label)+'" data-tooltip="'+esc(p.tooltip)+'" target="_blank" rel="noopener noreferrer"><span class="platform-text">'+esc(p.text)+'</span></a>';
@@ -1341,11 +1358,10 @@
       }).join('');
       featuredSlot.innerHTML =
         '<div class="featured-release">'+
-          '<span class="featured-label">Latest Release</span>'+
+          (featuredIdx === 0 ? '<span class="new-song-badge glitch-soft" data-text="New Song!">New Song!</span>' : '')+
           '<article class="single-card featured" aria-labelledby="'+id+'">'+
-            '<h3 id="'+id+'">'+esc(r.title)+'</h3>'+
             '<div class="card bandcamp-embed">'+
-              '<iframe style="border:0;width:350px;height:350px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
+              '<iframe style="border:0;width:300px;height:300px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
                 '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
               '</iframe>'+
             '</div>'+
@@ -1373,6 +1389,7 @@
           featuredIdx = parseInt(btn.dataset.idx, 10);
           renderFeatured(releases[featuredIdx]);
           renderPrev();
+          featuredSlot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
       });
     }
