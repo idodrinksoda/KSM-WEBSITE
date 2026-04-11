@@ -7,10 +7,10 @@ Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a tou
 - `styles.css` — Global styles, CSS tokens in `:root`, utilities, embeds, modal.
 - `script.js` — Legacy helpers (not referenced by `index.html`).
 - `assets/` — Images and icons, organized by type:
-  - `assets/shows/` — show posters and responsive variants
+  - `assets/shows/` — local backups only; live posters served from Cloudinary (`shows/` folder)
   - `assets/gallery/` — manifest.json only; images served from Cloudinary
   - `assets/icons/` — favicon and app icons
-- Hero image, gallery photos, and background texture are hosted on Cloudinary (cloud: dgxgi8bga).
+- Hero image, gallery photos, show posters, and background texture are hosted on Cloudinary (cloud: dgxgi8bga).
 - `CNAME` — Custom domain mapping to `kamasutramurder.com` (do not remove).
 
 ## Local preview
@@ -41,7 +41,7 @@ Append an `article.show-card` to `#shows .shows-grid`:
 <article class="show-card" aria-labelledby="show-id">
   <figure class="show-media">
     <a href="https://tickets.example" target="_blank" rel="noopener">
-      <img src="assets/shows/previous-shows/green-auto-640.jpg" alt="Poster — Event" loading="lazy" width="400" height="600">
+      <img src="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_640/ksm-shows/current-shows/POSTER_PUBLIC_ID" alt="Poster — Event" loading="lazy" width="400" height="600">
     </a>
   </figure>
   <div class="show-meta">
@@ -125,7 +125,7 @@ Optional (multiple releases): use `@graph` with an array of items — list the l
 
 ## Asset conventions
 - Keep filenames lowercased and hyphenated (e.g., `smile-thru-og.jpg`).
-- Place show poster variants in `assets/shows/current-shows/` (active) or `assets/shows/previous-shows/` (expired).
+- Show poster images are hosted on Cloudinary (cloud: dgxgi8bga, folder: `ksm-shows/`). Active shows go in `ksm-shows/current-shows/`, expired in `ksm-shows/previous-shows/`. Upload the highest-quality source file; Cloudinary handles format (`f_auto`) and resize (`w_640`) via URL params.
 - Gallery images are hosted on Cloudinary (cloud: dgxgi8bga, tag: gallery). Upload new images to the KSM-Gallery folder with the ksm-gallery-auto preset to auto-tag and serve them.
 - Avoid spaces in new filenames; prefer kebab-case.
 
