@@ -1262,6 +1262,19 @@
 
   </script>
 
+  <script>
+  // Click anywhere on an active show card to open its ticket link
+  document.querySelectorAll('.show-card:not(.expired-show)').forEach(function(card) {
+    var ticketLink = card.querySelector('.btn-tickets[href]');
+    if (!ticketLink) return;
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      window.open(ticketLink.href, '_blank', 'noopener');
+    });
+  });
+  </script>
+
   <!-- Plausible Analytics — privacy-friendly, cookie-free -->
   <script defer data-domain="kamasutramurder.com" src="https://plausible.io/js/script.js"></script>
 </body>
