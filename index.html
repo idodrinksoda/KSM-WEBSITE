@@ -103,6 +103,16 @@
         <a href="#music">Discography</a>
         <a href="#videos">Videos</a>
         <a href="#contact">Contact</a>
+        <button class="nav-hamburger" aria-label="More navigation" aria-expanded="false" aria-controls="nav-dropdown">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-dropdown" id="nav-dropdown" hidden>
+        <a href="#videos">Videos</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#press">Press</a>
+        <a href="#contact">Contact</a>
+        <button class="nav-dropdown-mc" data-open-mc>Mailing List</button>
       </div>
     </nav>
   </div>
@@ -127,6 +137,7 @@
         <div id="music-featured-slot"></div>
         <div id="music-prev-wrap" hidden>
           <div id="music-prev-grid" class="releases-prev-grid"></div>
+          <button id="music-prev-more" class="prev-more-btn" hidden></button>
         </div>
       </div>
     </section>
@@ -881,6 +892,17 @@
     </div>
   </footer>
 
+  <!-- Mailing list toast -->
+  <div id="mc-toast" class="mc-toast" hidden aria-live="polite">
+    <button class="mc-toast-close" id="mc-toast-close" aria-label="Dismiss">×</button>
+    <p class="mc-toast-msg">Get notified when new music drops.</p>
+    <div class="mc-toast-actions">
+      <span class="mc-toast-arrow" aria-hidden="true">&#x2193;</span>
+      <button class="mc-toast-btn" data-open-mc>Sign up</button>
+      <span class="mc-toast-arrow" aria-hidden="true">&#x2193;</span>
+    </div>
+  </div>
+
   <!-- Gallery lightbox -->
   <div id="galleryModal" class="modal" hidden>
     <div class="modal-backdrop" data-close-gallery></div>
@@ -1208,6 +1230,74 @@
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Hamburger nav toggle (mobile only)
+  (function() {
+    var btn = document.querySelector('.nav-hamburger');
+    var dropdown = document.getElementById('nav-dropdown');
+    if (!btn || !dropdown) return;
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      dropdown.hidden = open;
+    });
+    // Close on link click or outside tap
+    dropdown.addEventListener('click', function() {
+      btn.setAttribute('aria-expanded', 'false');
+      dropdown.hidden = true;
+    });
+    document.addEventListener('click', function(e) {
+      if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+        btn.setAttribute('aria-expanded', 'false');
+        dropdown.hidden = true;
+      }
+    });
+  })();
+
+  // Mailing list toast — sign up = never show again; X = snooze 3 days
+  (function() {
+    var PERMANENT_KEY = 'ksm_toast_signedup';
+    var SNOOZE_KEY    = 'ksm_toast_snoozed';
+    var SNOOZE_DAYS   = 3;
+
+    if (localStorage.getItem(PERMANENT_KEY)) return;
+    var snoozed = localStorage.getItem(SNOOZE_KEY);
+    if (snoozed && Date.now() < parseInt(snoozed, 10)) return;
+
+    var toast = document.getElementById('mc-toast');
+    var closeBtn = document.getElementById('mc-toast-close');
+    var signupBtn = toast ? toast.querySelector('.mc-toast-btn') : null;
+    if (!toast) return;
+    var autoDismissTimer;
+
+    function showToast() {
+      toast.hidden = false;
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() { toast.classList.add('is-visible'); });
+      });
+      autoDismissTimer = setTimeout(snoozeToast, 10000);
+    }
+    function hideToast() {
+      clearTimeout(autoDismissTimer);
+      toast.classList.remove('is-visible');
+      setTimeout(function() { toast.hidden = true; }, 400);
+    }
+    function snoozeToast() {
+      hideToast();
+      var until = Date.now() + SNOOZE_DAYS * 24 * 60 * 60 * 1000;
+      localStorage.setItem(SNOOZE_KEY, String(until));
+    }
+    function permanentDismiss() {
+      hideToast();
+      localStorage.setItem(PERMANENT_KEY, '1');
+    }
+
+    setTimeout(showToast, 5000);
+    closeBtn.addEventListener('click', snoozeToast);
+    if (signupBtn) signupBtn.addEventListener('click', permanentDismiss);
+  })();
+
   // Prevent sticky focus/hover on top social buttons for touch devices
   const topSocialLinks = document.querySelectorAll('.top-socials a');
   topSocialLinks.forEach(link => {
@@ -1329,15 +1419,29 @@
           { href: 'https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA', label: 'Spotify', tooltip: 'Spotify', icon: 'https://cdn.simpleicons.org/spotify/1DB954', alt: 'Spotify' },
           { href: 'https://www.youtube.com/watch?v=Ri7vws3DvBg', label: 'YouTube', tooltip: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/FF0000', alt: 'YouTube' }
         ]
-      }
+      },
+      // ── TEST PLACEHOLDERS — remove before going live ──────────────────────
+      { id: 'placeholder-3', title: 'Release 3', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] },
+      { id: 'placeholder-4', title: 'Release 4', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] },
+      { id: 'placeholder-5', title: 'Release 5', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] },
+      { id: 'placeholder-6', title: 'Release 6', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] },
+      { id: 'placeholder-7', title: 'Release 7', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] },
+      { id: 'placeholder-8', title: 'Release 8', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] },
+      { id: 'placeholder-9', title: 'Release 9', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] },
+      { id: 'placeholder-10', title: 'Release 10', embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/', art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls', platforms: [] }
       // ─────────────────────────────────────────────────────────────────────
     ];
     // ────────────────────────────────────────────────────────────────────────
 
+    var PREV_CAP_MOBILE = 2;
+    var PREV_CAP_DESKTOP = 6;
+    function getPrevCap() { return window.innerWidth < 600 ? PREV_CAP_MOBILE : PREV_CAP_DESKTOP; }
     var featuredIdx = 0;
+    var prevExpanded = false;
     var featuredSlot = document.getElementById('music-featured-slot');
     var prevWrap    = document.getElementById('music-prev-wrap');
     var prevGrid    = document.getElementById('music-prev-grid');
+    var prevMoreBtn = document.getElementById('music-prev-more');
     if (!featuredSlot) return;
 
     function esc(s) {
@@ -1372,9 +1476,14 @@
 
     function renderPrev() {
       var others = releases.filter(function(_,i){return i!==featuredIdx;});
-      if (!others.length) { if(prevWrap) prevWrap.hidden = true; return; }
+      if (!others.length) {
+        if(prevWrap) prevWrap.hidden = true;
+        if(prevMoreBtn) prevMoreBtn.hidden = true;
+        return;
+      }
       if(prevWrap) prevWrap.hidden = false;
-      prevGrid.innerHTML = others.map(function(r) {
+      var visible = prevExpanded ? others : others.slice(0, getPrevCap());
+      prevGrid.innerHTML = visible.map(function(r) {
         var idx = releases.indexOf(r);
         var artContent = r.art
           ? '<img src="'+esc(r.art)+'" alt="'+esc(r.title)+' artwork" loading="lazy">'
@@ -1387,11 +1496,25 @@
       prevGrid.querySelectorAll('.prev-release-tile').forEach(function(btn) {
         btn.addEventListener('click', function() {
           featuredIdx = parseInt(btn.dataset.idx, 10);
+          prevExpanded = false;
           renderFeatured(releases[featuredIdx]);
           renderPrev();
           featuredSlot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
       });
+      if (prevMoreBtn) {
+        var overflow = others.length - getPrevCap();
+        if (overflow > 0) {
+          prevMoreBtn.hidden = false;
+          prevMoreBtn.textContent = prevExpanded ? 'Show less' : 'Show more';
+          prevMoreBtn.onclick = function() {
+            prevExpanded = !prevExpanded;
+            renderPrev();
+          };
+        } else {
+          prevMoreBtn.hidden = true;
+        }
+      }
     }
 
     renderFeatured(releases[featuredIdx]);
