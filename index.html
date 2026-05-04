@@ -100,9 +100,19 @@
     <nav class="site-nav" aria-label="Page sections">
       <div class="site-nav-links">
         <a href="#shows">Shows</a>
-        <a href="#music">Music</a>
+        <a href="#music" id="nav-music-link">Music</a>
         <a href="#videos">Videos</a>
         <a href="#contact">Contact</a>
+        <button class="nav-hamburger" aria-label="More navigation" aria-expanded="false" aria-controls="nav-dropdown">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-dropdown" id="nav-dropdown" hidden>
+        <a href="#videos">Videos</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#press">Press</a>
+        <a href="#contact">Contact</a>
+        <button class="nav-dropdown-mc" data-open-mc>Mailing List</button>
       </div>
     </nav>
   </div>
@@ -119,42 +129,15 @@
 
     
 
-    <!-- MUSIC (moved above Shows) -->
+    <!-- MUSIC / DISCOGRAPHY — heading auto-swaps based on release count -->
     <section id="music">
       <div class="container reveal">
-        <h2 class="glitch-soft" data-text="Music">Music</h2>
-        <div class="singles-grid">
-          <article class="single-card" aria-labelledby="single-smile-thru">
-            <h3 id="single-smile-thru">Smile-Thru</h3>
-            <div class="card bandcamp-embed">
-              <iframe style="border: 0; width: 350px; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/transparent=true/" seamless loading="lazy">
-                <a href="https://kamasutramurder.bandcamp.com/track/smile-thru">Smile-Thru by Kama Sutra Murder</a>
-              </iframe>
-            </div>
-            <div class="platform-icons" aria-label="Find Smile-Thru on">
-              <a href="https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc" aria-label="Qobuz" data-tooltip="Qobuz" target="_blank" rel="noopener noreferrer">
-                <span class="platform-text">Qobuz</span>
-              </a>
-              <a href="https://kamasutramurder.bandcamp.com" aria-label="Bandcamp" data-tooltip="Bandcamp" target="_blank" rel="noopener noreferrer">
-                <img class="platform-icon" src="https://cdn.simpleicons.org/bandcamp/629AA9" width="28" height="28" alt="Bandcamp" loading="lazy" />
-              </a>
-              <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="Apple Music" data-tooltip="Apple Music" target="_blank" rel="noopener noreferrer">
-                <img class="platform-icon" src="https://cdn.simpleicons.org/applemusic/FA57C1" width="28" height="28" alt="Apple Music" loading="lazy" />
-              </a>
-              <a href="https://tidal.com/album/471357201/u" aria-label="Tidal" data-tooltip="Tidal" target="_blank" rel="noopener noreferrer">
-                <img class="platform-icon" src="https://cdn.simpleicons.org/tidal/FFFFFF" width="28" height="28" alt="Tidal" loading="lazy" />
-              </a>
-              <a href="https://music.apple.com/ca/album/smile-thru-single/1851463044" aria-label="iTunes" data-tooltip="iTunes" target="_blank" rel="noopener noreferrer">
-                <img class="platform-icon" src="https://cdn.simpleicons.org/itunes/FB5BC5" width="28" height="28" alt="iTunes" loading="lazy" />
-              </a>
-              <a href="https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA" aria-label="Spotify" data-tooltip="Spotify" target="_blank" rel="noopener noreferrer">
-                <img class="platform-icon" src="https://cdn.simpleicons.org/spotify/1DB954" width="28" height="28" alt="Spotify" loading="lazy" />
-              </a>
-              <a href="https://www.youtube.com/watch?v=Ri7vws3DvBg" aria-label="YouTube" data-tooltip="YouTube" target="_blank" rel="noopener noreferrer">
-                <img class="platform-icon" src="https://cdn.simpleicons.org/youtube/FF0000" width="28" height="28" alt="YouTube" loading="lazy" />
-              </a>
-            </div>
-          </article>
+        <h2 class="glitch-soft" id="music-heading" data-text="Music">Music</h2>
+        <!-- Populated by initMusicSection() in inline script -->
+        <div id="music-featured-slot"></div>
+        <div id="music-prev-wrap" hidden>
+          <div id="music-prev-grid" class="releases-prev-grid"></div>
+          <button id="music-prev-more" class="prev-more-btn" hidden></button>
         </div>
       </div>
     </section>
@@ -872,6 +855,17 @@
     </div>
   </footer>
 
+  <!-- Mailing list toast -->
+  <div id="mc-toast" class="mc-toast" hidden aria-live="polite">
+    <button class="mc-toast-close" id="mc-toast-close" aria-label="Dismiss">×</button>
+    <p class="mc-toast-msg">Get notified when new music drops.</p>
+    <div class="mc-toast-actions">
+      <span class="mc-toast-arrow" aria-hidden="true">&#x2193;</span>
+      <button class="mc-toast-btn" data-open-mc>Sign up</button>
+      <span class="mc-toast-arrow" aria-hidden="true">&#x2193;</span>
+    </div>
+  </div>
+
   <!-- Gallery lightbox -->
   <div id="galleryModal" class="modal" hidden>
     <div class="modal-backdrop" data-close-gallery></div>
@@ -1199,6 +1193,74 @@
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Hamburger nav toggle (mobile only)
+  (function() {
+    var btn = document.querySelector('.nav-hamburger');
+    var dropdown = document.getElementById('nav-dropdown');
+    if (!btn || !dropdown) return;
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      dropdown.hidden = open;
+    });
+    // Close on link click or outside tap
+    dropdown.addEventListener('click', function() {
+      btn.setAttribute('aria-expanded', 'false');
+      dropdown.hidden = true;
+    });
+    document.addEventListener('click', function(e) {
+      if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+        btn.setAttribute('aria-expanded', 'false');
+        dropdown.hidden = true;
+      }
+    });
+  })();
+
+  // Mailing list toast — sign up = never show again; X = snooze 3 days
+  (function() {
+    var PERMANENT_KEY = 'ksm_toast_signedup';
+    var SNOOZE_KEY    = 'ksm_toast_snoozed';
+    var SNOOZE_DAYS   = 3;
+
+    if (localStorage.getItem(PERMANENT_KEY)) return;
+    var snoozed = localStorage.getItem(SNOOZE_KEY);
+    if (snoozed && Date.now() < parseInt(snoozed, 10)) return;
+
+    var toast = document.getElementById('mc-toast');
+    var closeBtn = document.getElementById('mc-toast-close');
+    var signupBtn = toast ? toast.querySelector('.mc-toast-btn') : null;
+    if (!toast) return;
+    var autoDismissTimer;
+
+    function showToast() {
+      toast.hidden = false;
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() { toast.classList.add('is-visible'); });
+      });
+      autoDismissTimer = setTimeout(snoozeToast, 10000);
+    }
+    function hideToast() {
+      clearTimeout(autoDismissTimer);
+      toast.classList.remove('is-visible');
+      setTimeout(function() { toast.hidden = true; }, 400);
+    }
+    function snoozeToast() {
+      hideToast();
+      var until = Date.now() + SNOOZE_DAYS * 24 * 60 * 60 * 1000;
+      localStorage.setItem(SNOOZE_KEY, String(until));
+    }
+    function permanentDismiss() {
+      hideToast();
+      localStorage.setItem(PERMANENT_KEY, '1');
+    }
+
+    setTimeout(showToast, 5000);
+    closeBtn.addEventListener('click', snoozeToast);
+    if (signupBtn) signupBtn.addEventListener('click', permanentDismiss);
+  })();
+
   // Prevent sticky focus/hover on top social buttons for touch devices
   const topSocialLinks = document.querySelectorAll('.top-socials a');
   topSocialLinks.forEach(link => {
@@ -1284,8 +1346,8 @@
 
   </script>
 
+  <!-- Click anywhere on an active show card to open its ticket link -->
   <script>
-  // Click anywhere on an active show card to open its ticket link
   document.querySelectorAll('.show-card:not(.expired-show)').forEach(function(card) {
     var ticketLink = card.querySelector('.btn-tickets[href]');
     if (!ticketLink) return;
@@ -1295,6 +1357,170 @@
       window.open(ticketLink.href, '_blank', 'noopener');
     });
   });
+  </script>
+
+  <!-- Music section: releases data + featured/previous swap -->
+  <script>
+  (function initMusicSection() {
+    // ── Add new releases here when they drop ────────────────────────────────
+    // Each entry: { id, title, embedSrc, art (URL or ''), platforms [] }
+    var releases = [
+      {
+        id: 'smile-thru',
+        title: 'Smile-Thru',
+        embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/',
+        art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SMILETHRUCOVER_e6pq2n',
+        platforms: [
+          { href: 'https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc', label: 'Qobuz', tooltip: 'Qobuz', text: 'Qobuz' },
+          { href: 'https://kamasutramurder.bandcamp.com', label: 'Bandcamp', tooltip: 'Bandcamp', icon: 'https://cdn.simpleicons.org/bandcamp/629AA9', alt: 'Bandcamp' },
+          { href: 'https://music.apple.com/ca/album/smile-thru-single/1851463044', label: 'Apple Music', tooltip: 'Apple Music', icon: 'https://cdn.simpleicons.org/applemusic/FA57C1', alt: 'Apple Music' },
+          { href: 'https://tidal.com/album/471357201/u', label: 'Tidal', tooltip: 'Tidal', icon: 'https://cdn.simpleicons.org/tidal/FFFFFF', alt: 'Tidal' },
+          { href: 'https://music.apple.com/ca/album/smile-thru-single/1851463044', label: 'iTunes', tooltip: 'iTunes', icon: 'https://cdn.simpleicons.org/itunes/FB5BC5', alt: 'iTunes' },
+          { href: 'https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA', label: 'Spotify', tooltip: 'Spotify', icon: 'https://cdn.simpleicons.org/spotify/1DB954', alt: 'Spotify' },
+          { href: 'https://www.youtube.com/watch?v=Ri7vws3DvBg', label: 'YouTube', tooltip: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/FF0000', alt: 'YouTube' }
+        ]
+      },
+      // ── To add a new release: copy the template below, paste it here as a
+      //    new entry, fill in title / embedSrc / art / platform URLs. The
+      //    layout auto-upgrades from "single card" to "featured + previous
+      //    grid + show-more cap + 'New Song!' badge" the moment you add a 2nd.
+      //
+      // EXAMPLE — uncomment and edit when you ship the next single:
+      // {
+      //   id: 'new-release-id',                         // url-safe slug, used as Bandcamp track path
+      //   title: 'New Release Title',
+      //   embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=NEW_TRACK_ID/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/',
+      //   art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/NEW_COVER_PUBLIC_ID',
+      //   platforms: [
+      //     { href: 'https://www.qobuz.com/ca-en/album/...', label: 'Qobuz', tooltip: 'Qobuz', text: 'Qobuz' },
+      //     { href: 'https://kamasutramurder.bandcamp.com', label: 'Bandcamp', tooltip: 'Bandcamp', icon: 'https://cdn.simpleicons.org/bandcamp/629AA9', alt: 'Bandcamp' },
+      //     { href: 'https://music.apple.com/ca/album/...', label: 'Apple Music', tooltip: 'Apple Music', icon: 'https://cdn.simpleicons.org/applemusic/FA57C1', alt: 'Apple Music' },
+      //     { href: 'https://tidal.com/album/...', label: 'Tidal', tooltip: 'Tidal', icon: 'https://cdn.simpleicons.org/tidal/FFFFFF', alt: 'Tidal' },
+      //     { href: 'https://music.apple.com/ca/album/...', label: 'iTunes', tooltip: 'iTunes', icon: 'https://cdn.simpleicons.org/itunes/FB5BC5', alt: 'iTunes' },
+      //     { href: 'https://open.spotify.com/album/...', label: 'Spotify', tooltip: 'Spotify', icon: 'https://cdn.simpleicons.org/spotify/1DB954', alt: 'Spotify' },
+      //     { href: 'https://www.youtube.com/watch?v=...', label: 'YouTube', tooltip: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/FF0000', alt: 'YouTube' }
+      //   ]
+      // },
+    ];
+    // ────────────────────────────────────────────────────────────────────────
+
+    var PREV_CAP_MOBILE = 2;
+    var PREV_CAP_DESKTOP = 6;
+    function getPrevCap() { return window.innerWidth < 600 ? PREV_CAP_MOBILE : PREV_CAP_DESKTOP; }
+    var featuredIdx = 0;
+    var prevExpanded = false;
+    var featuredSlot = document.getElementById('music-featured-slot');
+    var prevWrap    = document.getElementById('music-prev-wrap');
+    var prevGrid    = document.getElementById('music-prev-grid');
+    var prevMoreBtn = document.getElementById('music-prev-more');
+    if (!featuredSlot) return;
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function initials(title) {
+      return title.split(/\s+/).map(function(w){return w[0]||'';}).join('').slice(0,2).toUpperCase();
+    }
+
+    function renderFeatured(r) {
+      var id = 'featured-' + r.id;
+      var platformsHtml = r.platforms.map(function(p) {
+        if (p.text) {
+          return '<a href="'+esc(p.href)+'" aria-label="'+esc(p.label)+'" data-tooltip="'+esc(p.tooltip)+'" target="_blank" rel="noopener noreferrer"><span class="platform-text">'+esc(p.text)+'</span></a>';
+        }
+        return '<a href="'+esc(p.href)+'" aria-label="'+esc(p.label)+'" data-tooltip="'+esc(p.tooltip)+'" target="_blank" rel="noopener noreferrer"><img class="platform-icon" src="'+esc(p.icon)+'" width="28" height="28" alt="'+esc(p.alt)+'" loading="lazy"></a>';
+      }).join('');
+
+      // SINGLE-RELEASE MODE — when there's only one entry, render a plain
+      // single-card matching the original "Music" layout. This auto-upgrades
+      // to the featured + "New Song!" badge layout the moment you add a 2nd.
+      if (releases.length === 1) {
+        featuredSlot.innerHTML =
+          '<div class="singles-grid">'+
+            '<article class="single-card" aria-labelledby="'+id+'">'+
+              '<h3 id="'+id+'">'+esc(r.title)+'</h3>'+
+              '<div class="card bandcamp-embed">'+
+                '<iframe style="border:0;width:350px;height:442px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
+                  '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
+                '</iframe>'+
+              '</div>'+
+              '<div class="platform-icons" aria-label="Find '+esc(r.title)+' on">'+platformsHtml+'</div>'+
+            '</article>'+
+          '</div>';
+        return;
+      }
+
+      // MULTI-RELEASE MODE — featured tile with "Latest Release" / "New Song!" badge
+      featuredSlot.innerHTML =
+        '<div class="featured-release">'+
+          (featuredIdx === 0 ? '<span class="new-song-badge glitch-soft" data-text="New Song!">New Song!</span>' : '')+
+          '<article class="single-card featured" aria-labelledby="'+id+'">'+
+            '<div class="card bandcamp-embed">'+
+              '<iframe style="border:0;width:300px;height:300px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
+                '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
+              '</iframe>'+
+            '</div>'+
+            '<div class="platform-icons" aria-label="Stream '+esc(r.title)+' on">'+platformsHtml+'</div>'+
+          '</article>'+
+        '</div>';
+    }
+
+    function renderPrev() {
+      var others = releases.filter(function(_,i){return i!==featuredIdx;});
+      if (!others.length) {
+        if(prevWrap) prevWrap.hidden = true;
+        if(prevMoreBtn) prevMoreBtn.hidden = true;
+        return;
+      }
+      if(prevWrap) prevWrap.hidden = false;
+      var visible = prevExpanded ? others : others.slice(0, getPrevCap());
+      prevGrid.innerHTML = visible.map(function(r) {
+        var idx = releases.indexOf(r);
+        var artContent = r.art
+          ? '<img src="'+esc(r.art)+'" alt="'+esc(r.title)+' artwork" loading="lazy">'
+          : '<span class="art-initials" aria-hidden="true">'+initials(r.title)+'</span>';
+        return '<button class="prev-release-tile" data-idx="'+idx+'" aria-label="View '+esc(r.title)+'">'+
+          '<figure class="prev-release-art">'+artContent+'</figure>'+
+          '<span class="prev-release-name">'+esc(r.title)+'</span>'+
+        '</button>';
+      }).join('');
+      prevGrid.querySelectorAll('.prev-release-tile').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          featuredIdx = parseInt(btn.dataset.idx, 10);
+          prevExpanded = false;
+          renderFeatured(releases[featuredIdx]);
+          renderPrev();
+          featuredSlot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      });
+      if (prevMoreBtn) {
+        var overflow = others.length - getPrevCap();
+        if (overflow > 0) {
+          prevMoreBtn.hidden = false;
+          prevMoreBtn.textContent = prevExpanded ? 'Show less' : 'Show more';
+          prevMoreBtn.onclick = function() {
+            prevExpanded = !prevExpanded;
+            renderPrev();
+          };
+        } else {
+          prevMoreBtn.hidden = true;
+        }
+      }
+    }
+
+    // Section heading + nav link: "Music" when single release, "Discography" when 2+
+    var label = releases.length > 1 ? 'Discography' : 'Music';
+    var heading = document.getElementById('music-heading');
+    if (heading) {
+      heading.textContent = label;
+      heading.setAttribute('data-text', label);
+    }
+    var navLink = document.getElementById('nav-music-link');
+    if (navLink) navLink.textContent = label;
+
+    renderFeatured(releases[featuredIdx]);
+    renderPrev();
+  })();
   </script>
 
   <!-- Plausible Analytics — privacy-friendly, cookie-free -->
