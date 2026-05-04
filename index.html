@@ -84,10 +84,12 @@
   }
   </script>
 
-  <!-- ── Meta Pixel ─────────────────────────────────────────
-       Replace YOUR_PIXEL_ID with the Pixel ID you create at
-       business.facebook.com/events_manager2/ → Connect Data Sources → Web → Meta Pixel.
-       Once set, FB/IG ads can retarget visitors and track conversions. -->
+  <!-- ── Meta Pixel — DISABLED until Pixel ID is created ──────────────────
+       TO ACTIVATE:
+       1. Create a Pixel at business.facebook.com/events_manager2/
+          → Connect Data Sources → Web → Meta Pixel
+       2. Replace YOUR_PIXEL_ID below (both <script> and <noscript> instances)
+       3. Uncomment the block below by removing the surrounding <!-- and -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -99,11 +101,13 @@
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" alt=""/></noscript>
+  -->
 
-  <!-- ── Google Tag (gtag.js) ───────────────────────────────
-       Replace AW-XXXXXXXXXX with your Google Ads conversion ID once you
-       set up conversion tracking at ads.google.com/aw/conversions. Required
-       to know which YouTube ads drove visits/conversions. -->
+  <!-- ── Google Tag (gtag.js) — DISABLED until Conversion ID is created ──
+       TO ACTIVATE:
+       1. Create conversion at ads.google.com/aw/conversions
+       2. Replace AW-XXXXXXXXXX (both instances) with your conversion ID
+       3. Uncomment the block below by removing the surrounding <!-- and -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -111,6 +115,7 @@
     gtag('js', new Date());
     gtag('config', 'AW-XXXXXXXXXX');
   </script>
+  -->
 </head>
 <body class="bg-overlay-sticker">
   <div class="site-top">
@@ -128,7 +133,7 @@
     <nav class="site-nav" aria-label="Page sections">
       <div class="site-nav-links">
         <a href="#shows">Shows</a>
-        <a href="#music" id="nav-music-link">Music</a>
+        <a href="#music">Discography</a>
         <a href="#videos">Videos</a>
         <a href="#contact">Contact</a>
         <button class="nav-hamburger" aria-label="More navigation" aria-expanded="false" aria-controls="nav-dropdown">
@@ -160,7 +165,7 @@
     <!-- MUSIC / DISCOGRAPHY — heading auto-swaps based on release count -->
     <section id="music">
       <div class="container reveal">
-        <h2 class="glitch-soft" id="music-heading" data-text="Music">Music</h2>
+        <h2 class="glitch-soft" data-text="Discography">Discography</h2>
         <!-- Populated by initMusicSection() in inline script -->
         <div id="music-featured-slot"></div>
         <div id="music-prev-wrap" hidden>
@@ -1536,16 +1541,6 @@
         }
       }
     }
-
-    // Section heading + nav link: "Music" when single release, "Discography" when 2+
-    var label = releases.length > 1 ? 'Discography' : 'Music';
-    var heading = document.getElementById('music-heading');
-    if (heading) {
-      heading.textContent = label;
-      heading.setAttribute('data-text', label);
-    }
-    var navLink = document.getElementById('nav-music-link');
-    if (navLink) navLink.textContent = label;
 
     renderFeatured(releases[featuredIdx]);
     renderPrev();
