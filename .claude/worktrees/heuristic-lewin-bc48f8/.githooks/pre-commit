@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+./scripts/audit-assets.sh
+
+staged_assets_with_spaces="$(git diff --cached --name-only --diff-filter=AM | grep '^assets/' | grep ' ' || true)"
+if [[ -n "$staged_assets_with_spaces" ]]; then
+  echo "[pre-commit] Refusing commit: staged asset paths contain spaces"
+  echo "$staged_assets_with_spaces"
+  exit 1
+fi
+
+echo "[pre-commit] Asset checks passed"
