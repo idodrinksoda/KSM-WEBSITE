@@ -1497,21 +1497,28 @@
       }).join('');
 
       // Always use the simple single-card layout for the featured release —
-      // matches the look on main with one release. When 2+ releases exist,
-      // the "Previous Releases" grid (rendered separately by renderPrev)
-      // appears below this card to show the rest of the discography.
+      // matches the look on main with one release. When 2+ releases exist
+      // AND we're showing the newest one (featuredIdx === 0), prepend the
+      // "New Song!" badge above the card. The "Previous Releases" grid is
+      // rendered separately below by renderPrev().
       // Title intentionally omitted — the Bandcamp artwork shows the song
       // title. Accessibility preserved via aria-label on the article.
+      var badge = (releases.length > 1 && featuredIdx === 0)
+        ? '<span class="new-song-badge glitch-soft" data-text="New Song!">New Song!</span>'
+        : '';
       featuredSlot.innerHTML =
-        '<div class="singles-grid">'+
-          '<article class="single-card" aria-label="'+esc(r.title)+' by Kama Sutra Murder">'+
-            '<div class="card bandcamp-embed">'+
-              '<iframe style="border:0;width:350px;height:350px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
-                '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
-              '</iframe>'+
-            '</div>'+
-            '<div class="platform-icons" aria-label="Find '+esc(r.title)+' on">'+platformsHtml+'</div>'+
-          '</article>'+
+        '<div class="featured-release">'+
+          badge+
+          '<div class="singles-grid">'+
+            '<article class="single-card" aria-label="'+esc(r.title)+' by Kama Sutra Murder">'+
+              '<div class="card bandcamp-embed">'+
+                '<iframe style="border:0;width:350px;height:350px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
+                  '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
+                '</iframe>'+
+              '</div>'+
+              '<div class="platform-icons" aria-label="Find '+esc(r.title)+' on">'+platformsHtml+'</div>'+
+            '</article>'+
+          '</div>'+
         '</div>';
     }
 
