@@ -1717,7 +1717,6 @@
     }
 
     function renderFeatured(r) {
-      var id = 'featured-' + r.id;
       var platformsHtml = r.platforms.map(function(p) {
         if (p.text) {
           return '<a href="'+esc(p.href)+'" aria-label="'+esc(p.label)+'" data-tooltip="'+esc(p.tooltip)+'" target="_blank" rel="noopener noreferrer"><span class="platform-text">'+esc(p.text)+'</span></a>';
@@ -1725,38 +1724,21 @@
         return '<a href="'+esc(p.href)+'" aria-label="'+esc(p.label)+'" data-tooltip="'+esc(p.tooltip)+'" target="_blank" rel="noopener noreferrer"><img class="platform-icon" src="'+esc(p.icon)+'" width="28" height="28" alt="'+esc(p.alt)+'" loading="lazy"></a>';
       }).join('');
 
-      // SINGLE-RELEASE MODE — when there's only one entry, render a plain
-      // single-card. The embedSrc URL has `minimal=true` (artwork-only), so
-      // the iframe must be square (350x350). When you add a 2nd release the
-      // layout auto-upgrades to the featured tile + "New Song!" badge.
-      if (releases.length === 1) {
-        // Title intentionally omitted above the embed — the Bandcamp artwork
-        // already shows the song title. Accessibility preserved via aria-label.
-        featuredSlot.innerHTML =
-          '<div class="singles-grid">'+
-            '<article class="single-card" aria-label="'+esc(r.title)+' by Kama Sutra Murder">'+
-              '<div class="card bandcamp-embed">'+
-                '<iframe style="border:0;width:350px;height:350px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
-                  '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
-                '</iframe>'+
-              '</div>'+
-              '<div class="platform-icons" aria-label="Find '+esc(r.title)+' on">'+platformsHtml+'</div>'+
-            '</article>'+
-          '</div>';
-        return;
-      }
-
-      // MULTI-RELEASE MODE — featured tile with "Latest Release" / "New Song!" badge
+      // Always use the simple single-card layout for the featured release —
+      // matches the look on main with one release. When 2+ releases exist,
+      // the "Previous Releases" grid (rendered separately by renderPrev)
+      // appears below this card to show the rest of the discography.
+      // Title intentionally omitted — the Bandcamp artwork shows the song
+      // title. Accessibility preserved via aria-label on the article.
       featuredSlot.innerHTML =
-        '<div class="featured-release">'+
-          (featuredIdx === 0 ? '<span class="new-song-badge glitch-soft" data-text="New Song!">New Song!</span>' : '')+
-          '<article class="single-card featured" aria-labelledby="'+id+'">'+
+        '<div class="singles-grid">'+
+          '<article class="single-card" aria-label="'+esc(r.title)+' by Kama Sutra Murder">'+
             '<div class="card bandcamp-embed">'+
-              '<iframe style="border:0;width:300px;height:300px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
+              '<iframe style="border:0;width:350px;height:350px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
                 '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
               '</iframe>'+
             '</div>'+
-            '<div class="platform-icons" aria-label="Stream '+esc(r.title)+' on">'+platformsHtml+'</div>'+
+            '<div class="platform-icons" aria-label="Find '+esc(r.title)+' on">'+platformsHtml+'</div>'+
           '</article>'+
         '</div>';
     }
