@@ -138,7 +138,7 @@ h2{font-size:clamp(28px,4vw,42px);margin:0 0 24px}
 }
 .site-nav a:hover{background:#1e1e2a;color:var(--accent-2);transform:translateY(-1px)}
 .site-nav a:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
-@media (max-width:640px){
+@media (max-width:768px){
   body{padding-top  :56px}
   .site-top{top:8px;left:8px;right:8px;gap:8px}
   .top-socials{gap:6px}

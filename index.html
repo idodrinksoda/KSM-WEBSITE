@@ -47,7 +47,7 @@
   <link rel="preload" as="image" href="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_640/GA-MAY28TH2026">
 
   <!-- Site styles -->
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 
   <!-- JSON-LD: MusicGroup -->
   <script type="application/ld+json">
@@ -84,37 +84,47 @@
   }
   </script>
 
-  <!-- ── Meta Pixel — DISABLED until Pixel ID is created ──────────────────
-       TO ACTIVATE:
-       1. Create a Pixel at business.facebook.com/events_manager2/
-          → Connect Data Sources → Web → Meta Pixel
-       2. Replace YOUR_PIXEL_ID below (both <script> and <noscript> instances)
-       3. Uncomment the block below by removing the surrounding <!-- and -->
-  <script>
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-  document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', 'YOUR_PIXEL_ID');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" alt=""/></noscript>
+  <!--
+    Meta Pixel — DISABLED until Pixel ID is created.
+
+    To activate:
+      1. Create a Pixel at business.facebook.com/events_manager2/
+         (Connect Data Sources / Web / Meta Pixel)
+      2. Replace YOUR_PIXEL_ID below (both script and noscript blocks)
+      3. Remove the comment markers wrapping the snippet
+
+    SNIPPET:
+
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" alt=""/></noscript>
   -->
 
-  <!-- ── Google Tag (gtag.js) — DISABLED until Conversion ID is created ──
-       TO ACTIVATE:
-       1. Create conversion at ads.google.com/aw/conversions
-       2. Replace AW-XXXXXXXXXX (both instances) with your conversion ID
-       3. Uncomment the block below by removing the surrounding <!-- and -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-XXXXXXXXXX');
-  </script>
+  <!--
+    Google Tag (gtag.js) — DISABLED until Conversion ID is created.
+
+    To activate:
+      1. Create conversion at ads.google.com/aw/conversions
+      2. Replace AW-XXXXXXXXXX (both instances) with your conversion ID
+      3. Remove the comment markers wrapping the snippet
+
+    SNIPPET:
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-XXXXXXXXXX');
+    </script>
   -->
 </head>
 <body class="bg-overlay-sticker">
