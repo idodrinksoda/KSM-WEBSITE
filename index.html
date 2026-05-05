@@ -1484,10 +1484,11 @@
       // the iframe must be square (350x350). When you add a 2nd release the
       // layout auto-upgrades to the featured tile + "New Song!" badge.
       if (releases.length === 1) {
+        // Title intentionally omitted above the embed — the Bandcamp artwork
+        // already shows the song title. Accessibility preserved via aria-label.
         featuredSlot.innerHTML =
           '<div class="singles-grid">'+
-            '<article class="single-card" aria-labelledby="'+id+'">'+
-              '<h3 id="'+id+'">'+esc(r.title)+'</h3>'+
+            '<article class="single-card" aria-label="'+esc(r.title)+' by Kama Sutra Murder">'+
               '<div class="card bandcamp-embed">'+
                 '<iframe style="border:0;width:350px;height:350px;" src="'+esc(r.embedSrc)+'" seamless loading="lazy">'+
                   '<a href="https://kamasutramurder.bandcamp.com/track/'+esc(r.id)+'">'+esc(r.title)+' by Kama Sutra Murder</a>'+
