@@ -47,7 +47,7 @@
   <link rel="preload" as="image" href="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_640/GA-MAY28TH2026">
 
   <!-- Site styles -->
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 
   <!-- JSON-LD: MusicGroup -->
   <script type="application/ld+json">
@@ -867,6 +867,11 @@
       active.concat(expired).forEach(function(item) {
         grid.appendChild(item.card);
       });
+
+      // Reset scroll to the leftmost (active) cards after reorder.
+      // Without this, the browser sometimes preserves a scroll offset from
+      // the original DOM order, leaving the user looking at expired shows.
+      grid.scrollLeft = 0;
 
       // Arrow navigation
       function scrollByCard(dir) {
