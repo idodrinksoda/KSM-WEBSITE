@@ -16,6 +16,12 @@
   <title>Kama Sutra Murder — Official Site</title>
   <meta name="description" content="Kama Sutra Murder — heavy rock/grunge/alt-metal from Vancouver, BC. Shows, music, merch, contact." />
 
+  <!--
+    Crawler hint: keyword variants (low ranking impact but cheap to keep).
+    Update when: spelling variants drift, or you find new misspellings in Search Console.
+  -->
+  <meta name="keywords" content="Kama Sutra Murder, KSM, Kamasutra Murder, Kama-Sutra Murder, Karma Sutra Murder, Karma Sutra Murders, Kama Sutra Murders, Kamasutra Murders, Karmasutra Murder, Cama Sutra Murder, Comma Sutra Murder, Vancouver rock band, Vancouver metal band, Vancouver grunge band, Vancouver punk band, Vancouver alt-metal, Vancouver psych rock, heavy rock Vancouver, Smile-Thru, Caylee Edge band">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kamasutramurder.com/" />
@@ -58,38 +64,273 @@
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css?v=5">
 
-  <!-- JSON-LD: MusicGroup -->
+  <!--
+    JSON-LD #1: MusicGroup
+    Purpose: Primary artist entity. Drives Knowledge Panel, artist card, and "people also search for" results.
+    Update when: members change, social/streaming platforms added or removed, image or genre changes.
+    Note: alternateName covers common misspellings — KEEP THESE. They are the primary lever for capturing
+          searches like "Karma Sutra Murder" or "Kamasutra Murders" without polluting visible copy.
+  -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MusicGroup",
+    "@id": "https://kamasutramurder.com/#band",
     "name": "Kama Sutra Murder",
+    "alternateName": [
+      "KSM",
+      "Kamasutra Murder",
+      "Kama-Sutra Murder",
+      "Kama Sutra Murders",
+      "Kamasutra Murders",
+      "Karma Sutra Murder",
+      "Karma Sutra Murders",
+      "Karmasutra Murder",
+      "Kama Sutra Murderers",
+      "Kamasutramurder",
+      "Cama Sutra Murder",
+      "Comma Sutra Murder"
+    ],
     "url": "https://kamasutramurder.com",
-    "foundingLocation": { "@type": "Place", "name": "Vancouver, BC, Canada" },
-    "genre": ["Grunge", "Punk", "Rock", "Alt-Metal", "Psychedelic", "Noise Rock"],
+    "logo": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_512/hero_tot2cm",
+    "image": [
+      "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm",
+      "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1920/hero_tot2cm"
+    ],
+    "description": "Kama Sutra Murder is a Vancouver rock band blending grunge, punk, psych and alt-metal. A heavy Vancouver metal band with a noisy, melodic edge — Vancouver grunge meets psych rock and alternative metal.",
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Vancouver, BC, Canada",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vancouver",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      }
+    },
+    "areaServed": { "@type": "Country", "name": "Canada" },
+    "genre": [
+      "Grunge",
+      "Punk",
+      "Rock",
+      "Alternative Metal",
+      "Alt-Metal",
+      "Heavy Rock",
+      "Psychedelic Rock",
+      "Psych Rock",
+      "Noise Rock",
+      "Vancouver Rock"
+    ],
+    "keywords": "Vancouver rock band, Vancouver metal band, Vancouver grunge band, Vancouver punk band, heavy rock Vancouver, alt-metal Vancouver, psych rock Vancouver, KSM band, Kama Sutra Murder, Kamasutra Murder, Karma Sutra Murder",
     "member": [
       { "@type": "OrganizationRole", "member": { "@type": "Person", "name": "Caylee Edge" } },
       { "@type": "OrganizationRole", "member": { "@type": "Person", "name": "Nikolas Maninis" } },
       { "@type": "OrganizationRole", "member": { "@type": "Person", "name": "Adolfo Ruiz" } },
       { "@type": "OrganizationRole", "member": { "@type": "Person", "name": "Nim Chattree" } }
     ],
-    "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm",
     "sameAs": [
       "https://www.instagram.com/kamasutramurder",
       "https://www.youtube.com/channel/UC9xu3OuSIVgUzQ9wIv0OgKg",
-      "https://kamasutramurder.bandcamp.com/"
+      "https://kamasutramurder.bandcamp.com/",
+      "https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH",
+      "https://music.apple.com/ca/album/smile-thru-single/1851463044",
+      "https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc"
     ]
   }
   </script>
-  <!-- JSON-LD: MusicRecording — Smile-Thru -->
+
+  <!--
+    JSON-LD #2: MusicEvent — May 16, 2026 — The Mezzanine, Vancouver
+    Update when: event cancelled (set eventStatus to "EventCancelled"), postponed ("EventPostponed"),
+                 moved online ("EventMovedOnline"), or after it has passed (remove the block).
+    Note: This show is in the past as of 2026-05-19 — remove the block once you don't need it indexed.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "Kama Sutra Murder — Live at The Mezzanine",
+    "startDate": "2026-05-16T20:00:00-07:00",
+    "endDate": "2026-05-17T00:00:00-07:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "MusicVenue",
+      "name": "The Mezzanine",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "33 West 8th Avenue",
+        "addressLocality": "Vancouver",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      },
+      "sameAs": "https://www.google.com/maps/search/33+West+8th+Avenue+Vancouver+BC"
+    },
+    "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/May16thTheMezzanine_jag1gb",
+    "performer": { "@id": "https://kamasutramurder.com/#band" },
+    "organizer": { "@id": "https://kamasutramurder.com/#band" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://gigpit.ca/shows/event:mm2s_4ki0Tw/tickets?region=1",
+      "availability": "https://schema.org/InStock",
+      "validFrom": "2026-03-01T00:00:00-08:00",
+      "priceCurrency": "CAD",
+      "category": "primary"
+    }
+  }
+  </script>
+
+  <!--
+    JSON-LD #3: MusicEvent — May 28, 2026 — Green Auto, Vancouver
+    Update when: status changes (cancelled/postponed), ticket URL changes, or after the show has passed.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "Kama Sutra Murder — Live at Green Auto",
+    "startDate": "2026-05-28T20:00:00-07:00",
+    "endDate": "2026-05-29T00:00:00-07:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "MusicVenue",
+      "name": "Green Auto",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vancouver",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      },
+      "sameAs": "https://www.google.com/maps/place/green+auto/data=!4m2!3m1!1s0x548671006d91b771:0x5af86ca349312e19"
+    },
+    "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/v1778121005/GA-MAY28TH2026",
+    "performer": { "@id": "https://kamasutramurder.com/#band" },
+    "organizer": { "@id": "https://kamasutramurder.com/#band" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://gigpit.ca/shows/event:yrwSHdcNJx4",
+      "availability": "https://schema.org/InStock",
+      "validFrom": "2026-04-01T00:00:00-07:00",
+      "priceCurrency": "CAD",
+      "category": "primary"
+    }
+  }
+  </script>
+
+  <!--
+    JSON-LD #4: MusicEvent — June 7, 2026 — Green Auto, Vancouver
+    Update when: ticket URL is published (replace TICKET_URL_TBD), or status changes.
+    IMPORTANT: Add the matching .show-card to #shows .shows-grid before publishing so the page and schema agree.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "Kama Sutra Murder — Live at Green Auto",
+    "startDate": "2026-06-07T20:00:00-07:00",
+    "endDate": "2026-06-08T00:00:00-07:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "MusicVenue",
+      "name": "Green Auto",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vancouver",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      },
+      "sameAs": "https://www.google.com/maps/place/green+auto/data=!4m2!3m1!1s0x548671006d91b771:0x5af86ca349312e19"
+    },
+    "performer": { "@id": "https://kamasutramurder.com/#band" },
+    "organizer": { "@id": "https://kamasutramurder.com/#band" },
+    "offers": {
+      "@type": "Offer",
+      "url": "TICKET_URL_TBD",
+      "availability": "https://schema.org/PreOrder",
+      "priceCurrency": "CAD",
+      "category": "primary"
+    }
+  }
+  </script>
+
+  <!--
+    JSON-LD #5: MusicRecording — "Smile-Thru" (released 2025-11-22)
+    Update when: new track released (duplicate this block with new values), or platform URL changes.
+    For future releases, switch to @graph if more than one MusicRecording is on the page.
+  -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MusicRecording",
+    "@id": "https://kamasutramurder.com/#smile-thru",
     "name": "Smile-Thru",
-    "byArtist": { "@type": "MusicGroup", "name": "Kama Sutra Murder" },
-    "datePublished": "2025-11-15",
-    "url": "https://kamasutramurder.bandcamp.com/track/smile-thru"
+    "byArtist": { "@id": "https://kamasutramurder.com/#band" },
+    "datePublished": "2025-11-22",
+    "inAlbum": {
+      "@type": "MusicAlbum",
+      "name": "Smile-Thru",
+      "byArtist": { "@id": "https://kamasutramurder.com/#band" },
+      "datePublished": "2025-11-22",
+      "albumReleaseType": "https://schema.org/SingleRelease"
+    },
+    "url": "https://kamasutramurder.bandcamp.com/track/smile-thru",
+    "sameAs": [
+      "https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH",
+      "https://www.youtube.com/watch?v=Ri7vws3DvBg",
+      "https://music.apple.com/ca/album/smile-thru-single/1851463044",
+      "https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc"
+    ]
+  }
+  </script>
+
+  <!--
+    JSON-LD #6: WebSite + SearchAction (sitelinks search box eligibility)
+    Update when: domain changes, or you add a real on-site search endpoint (replace the Google fallback URL).
+    Caveat: Google deprecated the sitelinks-search-box rich result in late 2024. Schema remains valid and
+            still surfaces in other engines (Bing, DuckDuckGo). The action URL below falls back to a Google
+            site:-search since the site has no native search endpoint.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://kamasutramurder.com/#website",
+    "url": "https://kamasutramurder.com/",
+    "name": "Kama Sutra Murder",
+    "alternateName": ["KSM", "Kamasutra Murder", "Karma Sutra Murder"],
+    "description": "Official site of Kama Sutra Murder — Vancouver rock / grunge / alt-metal band. Shows, music, videos, contact.",
+    "publisher": { "@id": "https://kamasutramurder.com/#band" },
+    "inLanguage": "en",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.google.com/search?q=site%3Akamasutramurder.com+{search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!--
+    JSON-LD #7: BreadcrumbList — single-page section navigation
+    Update when: nav sections are added/removed/reordered. Mirrors the in-page anchor menu.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",        "item": "https://kamasutramurder.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Shows",       "item": "https://kamasutramurder.com/#shows" },
+      { "@type": "ListItem", "position": 3, "name": "Discography", "item": "https://kamasutramurder.com/#music" },
+      { "@type": "ListItem", "position": 4, "name": "Videos",      "item": "https://kamasutramurder.com/#videos" },
+      { "@type": "ListItem", "position": 5, "name": "Gallery",     "item": "https://kamasutramurder.com/#gallery" },
+      { "@type": "ListItem", "position": 6, "name": "Press",       "item": "https://kamasutramurder.com/#press" },
+      { "@type": "ListItem", "position": 7, "name": "Contact",     "item": "https://kamasutramurder.com/#contact" }
+    ]
   }
   </script>
 
@@ -1008,21 +1249,37 @@
     img.src = galleryImages[nextIdx];
   }
 
-  function shuffleGalleryImages() {
-    for (let i = galleryImages.length - 1; i > 0; i -= 1) {
+  // Deck-shuffle: deal pages from a pre-shuffled deck of indices. When the deck
+  // runs low we reshuffle, pushing the just-shown indices to the back so they
+  // can't appear on the immediately-following page (as long as the pool allows).
+  let galleryDeck = [];
+  let lastPageIndices = [];
+
+  function refillGalleryDeck() {
+    if (!galleryImages.length) { galleryDeck = []; return; }
+    const indices = galleryImages.map((_, i) => i);
+    for (let i = indices.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
-      [galleryImages[i], galleryImages[j]] = [galleryImages[j], galleryImages[i]];
+      [indices[i], indices[j]] = [indices[j], indices[i]];
     }
+    if (lastPageIndices.length && galleryImages.length > lastPageIndices.length) {
+      const recent = new Set(lastPageIndices);
+      indices.sort((a, b) => (recent.has(a) ? 1 : 0) - (recent.has(b) ? 1 : 0));
+    }
+    galleryDeck = indices;
   }
 
-  // Render a single page of exactly galleryPageSize images, wrapping if needed
+  // Render one page of up to galleryPageSize images, never repeating within the
+  // page and avoiding the previous page's images when the pool is large enough.
   function renderGalleryGrid() {
     if (!galleryGrid || !galleryImages.length) return;
-    const total = galleryImages.length;
+    const pageSize = Math.min(galleryPageSize, galleryImages.length);
+    if (galleryDeck.length < pageSize) refillGalleryDeck();
+    const pageIndices = galleryDeck.splice(0, pageSize);
+    lastPageIndices = pageIndices.slice();
     const pageEl = document.createElement('div');
     pageEl.className = 'gallery-page is-active';
-    for (let slot = 0; slot < galleryPageSize; slot++) {
-      const imageIdx = slot % total;
+    for (const imageIdx of pageIndices) {
       const src = galleryImages[imageIdx];
       const figure = document.createElement('figure');
       figure.className = 'gallery-item';
@@ -1053,9 +1310,7 @@
     }
   }
 
-  // Shuffle + render + reset timer
   function advanceGallery() {
-    shuffleGalleryImages();
     renderGalleryGrid();
     startGalleryTimer();
   }
@@ -1074,6 +1329,8 @@
       const urls = (data.resources || []).map(r => cloudinaryUrl(r.public_id));
       if (urls.length) {
         galleryImages = urls;
+        galleryDeck = [];
+        lastPageIndices = [];
         advanceGallery();
       }
     } catch (e) {
