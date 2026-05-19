@@ -22,7 +22,6 @@ Track features, fixes, and content updates here. Update this file at the start a
 
 ### Code / Tech
 - [ ] Decide fate of `script.js` — delete or integrate into `index.html`
-- [ ] Audit `assets/manifest.json` vs root `manifest.json` — confirm which is canonical and remove duplicate
 - [ ] Review `sitemap.xml` for accuracy
 
 ### Design / UX
