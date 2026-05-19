@@ -7,9 +7,9 @@ Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a tou
 - `styles.css` — Global styles, CSS tokens in `:root`, utilities, embeds, modal.
 - `script.js` — Legacy helpers (not referenced by `index.html`).
 - `assets/` — Images and icons, organized by type:
-  - `assets/shows/` — local backups only; live posters served from Cloudinary (`shows/` folder)
   - `assets/gallery/` — manifest.json only; images served from Cloudinary
   - `assets/icons/` — favicon and app icons
+  - Show posters: served from Cloudinary (`ksm-shows/current-shows/` and `ksm-shows/previous-shows/`) — no local copies.
 - Hero image, gallery photos, show posters, and background texture are hosted on Cloudinary (cloud: dgxgi8bga).
 - `CNAME` — Custom domain mapping to `kamasutramurder.com` (do not remove).
 
@@ -118,7 +118,7 @@ Optional (multiple releases): use `@graph` with an array of items — list the l
   "@context": "https://schema.org",
   "@graph": [
     { "@type": "MusicRecording", "name": "New Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-12-06", "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm", "url": "https://…" },
-    { "@type": "MusicRecording", "name": "Previous Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-11-15", "image": "assets/shows/previous-shows/green-auto-640.jpg", "url": "https://…" }
+    { "@type": "MusicRecording", "name": "Previous Single", "byArtist": {"@type": "MusicGroup", "name": "Kama Sutra Murder"}, "datePublished": "2025-11-15", "image": "https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1200/hero_tot2cm", "url": "https://…" }
   ]
 }
 ```
