@@ -14,3 +14,20 @@ if [[ -n "$staged_assets_with_spaces" ]]; then
 fi
 
 echo "[pre-commit] Asset checks passed"
+
+# Regenerate MusicEvent JSON-LD from show-cards. If index.html was already
+# staged, re-stage it after the rewrite so the auto-generated schema goes
+# in with the same commit.
+if command -v node >/dev/null 2>&1; then
+  index_was_staged=0
+  if git diff --cached --name-only | grep -qx 'index.html'; then
+    index_was_staged=1
+  fi
+  node scripts/sync-show-schema.js
+  if [[ "$index_was_staged" -eq 1 ]] && ! git diff --quiet -- index.html; then
+    git add index.html
+    echo "[pre-commit] Re-staged index.html with regenerated MusicEvent schema"
+  fi
+else
+  echo "[pre-commit] WARN: node not found, skipping sync-show-schema.js"
+fi

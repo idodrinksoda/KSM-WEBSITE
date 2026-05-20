@@ -17,6 +17,9 @@ jobs:
       - name: Run missing-reference audit
         run: bash scripts/audit-assets.sh --missing-only
 
+      - name: Verify MusicEvent schema is in sync with show-cards
+        run: node scripts/sync-show-schema.js --check
+
       - name: Fail if PR introduces asset filenames with spaces
         if: github.event_name == 'pull_request'
         run: |
