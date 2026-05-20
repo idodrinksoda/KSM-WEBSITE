@@ -126,6 +126,13 @@ Append inside `#shows .shows-grid`:
 ```
 The inline JS auto-formats ISO dates to `Sat Mar 21, 2026` using UTC — just write `YYYY-MM-DD` in both `datetime` and the element content.
 
+**MusicEvent JSON-LD is auto-generated.** `scripts/sync-show-schema.js` runs in the pre-commit hook and regenerates the `<!-- AUTO:SHOWS -->` block in `<head>` from upcoming `.show-card` markup (dates ≥ today only). Don't edit MusicEvent schema by hand — paste the card, commit, schema appears. CI re-runs the script with `--check` to catch drift.
+
+If the venue is new, add it to the `VENUES` table at the top of `scripts/sync-show-schema.js` (needs address + Google Maps URL). The script errors loudly until you do.
+
+Per-card overrides (optional):
+- `data-show-start="19:00"` — non-default start time (default is 20:00 / 8 PM)
+
 ### Move a show to past
 Move the Cloudinary asset: `ksm-shows/current-shows/` → `ksm-shows/previous-shows/`
 Update the `src` URL in `index.html` accordingly. Or simply remove the card.
