@@ -35,6 +35,15 @@ const VENUES = {
       addressCountry: 'CA'
     },
     sameAs: 'https://www.google.com/maps/search/33+West+8th+Avenue+Vancouver+BC'
+  },
+  "Lana Lou's": {
+    address: {
+      streetAddress: '362 Powell Street',
+      addressLocality: 'Vancouver',
+      addressRegion: 'BC',
+      addressCountry: 'CA'
+    },
+    sameAs: 'https://www.google.com/maps/search/362+Powell+Street+Vancouver+BC'
   }
 };
 
@@ -95,10 +104,9 @@ function parseCard(block) {
   const posterSrc = img[1];
   const posterAlt = img[2];
 
-  // Ticket URL is on .btn-tickets
+  // Ticket URL is on .btn-tickets (optional — door/PWYC shows have no link)
   const ticket = block.match(/<a[^>]*class="btn-tickets"[^>]*href="([^"]+)"/);
-  if (!ticket) return null;
-  const ticketUrl = ticket[1];
+  const ticketUrl = ticket ? ticket[1] : null;
 
   return { date, startHour, startMinute, venue, city, posterSrc, posterAlt, ticketUrl };
 }
@@ -128,13 +136,16 @@ function buildEvent(card) {
     image: card.posterSrc,
     performer: { '@id': BAND_ID },
     organizer: { '@id': BAND_ID },
-    offers: {
-      '@type': 'Offer',
-      url: card.ticketUrl,
-      availability: 'https://schema.org/InStock',
-      priceCurrency: 'CAD',
-      category: 'primary'
-    }
+    // offers is optional — only emitted when the card has a ticket link.
+    ...(card.ticketUrl && {
+      offers: {
+        '@type': 'Offer',
+        url: card.ticketUrl,
+        availability: 'https://schema.org/InStock',
+        priceCurrency: 'CAD',
+        category: 'primary'
+      }
+    })
   };
 }
 
