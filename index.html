@@ -63,6 +63,8 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css?v=5">
+  <!-- ZINE SKIN (experiment, additive) — delete this line + zine.css to fully revert -->
+  <link rel="stylesheet" href="zine.css?v=1">
 
   <!--
     JSON-LD #1: MusicGroup
@@ -362,6 +364,9 @@
     <section id="shows">
       <div class="container reveal">
         <h2 class="glitch-soft visually-hidden" data-text="Shows">Shows</h2>
+        <!-- Featured next show — populated by initShowsCarousel() (soonest upcoming card is
+             moved here at runtime). Stays hidden with no JS or when there are no upcoming shows. -->
+        <div class="shows-featured" id="showsFeatured" aria-label="Next show" hidden></div>
         <div class="card">
           <button class="shows-arrow left" aria-label="Scroll left" type="button">&#8592;</button>
           <div class="shows-grid" tabindex="0">
@@ -1047,13 +1052,17 @@
       var grid = document.querySelector('.shows-grid');
       var leftBtn = document.querySelector('.shows-arrow.left');
       var rightBtn = document.querySelector('.shows-arrow.right');
+      var featured = document.getElementById('showsFeatured');
       if (!grid || !leftBtn || !rightBtn) return;
 
       var today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      // Classify all dated cards into active vs expired
-      var cards = Array.from(grid.querySelectorAll('.show-card[data-show-date]'));
+      // Classify all dated cards into active vs expired. Query the whole
+      // #shows section (not just the grid) so a previously-featured card is
+      // recollected — keeps this idempotent if it ever runs more than once.
+      var shows = document.getElementById('shows') || grid.closest('section') || document;
+      var cards = Array.from(shows.querySelectorAll('.show-card[data-show-date]'));
       var active = [];
       var expired = [];
 
@@ -1062,7 +1071,7 @@
         // Parse as local date to avoid timezone shifts
         var parts = dateStr.split('-');
         var showDate = new Date(+parts[0], +parts[1] - 1, +parts[2]);
-        card.classList.remove('expired-show', 'no-jump', 'show-expired');
+        card.classList.remove('expired-show', 'no-jump', 'show-expired', 'is-featured');
         if (showDate >= today) {
           active.push({ card: card, date: showDate });
         } else {
@@ -1079,6 +1088,20 @@
       active.concat(expired).forEach(function(item) {
         grid.appendChild(item.card);
       });
+
+      // Feature the soonest upcoming show above the scroller: lift it out of
+      // the grid into the featured slot. The scroller then leads with the
+      // next-soonest. With no upcoming shows, keep the slot hidden.
+      if (featured) {
+        if (active.length) {
+          var feat = active[0].card;
+          feat.classList.add('is-featured');
+          featured.appendChild(feat);
+          featured.hidden = false;
+        } else {
+          featured.hidden = true;
+        }
+      }
 
       // Reset scroll to the leftmost (active) cards after reorder.
       // Without this, the browser sometimes preserves a scroll offset from
