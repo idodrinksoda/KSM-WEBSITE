@@ -65,6 +65,8 @@
   <link rel="stylesheet" href="styles.css?v=5">
   <!-- ZINE SKIN (experiment, additive) — delete this line + zine.css to fully revert -->
   <link rel="stylesheet" href="zine.css?v=1">
+  <!-- ZINE FINAL (combined direction, additive) — delete this line + zine-final.css to revert the skin -->
+  <link rel="stylesheet" href="zine-final.css?v=1">
 
   <!--
     JSON-LD #1: MusicGroup
@@ -317,6 +319,7 @@
     </div>
     <nav class="site-nav" aria-label="Page sections">
       <div class="site-nav-links">
+        <a href="#about">About</a>
         <a href="#shows">Shows</a>
         <a href="#music">Discography</a>
         <a href="#videos">Videos</a>
@@ -326,6 +329,7 @@
         </button>
       </div>
       <div class="nav-dropdown" id="nav-dropdown" hidden>
+        <a href="#about">About</a>
         <a href="#videos">Videos</a>
         <a href="#gallery">Gallery</a>
         <a href="#press">Press</a>
@@ -341,11 +345,35 @@
     <section class="hero has-image">
       <div class="container">
         <h1 class="glitch-title" data-text="Kama Sutra Murder">Kama Sutra Murder</h1>
-        <p>grunge/punk/psych/alt-metal from Vancouver, BC.</p>
+        <p>in your face music from Vancouver, BC.</p>
       </div>
     </section>
 
     
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container reveal">
+        <h2 class="glitch-soft visually-hidden" data-text="About">About</h2>
+        <div class="about-wrap">
+          <div class="about-copy">
+            <p>[Placeholder bio — replace with real copy. Who Kama Sutra Murder are, where they're from, what the live show feels like.]</p>
+            <p>[Second paragraph — releases to date, what's next.]</p>
+          </div>
+          <figure class="about-photo">
+            <!-- TODO: stand-in photo — this is the hero image; swap the Cloudinary public ID for a real band photo -->
+            <img class="about-img"
+                 src="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_800/13_if15ed_1_nuwuez"
+                 alt="Kama Sutra Murder band photo"
+                 loading="lazy"
+                 decoding="async"
+                 width="800"
+                 height="533">
+            <figcaption class="about-scrawl">that's us</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
     <!-- MUSIC / DISCOGRAPHY — heading auto-swaps based on release count -->
     <section id="music">
@@ -1076,6 +1104,13 @@
           active.push({ card: card, date: showDate });
         } else {
           card.classList.add('expired-show', 'no-jump');
+          // A card that expired while still carrying live Tickets/Map buttons
+          // swaps to the same static "Show complete" state used by the
+          // hand-edited expired cards below.
+          var actions = card.querySelector('.show-actions');
+          if (actions && !actions.querySelector('.btn-tickets.expired')) {
+            actions.innerHTML = '<span class="btn-tickets expired" aria-disabled="true">Show complete</span>';
+          }
           expired.push({ card: card, date: showDate });
         }
       });
@@ -1700,7 +1735,7 @@
       // ── To add a new release: copy the template below, paste it here as a
       //    new entry, fill in title / embedSrc / art / platform URLs. The
       //    layout auto-upgrades from "single card" to "featured + previous
-      //    grid + show-more cap + 'New Song!' badge" the moment you add a 2nd.
+      //    grid + show-more cap + 'Listen now' badge" the moment you add a 2nd.
       //
       // EXAMPLE — uncomment and edit when you ship the next single:
       // {
@@ -1750,12 +1785,12 @@
       // Always use the simple single-card layout for the featured release —
       // matches the look on main with one release. When 2+ releases exist
       // AND we're showing the newest one (featuredIdx === 0), prepend the
-      // "New Song!" badge above the card. The "Previous Releases" grid is
+      // "Listen now" badge above the card. The "Previous Releases" grid is
       // rendered separately below by renderPrev().
       // Title intentionally omitted — the Bandcamp artwork shows the song
       // title. Accessibility preserved via aria-label on the article.
       var badge = (releases.length > 1 && featuredIdx === 0)
-        ? '<span class="new-song-badge glitch-soft" data-text="New Song!">New Song!</span>'
+        ? '<span class="new-song-badge glitch-soft" data-text="Listen now">Listen now</span>'
         : '';
       featuredSlot.innerHTML =
         '<div class="featured-release">'+
