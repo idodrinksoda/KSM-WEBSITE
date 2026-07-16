@@ -1161,6 +1161,154 @@
       // Initial state after layout
       requestAnimationFrame(function() { setTimeout(updateArrows, 150); });
     })();
+
+    // Tape decor: real tape cutouts (Cloudinary ksm-site/tape) so posters look
+    // taped to a wall. Deterministic per show (seeded from the card id), so each
+    // poster keeps the same tape across visits. Featured show: all 4 corners.
+    // Active shows each get a distinct tape color; expired shows mix freely.
+    // Must run AFTER initShowsCarousel (needs expired-show/is-featured classes).
+    (function initTapeDecor() {
+      var CLD = 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_400,c_limit/';
+      var PIECES = [
+        { id: 'ksm-tape-black-strip-1',  color: 'black',  kind: 'strip' },
+        { id: 'ksm-tape-black-x',        color: 'black',  kind: 'x' },
+        { id: 'ksm-tape-black-strip-2',  color: 'black',  kind: 'strip' },
+        { id: 'ksm-tape-gaffer-strip',   color: 'black',  kind: 'strip' },
+        { id: 'ksm-tape-gaffer-x',       color: 'black',  kind: 'x' },
+        { id: 'ksm-tape-gaffer-crumple', color: 'black',  kind: 'strip' },
+        { id: 'ksm-tape-black-square',   color: 'black',  kind: 'patch' },
+        { id: 'ksm-tape-silver-strip',   color: 'silver', kind: 'strip' },
+        { id: 'ksm-tape-silver-x',       color: 'silver', kind: 'x' },
+        { id: 'ksm-tape-silver-patch',   color: 'silver', kind: 'patch' },
+        { id: 'ksm-tape-cream-x',        color: 'cream',  kind: 'x' },
+        { id: 'ksm-tape-cream-strip',    color: 'cream',  kind: 'strip' },
+        { id: 'ksm-tape-red-strip',      color: 'red',    kind: 'strip' },
+        { id: 'ksm-tape-red-x',          color: 'red',    kind: 'x' }
+      ];
+      var PALETTE = ['red', 'silver', 'black', 'cream'];
+
+      function hashStr(str) {
+        var h = 2166136261;
+        for (var i = 0; i < str.length; i++) {
+          h ^= str.charCodeAt(i);
+          h = Math.imul(h, 16777619);
+        }
+        return h >>> 0;
+      }
+      function makeRng(seed) {
+        return function() {
+          seed = (seed + 0x6D2B79F5) | 0;
+          var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+      function shuffled(arr, rnd) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(rnd() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      // Corner spots get diagonal strips; edge-centers get straight ones.
+      var CORNERS = [
+        { x: 4,  y: 3,  base: -45 },  // top-left
+        { x: 96, y: 3,  base: 45 },   // top-right
+        { x: 4,  y: 97, base: 45 },   // bottom-left
+        { x: 96, y: 97, base: -45 }   // bottom-right
+      ];
+      var EDGES = [
+        { x: 50, y: 2,  base: 0 },    // top-center
+        { x: 50, y: 98, base: 0 },    // bottom-center
+        { x: 3,  y: 50, base: 0 },    // left-mid
+        { x: 97, y: 50, base: 0 }     // right-mid
+      ];
+
+      function addPiece(layer, piece, spot, rnd) {
+        var img = document.createElement('img');
+        img.className = 'tape-piece';
+        img.src = CLD + piece.id;
+        img.alt = '';
+        img.setAttribute('aria-hidden', 'true');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.draggable = false;
+        var width = 19 + rnd() * 11; // % of poster width — random size per piece
+        var rot = piece.kind === 'strip'
+          ? spot.base + (rnd() * 28 - 14)
+          : rnd() * 50 - 25;
+        var flip = rnd() < 0.5 ? -1 : 1;
+        // inline height:auto — .show-media img{height:100%} would stretch it otherwise
+        img.style.width = width.toFixed(1) + '%';
+        img.style.height = 'auto';
+        img.style.left = (spot.x + rnd() * 4 - 2).toFixed(1) + '%';
+        img.style.top = (spot.y + rnd() * 4 - 2).toFixed(1) + '%';
+        img.style.transform = 'translate(-50%,-50%) rotate(' + rot.toFixed(1) + 'deg) scaleX(' + flip + ')';
+        layer.appendChild(img);
+      }
+
+      function decorate(card, colorPieces, spots, count, rnd) {
+        var media = card.querySelector('.show-media');
+        if (!media || media.querySelector('.tape-layer')) return;
+        var layer = document.createElement('div');
+        layer.className = 'tape-layer';
+        var deck = shuffled(colorPieces, rnd);
+        for (var i = 0; i < count; i++) {
+          addPiece(layer, deck[i % deck.length], spots[i], rnd);
+        }
+        media.appendChild(layer);
+      }
+
+      var cards = Array.from(document.querySelectorAll('#shows .show-card[data-show-date]'));
+      var activeCards = cards.filter(function(c) { return !c.classList.contains('expired-show'); });
+      activeCards.sort(function(a, b) {
+        return a.getAttribute('data-show-date') < b.getAttribute('data-show-date') ? -1 : 1;
+      });
+
+      // Tape color per active show: 1st (soonest/featured) is always silver,
+      // 2nd is always cream ("white"). Any further actives are seed-picked from
+      // the remaining colors, collisions bumped to the next free one.
+      var FIXED_COLORS = ['silver', 'cream'];
+      var usedColors = [];
+      var colorOf = {};
+      activeCards.forEach(function(card, i) {
+        var key = card.getAttribute('aria-labelledby') || card.getAttribute('data-show-date');
+        if (i < FIXED_COLORS.length) {
+          colorOf[key] = FIXED_COLORS[i];
+          usedColors.push(FIXED_COLORS[i]);
+          return;
+        }
+        var rnd = makeRng(hashStr('color:' + key));
+        if (usedColors.length >= PALETTE.length) usedColors = [];
+        var idx = Math.floor(rnd() * PALETTE.length);
+        while (usedColors.indexOf(PALETTE[idx]) !== -1) idx = (idx + 1) % PALETTE.length;
+        usedColors.push(PALETTE[idx]);
+        colorOf[key] = PALETTE[idx];
+      });
+
+      cards.forEach(function(card) {
+        var key = card.getAttribute('aria-labelledby') || card.getAttribute('data-show-date');
+        var rnd = makeRng(hashStr(key));
+        if (card.classList.contains('is-featured')) {
+          // Main live poster: always taped in all 4 corners, one color.
+          var group = PIECES.filter(function(p) { return p.color === colorOf[key]; });
+          decorate(card, group, CORNERS, 4, rnd);
+        } else if (!card.classList.contains('expired-show')) {
+          // Other live shows: 2-3 pieces of their own color.
+          var g = PIECES.filter(function(p) { return p.color === colorOf[key]; });
+          decorate(card, g, shuffled(CORNERS.concat(EDGES), rnd), 2 + Math.floor(rnd() * 2), rnd);
+        } else {
+          // Past shows: always taped up — both top corners pinned, plus 0-2 more
+          // random spots, any tape color.
+          var pastSpots = [CORNERS[0], CORNERS[1]].concat(
+            shuffled([CORNERS[2], CORNERS[3]].concat(EDGES), rnd)
+          );
+          decorate(card, PIECES, pastSpots, 2 + Math.floor(rnd() * 3), rnd);
+        }
+      });
+    })();
   </script>
 
   <footer>
@@ -1699,24 +1847,6 @@
     // ── Add new releases here when they drop ────────────────────────────────
     // Each entry: { id, title, embedSrc, art (URL or ''), platforms [] }
     var releases = [
-      // ── SYKE — placeholder for the next single ──────────────────────────
-      // Once the track drops on Bandcamp, replace `track=1750255108` with the
-      // real track ID and update the platform URLs to the real release links.
-      {
-        id: 'syke',
-        title: 'SYKE',
-        embedSrc: 'https://bandcamp.com/EmbeddedPlayer/track=1750255108/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/',
-        art: 'https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_600/SYKE_COVER_oah9ls',
-        platforms: [
-          { href: 'https://www.qobuz.com/ca-en/album/smile-thru-kama-sutra-murder/ai2y5teurgmfc', label: 'Qobuz', tooltip: 'Qobuz', text: 'Qobuz' },
-          { href: 'https://kamasutramurder.bandcamp.com', label: 'Bandcamp', tooltip: 'Bandcamp', icon: 'https://cdn.simpleicons.org/bandcamp/629AA9', alt: 'Bandcamp' },
-          { href: 'https://music.apple.com/ca/album/smile-thru-single/1851463044', label: 'Apple Music', tooltip: 'Apple Music', icon: 'https://cdn.simpleicons.org/applemusic/FA57C1', alt: 'Apple Music' },
-          { href: 'https://tidal.com/album/471357201/u', label: 'Tidal', tooltip: 'Tidal', icon: 'https://cdn.simpleicons.org/tidal/FFFFFF', alt: 'Tidal' },
-          { href: 'https://music.apple.com/ca/album/smile-thru-single/1851463044', label: 'iTunes', tooltip: 'iTunes', icon: 'https://cdn.simpleicons.org/itunes/FB5BC5', alt: 'iTunes' },
-          { href: 'https://open.spotify.com/album/6LhyvHszi7PccV5VDgvIMH?si=JIUrfGngQUeTHVb6bvyhmA', label: 'Spotify', tooltip: 'Spotify', icon: 'https://cdn.simpleicons.org/spotify/1DB954', alt: 'Spotify' },
-          { href: 'https://www.youtube.com/watch?v=Ri7vws3DvBg', label: 'YouTube', tooltip: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/FF0000', alt: 'YouTube' }
-        ]
-      },
       {
         id: 'smile-thru',
         title: 'Smile-Thru',
