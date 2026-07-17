@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+/* Vtks Troath — self-hosted (not on Google Fonts). Personal-use license
+   (1001Fonts FFP) — not cleared for commercial use; used here per explicit
+   direction despite that, on a small/local band site. */
+@font-face{
+  font-family:'Vtks Troath';
+  src:url('assets/fonts/vtks-troath.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
 /* ==================================================================
    zine-final.css — COMBINED DIRECTION
    Loaded AFTER zine.css.
@@ -15,14 +26,18 @@
 }
 
 /* ---- HERO (from 1b, minus the paper-strip title) ------------------
-   Title stays the zine.css Anton glitch treatment, but back to
-   proper case: "Kama Sutra Murder". */
+   Title breaks from the site-wide --zine-display (Anton) used for nav
+   links/stamp headings — Vtks Troath instead: a punk/brush/handdrawn
+   display face, self-hosted (see @font-face above). */
 .hero h1.glitch-title{
+  font-family:'Vtks Troath', 'Permanent Marker', cursive;
+  font-weight:400;
+  letter-spacing:0; /* brush script reads worse with the base's +0.04em tracking */
   text-transform:none;
   /* Was landing as near-white: .hero h1{color:var(--fg)} in styles.css
      out-specifies .glitch-title's own muted color. Override here instead —
      a warm dusty lavender/cream blend, toned down from the harsh white. */
-  color:rgba(211,202,208,0.95);
+  color:rgba(211,202,208,0.99);
   /* worn print: fine sandy grain eaten out of the ink (masks the glitch
      layers too) — grittier + more solid than the original soft/sparse
      worn-paper mask (higher baseFrequency, fewer octaves, more graduated
