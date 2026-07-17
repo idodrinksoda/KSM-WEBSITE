@@ -3,15 +3,20 @@
 Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a touch of JS. Deployed via GitHub Pages with a custom domain.
 
 ## Project structure
-- `index.html` — Main page with all sections, inline JS for modal/year/scroll.
-- `styles.css` — Global styles, CSS tokens in `:root`, utilities, embeds, modal.
+- `index.html` — Main page with all sections, inline JS (shows carousel, tape decor, music releases, gallery, modal).
+- `styles.css` — Base styles, CSS tokens in `:root`, utilities, embeds, modal, tape/video-backdrop plumbing.
+- `zine.css` — Punk/zine skin layer 1 (loaded after `styles.css`): display/mono typefaces, tilted cards, grain, poster framing.
+- `zine-final.css` — Zine skin layer 2 (loaded last): stamp headings, sticker nav/buttons, handwritten annotations, poster wear, misregistration hover, About layout.
 - `script.js` — Legacy helpers (not referenced by `index.html`).
+- `scripts/sync-show-schema.js` — Regenerates MusicEvent JSON-LD from show cards (runs in pre-commit).
 - `assets/` — Images and icons, organized by type:
   - `assets/gallery/` — manifest.json only; images served from Cloudinary
   - `assets/icons/` — favicon and app icons
   - Show posters: served from Cloudinary (`ksm-shows/current-shows/` and `ksm-shows/previous-shows/`) — no local copies.
-- Hero image, gallery photos, show posters, and background texture are hosted on Cloudinary (cloud: dgxgi8bga).
+- Hero image, gallery photos, show posters, tape cutouts (`ksm-site/tape/`), gallery video, and background texture are hosted on Cloudinary (cloud: dgxgi8bga).
 - `CNAME` — Custom domain mapping to `kamasutramurder.com` (do not remove).
+
+The three stylesheets are layered intentionally: `styles.css` is structure, the two `zine*.css` files are a visual skin. Cache-bust query params (`?v=N`) on all three `<link>` tags in `index.html` — bump them when shipping style changes.
 
 ## Local preview
 Any static HTTP server works; no build step.
@@ -29,10 +34,12 @@ Push/merge to `main`. GitHub Pages serves the repo root with `CNAME` → `kamasu
 
 ## Key sections and patterns
 - Hero: background image served from Cloudinary via `.hero.has-image::before` in `styles.css`.
-- Music: Bandcamp embed + streaming icons (`.platform-icons` use Simple Icons CDN).
-- Shows: cards inside `#shows .shows-grid`; enter ISO dates (`YYYY-MM-DD`) in the `<time>` content/`datetime`, the inline JS formats them to `Sat Mar 21, 2026` in UTC.
+- Music: rendered by `initMusicSection()` from the `releases` array in `index.html` (see below).
+- Shows: cards inside `#shows .shows-grid`; enter ISO dates (`YYYY-MM-DD`) in the `<time>` content/`datetime`, the inline JS formats them to `Sat Mar 21, 2026` in UTC. The soonest upcoming show is lifted into a featured slot above the scroller; past shows are auto-classified and dimmed.
+- Tape decor: every show poster (and the About photo) is "taped to the wall" with cutouts of real tape photographed on paper, hosted at Cloudinary `ksm-site/tape/` (public IDs `ksm-tape-*`). `initTapeDecor()` in `index.html` places them deterministically per show (seeded by card id, stable across visits): the featured poster always gets 4 silver corners, a 2nd live show gets cream, further live shows get seed-picked distinct colors, past shows get 2-4 mixed pieces.
+- Gallery: photo grid fetched from Cloudinary by tag (`gallery`), with a muted looping moshpit video backdrop behind the photos (`.gallery-bg-video`, edge-masked to fade into the page). The video is desktop/tablet-only — `initGalleryVideoBg()` removes the element under 640px or with reduced motion, so phones never download it.
 - Videos: `youtube-nocookie` iframe inside `.video-embed`.
-- Mailchimp modal: `#mcModal` with `[data-open-mc]` and `[data-close-mc]` controls.
+- Mailchimp modal: `#mcModal` with `[data-open-mc]` and `[data-close-mc]` controls (footer button + nav dropdown; there is intentionally no auto-popup).
 
 ### Add a show
 Append an `article.show-card` to `#shows .shows-grid`:
@@ -56,9 +63,8 @@ Append an `article.show-card` to `#shows .shows-grid`:
 </article>
 ```
 
-### Music: Bandcamp + platforms
-- Update the Bandcamp iframe `src` in `#music .bandcamp-embed` with the correct track/album id.
-- Update `.platform-icons` links. Use Simple Icons CDN, e.g., `https://cdn.simpleicons.org/spotify/1DB954`. Keep `aria-label` and `data-tooltip`.
+### Music: add a release
+The Discography section renders from the `releases` array at the top of `initMusicSection()` in `index.html` — don't edit the section markup by hand. To ship a new single, copy the commented `EXAMPLE` template in that array, fill in `title`, `embedSrc` (Bandcamp track id), `art` (Cloudinary public ID), and platform URLs, and paste it as the first entry. With one release the layout is a single card; the moment a 2nd entry exists it auto-upgrades to featured + "Previous Releases" grid + "Listen now" badge. Platform icons use the Simple Icons CDN, e.g. `https://cdn.simpleicons.org/spotify/1DB954`.
 
 ## Mailchimp modal rules
 - Modal id: `mcModal`. Input id: `mce-EMAIL-modal`. Response id: `mce-success-response-modal`.
@@ -169,54 +175,3 @@ The repo includes a lightweight asset audit and pre-commit guard.
 ./scripts/audit-assets.sh --spaces-only
 ./scripts/audit-assets.sh --spaces-all
 ```
-GPT smooth command begining of session
-
-You are a senior frontend developer and UX designer specializing in modern, high-performance music and artist websites.
-
-Your goal is to build a visually striking, fast, and mobile-first band website.
-
-When generating code:
-
-* Use clean, modern HTML, CSS, and JavaScript (or React if appropriate).
-* Prioritize responsive design (mobile-first).
-* Optimize for performance (lazy loading, minimal dependencies, fast load times).
-* Use semantic HTML and accessible design (ARIA, alt text).
-* Structure code for scalability and maintainability.
-
-Design priorities:
-
-* Bold, minimal, and immersive layout (inspired by modern artist websites).
-* Focus on visuals (hero sections, full-width images, video backgrounds).
-* Smooth animations (but lightweight).
-* Strong typography and spacing.
-* Dark mode preferred unless specified otherwise.
-
-Core features to support:
-
-* Hero section with band name + tagline
-* Music player or embedded streaming (Spotify, Apple Music)
-* Tour dates section
-* Media/gallery (images + videos)
-* About section
-* Email signup / contact form
-* Social media links
-
-When responding:
-
-* Briefly explain your design and structure choices.
-* Then provide complete, working code.
-* Keep components modular and reusable.
-
-When improving code:
-
-* Suggest UI/UX improvements
-* Reduce unnecessary complexity
-* Improve performance and accessibility
-
-Avoid:
-
-* Overcomplicated frameworks unless necessary
-* Generic or boring layouts
-* Inline styles unless justified
-
-Act like you're building a professional band website that needs to impress fans, labels, and booking agents.

@@ -257,13 +257,18 @@ main h2{ text-shadow: 0 2px 14px rgba(0,0,0,.45); }
   opacity:.65;
   text-shadow:0 0 6px currentColor;
 }
+.glitch-title::before,
+.glitch-title::after{
+  /* One consistent tone (matches the title's own color, set below/in
+     zine-final.css) instead of the old pink/cyan split — keeps the
+     shifting double-exposure motion without the two-color glitch look. */
+  color:currentColor;
+}
 .glitch-title::before{
-  color:var(--accent);
   clip-path:polygon(0 0,100% 0,100% 42%,0 56%);
   animation:glitch-shift 7.8s infinite steps(1,end);
 }
 .glitch-title::after{
-  color:var(--accent-2);
   clip-path:polygon(0 44%,100% 38%,100% 100%,0 100%);
   animation:glitch-shift 5.6s infinite steps(1,end) reverse;
 }
@@ -819,11 +824,55 @@ main h2{
 /* Gallery section */
 #gallery{padding:32px 0 0 0}
 #gallery > .container{width:min(1320px,96%)}
+
+/* ---- Gallery moshpit video backdrop ----
+   Real <video>, not a CSS background — muted/looped/autoplay via
+   initGalleryVideoBg(). Desktop/tablet only; removed outright on mobile
+   (see JS) so phones never fetch it. Scoped to the photo-grid card only
+   (not the section heading above it). Dark scrim (::after) keeps the
+   photos legible on top. */
+.gallery-card.has-video-bg{
+  position:relative;overflow:hidden;
+  /* soft edge fade into the page bg — same idea as the hero image mask,
+     gentler: content stays solid through the middle, melts at the edges.
+     Shared by the video and its scrim so neither paints a visible box. */
+  --gallery-edge-mask:
+    linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.gallery-bg-video{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  pointer-events:none;
+  -webkit-mask-image:var(--gallery-edge-mask);
+  mask-image:var(--gallery-edge-mask);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+.gallery-card.has-video-bg::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(11,11,13,.35) 0%, rgba(11,11,13,.5) 55%, rgba(11,11,13,.6) 100%),
+    radial-gradient(ellipse 70% 90% at 50% 40%, transparent 35%, rgba(11,11,13,.3) 90%);
+  -webkit-mask-image:var(--gallery-edge-mask);
+  mask-image:var(--gallery-edge-mask);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+.gallery-card.has-video-bg > .gallery-meta,
+.gallery-card.has-video-bg > .gallery-row-wrap{position:relative;z-index:1}
+@media (max-width:640px){
+  .gallery-bg-video{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .gallery-bg-video{display:none}
+}
+
+/* Free-standing: no card box, no photo borders — the grid is just a layout
+   container, photos + video sit directly on the page. */
 .gallery-card{
-  background:rgba(0,0,0,.28);
-  border:1px solid #22222a;
-  border-radius:12px;
-  padding:14px;
+  padding:28px 10px;
   display:grid;
   grid-template-columns:1fr;
   gap:12px;
@@ -847,13 +896,13 @@ main h2{
 }
 .gallery-item{
   margin:0;
-  border-radius:10px;
+  border-radius:6px;
   overflow:hidden;
   background:#0f0f14;
-  border:1px solid #22222a;
   width:100%;
   aspect-ratio:3 / 2;
   cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.5);
 }
 .gallery-item img{
   width:100%;
@@ -864,7 +913,7 @@ main h2{
 }
 .gallery-item:hover img{transform:scale(1.07)}
 @media(max-width:520px){
-  .gallery-card{padding:12px}
+  .gallery-card{padding:20px 8px}
   .gallery-page{grid-template-columns:repeat(2,1fr)}
 }
 
@@ -1345,51 +1394,6 @@ body.bg-overlay-sticker{
 .socials a:hover{color:var(--accent)}
 
 /* (Removed .single styles — section no longer used) */
-
-/* =========================
-   MAILING LIST TOAST
-   ========================= */
-.mc-toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120%);
-  width:min(300px, calc(100vw - 32px));
-  background:#12121a;border:1px solid #2a2a3a;border-radius:16px;
-  padding:14px 16px 14px;
-  box-shadow:0 8px 40px rgba(0,0,0,.7);
-  z-index:900;
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  transition:transform .4s cubic-bezier(.34,1.3,.64,1), opacity .3s ease;
-  opacity:0;
-}
-.mc-toast.is-visible{transform:translateX(-50%) translateY(0);opacity:1}
-.mc-toast-close{
-  align-self:flex-end;
-  background:none;border:none;cursor:pointer;
-  font-size:18px;line-height:1;color:var(--muted);padding:0 2px;
-  transition:color .18s ease;
-}
-.mc-toast-close:hover{color:var(--fg)}
-.mc-toast-msg{
-  margin:0;font-size:13px;font-weight:600;text-align:center;
-  color:var(--muted);
-}
-.mc-toast-actions{
-  display:flex;align-items:center;gap:10px;
-}
-.mc-toast-arrow{
-  font-size:16px;color:var(--accent);opacity:.7;
-  animation:toast-arrow-bob .9s ease-in-out infinite alternate;
-}
-@keyframes toast-arrow-bob{
-  from{transform:translateY(-3px);opacity:.5}
-  to{transform:translateY(3px);opacity:1}
-}
-.mc-toast-btn{
-  background:var(--accent);color:#fff;border:none;border-radius:8px;
-  padding:8px 16px;font-family:inherit;font-size:12px;font-weight:700;
-  letter-spacing:.4px;cursor:pointer;white-space:nowrap;
-  transition:opacity .18s ease;
-}
-.mc-toast-btn:hover{opacity:.85}
 
 /* =========================
    MOBILE OPTIMISATION

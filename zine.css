@@ -27,7 +27,6 @@
 :root{
   --zine-display:'Anton', Impact, 'Arial Narrow', sans-serif;
   --zine-mono:'Special Elite', 'Courier New', monospace;
-  --zine-tape:#a9acb2;                   /* dull silver duct tape base */
 }
 
 /* ---- TYPOGRAPHY -------------------------------------------------
@@ -81,23 +80,9 @@
    Bare poster stuck onto the dark page — NO paper backing (card, meta
    and actions are already transparent in styles.css; we also pin the
    poster's own placeholder fill to --bg so any sliver matches the page).
-   Tape = pseudo-elements only. No markup, no image assets, no JS.     */
-.show-card{
-  position:relative;                    /* containing block for the chips */
-  --tape:var(--zine-tape);              /* dull silver */
-  /* one silver duct-tape chip: cross sheen + faint ridges over silver */
-  --chip:
-    linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 44%, rgba(0,0,0,.26)),
-    repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 2px, rgba(255,255,255,.05) 2px 4px),
-    var(--tape);
-  /* irregular torn ends so no chip looks die-cut */
-  --torn:polygon(7% 6%, 0 46%, 6% 84%, 14% 100%, 87% 96%, 100% 58%, 94% 20%, 88% 0);
-  /* crossed "X" strip of two diagonal tape runs (used on the marquee cards) */
-  --xtape:
-    linear-gradient(45deg,  transparent 40%, rgba(255,255,255,.85) 40% 44%, var(--tape) 44% 56%, rgba(0,0,0,.28) 56% 60%, transparent 60%),
-    linear-gradient(-45deg, transparent 40%, rgba(255,255,255,.85) 40% 44%, var(--tape) 44% 56%, rgba(0,0,0,.28) 56% 60%, transparent 60%);
-}
-.shows-grid .show-meta{ position:relative; }   /* anchor for the two lower chips */
+   The tape itself is real tape-photo cutouts placed by initTapeDecor()
+   in index.html (Cloudinary ksm-site/tape) — no CSS-drawn tape here.  */
+.show-card{ position:relative; }
 
 /* poster sits on the dark page with a soft drop shadow */
 .show-card .show-media{
@@ -105,77 +90,20 @@
   box-shadow:0 6px 16px rgba(0,0,0,.55);
 }
 
-/* SOLVING "IT DOESN'T LOOK STUCK TO THE PAGE": the shows row is a
-   horizontal scroller with overflow-y:hidden (styles.css), so anything
-   past a card's edge is cut by the block's own border. Padding lives
-   INSIDE that clip box, so we pad the scroller on every side and let the
-   corner tape ride out into that page-coloured margin instead of being
-   boxed in with the poster.                                            */
+/* The shows row is a horizontal scroller with overflow-y:hidden
+   (styles.css), so anything past a card's edge is cut by the block's own
+   border. Padding lives INSIDE that clip box, so we pad the scroller on
+   every side and let the overhanging tape cutouts ride out into that
+   page-coloured margin instead of being boxed in with the poster.      */
 .shows-grid{ padding:28px 14px 10px; }
 
-/* FOUR CORNER CHIPS (scroller cards only — the featured card is taped
-   separately below). Top pair hang off the card's top corners; bottom
-   pair are anchored to .show-meta and pulled up to grab the poster's
-   lower corners. z-index keeps every chip above the poster.            */
-.shows-grid .show-card::before, .shows-grid .show-card::after,
-.shows-grid .show-meta::before, .shows-grid .show-meta::after{
-  content:"";
-  position:absolute; z-index:6; pointer-events:none;
-  width:46px; height:20px;
-  background:var(--chip);
-  border-top:1px solid rgba(255,255,255,.28);
-  border-bottom:1px solid rgba(0,0,0,.30);
-  box-shadow:0 2px 6px rgba(0,0,0,.5);
-  clip-path:var(--torn);
-}
-.shows-grid .show-card::before{ top:-11px; left:-13px;  transform:rotate(-42deg); }  /* TL */
-.shows-grid .show-card::after { top:-11px; right:-13px; transform:rotate(40deg);  }  /* TR */
-.shows-grid .show-meta::before{ top:-21px; left:-13px;  transform:rotate(41deg);  }  /* BL */
-.shows-grid .show-meta::after { top:-21px; right:-13px; transform:rotate(-39deg); }  /* BR */
-
-/* Random-looking but deterministic: some posters are lightly taped, one
-   in five is bare — keyed by nth-child so new cards inherit a look. */
-.shows-grid .show-card:nth-child(5n+3)::before,
-.shows-grid .show-card:nth-child(5n+3)::after,
-.shows-grid .show-card:nth-child(5n+3) .show-meta::before,
-.shows-grid .show-card:nth-child(5n+3) .show-meta::after{ content:none; }   /* bare */
-
-.shows-grid .show-card:nth-child(5n+5) .show-meta::before,
-.shows-grid .show-card:nth-child(5n+2)::after{ content:none; }              /* 3 corners */
-
-.shows-grid .show-card:nth-child(5n+2)::before{ transform:rotate(-33deg); }
-.shows-grid .show-card:nth-child(5n+4)::after { transform:rotate(30deg);  }
-.shows-grid .show-card:nth-child(5n+4) .show-meta::after{ transform:rotate(-50deg); }
-.shows-grid .show-card:nth-child(5n+5) .show-meta::after{ transform:rotate(-30deg); }
-
-/* First card left in the SCROLLER (2nd-soonest once the featured one is
-   lifted out): crossed "X" tape on its top corners. */
-.shows-grid > .show-card:first-child::before,
-.shows-grid > .show-card:first-child::after{
-  width:30px; height:30px;
-  clip-path:none; border:0; box-shadow:none;
-  background:var(--xtape);
-  filter:drop-shadow(0 2px 3px rgba(0,0,0,.55));
-}
-.shows-grid > .show-card:first-child::before{ top:-13px; left:-15px;  transform:rotate(-8deg); }
-.shows-grid > .show-card:first-child::after { top:-13px; right:-15px; transform:rotate(7deg);  }
-
-/* FEATURED next-show poster (JS lifts it out of the scroller). Bigger
-   crossed X tape on its top corners; its container doesn't clip, so we
-   let the poster show overflow and the tape overhang onto the page.
-   The nth-child tilt cycle above would rotate the whole featured block
-   (meta + buttons included), so neutralize it and tilt only the poster. */
+/* FEATURED next-show poster (JS lifts it out of the scroller). Its
+   container doesn't clip, so let the poster show overflow for the tape
+   overhang. The nth-child tilt cycle above would rotate the whole
+   featured block (meta + buttons included), so neutralize it and tilt
+   only the poster. */
 .show-card.is-featured{ transform:none; }
 .show-card.is-featured .show-media{ overflow:visible; transform:rotate(-1.2deg); }
-.show-card.is-featured .show-media::before,
-.show-card.is-featured .show-media::after{
-  content:""; position:absolute; z-index:6; pointer-events:none;
-  width:44px; height:44px;
-  background:var(--xtape);
-  filter:drop-shadow(0 2px 4px rgba(0,0,0,.6));
-}
-.show-card.is-featured .show-media::before{ top:-18px; left:-18px;  transform:rotate(-8deg); }
-.show-card.is-featured .show-media::after { top:-18px; right:-18px; transform:rotate(7deg);  }
 
 /* Lifting a poster off the wall straightens & raises it (scroller only). */
 .shows-grid .show-card:hover{ transform:rotate(0deg) translateY(-6px) scale(1.02); z-index:5; }
