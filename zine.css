@@ -1,0 +1,149 @@
+/* ==================================================================
+   zine.css — PUNK / ZINE SKIN  (scoped experiment, additive only)
+   ------------------------------------------------------------------
+   Loaded AFTER styles.css. This file is a SKIN, not structure:
+   no HTML/JS/content/data changes live here. To fully revert the
+   site to its prior state, delete this file AND its <link> tag in
+   index.html. Nothing else references it.
+   ------------------------------------------------------------------
+   PHOTO TREATMENT — do this yourself in the markup, not here.
+   Don't hardcode image URLs in CSS. To get the xeroxed-zine look,
+   splice ONE of these Cloudinary transform chains into the poster/
+   gallery URL template, right after "f_auto,q_auto,":
+
+     Photocopy B&W (high contrast):
+        e_grayscale,e_contrast:50,e_sharpen:60
+     Ink-on-newsprint duotone (dark + accent pink):
+        e_grayscale,e_tint:70:0b0b0d:ff2b6a
+     Blown-out punk flyer:
+        e_grayscale,e_contrast:70,e_brightness:6
+
+   Example:
+     .../upload/f_auto,q_auto,e_grayscale,e_contrast:50,w_640/PUBLIC_ID
+   ================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap');
+
+:root{
+  --zine-display:'Anton', Impact, 'Arial Narrow', sans-serif;
+  --zine-mono:'Special Elite', 'Courier New', monospace;
+}
+
+/* ---- TYPOGRAPHY -------------------------------------------------
+   Loud display face for headings; typewriter for dates + metadata.
+   Body font is left untouched (stays Saira/Inter).                */
+.glitch-title,
+.glitch-soft,
+.press-item h3{
+  font-family:var(--zine-display);
+  font-weight:400;                      /* Anton ships a single weight */
+  text-transform:lowercase;
+  letter-spacing:.01em;
+}
+.show-meta, .show-meta time,
+.press-meta, .press-outlet, .press-tag,
+.gallery-meta, .contact-line{
+  font-family:var(--zine-mono);
+  letter-spacing:.09em;                 /* wide tracking on the mono */
+}
+
+/* ---- DETERMINISTIC CHAOS ---------------------------------------
+   Small rotation + vertical jitter on a 5-variant cycle, keyed by
+   nth-child so it applies PER PARENT. New show cards / gallery
+   photos / press entries added later inherit a variant with zero
+   extra CSS. No per-item rules, no inline styles, no JS.
+   (Rotations are static layout — not animation — so they are left
+   in place under reduced-motion; only hover MOTION is gated below.)
+   Page-level overflow-x:hidden (html,body in styles.css) absorbs
+   any horizontal spill, so rotations never cause a scrollbar.     */
+.show-card:nth-child(5n+1),
+.gallery-item:nth-child(5n+1),
+.press-item:nth-child(5n+1){ transform:rotate(-3deg) translateY(5px); }
+
+.show-card:nth-child(5n+2),
+.gallery-item:nth-child(5n+2),
+.press-item:nth-child(5n+2){ transform:rotate(2deg) translateY(-4px); }
+
+.show-card:nth-child(5n+3),
+.gallery-item:nth-child(5n+3),
+.press-item:nth-child(5n+3){ transform:rotate(-1.4deg) translateY(6px); }
+
+.show-card:nth-child(5n+4),
+.gallery-item:nth-child(5n+4),
+.press-item:nth-child(5n+4){ transform:rotate(3deg) translateY(-6px); }
+
+.show-card:nth-child(5n+5),
+.gallery-item:nth-child(5n+5),
+.press-item:nth-child(5n+5){ transform:rotate(.8deg) translateY(3px); }
+
+/* ---- PINNED-POSTER FRAMING (show cards only) -------------------
+   Bare poster stuck onto the dark page — NO paper backing (card, meta
+   and actions are already transparent in styles.css; we also pin the
+   poster's own placeholder fill to --bg so any sliver matches the page).
+   The tape itself is real tape-photo cutouts placed by initTapeDecor()
+   in index.html (Cloudinary ksm-site/tape) — no CSS-drawn tape here.  */
+.show-card{ position:relative; }
+
+/* poster sits on the dark page with a soft drop shadow */
+.show-card .show-media{
+  background:var(--bg);
+  box-shadow:0 6px 16px rgba(0,0,0,.55);
+}
+
+/* The shows row is a horizontal scroller with overflow-y:hidden
+   (styles.css), so anything past a card's edge is cut by the block's own
+   border. Padding lives INSIDE that clip box, so we pad the scroller on
+   every side and let the overhanging tape cutouts ride out into that
+   page-coloured margin instead of being boxed in with the poster.      */
+.shows-grid{ padding:28px 14px 10px; }
+
+/* FEATURED next-show poster (JS lifts it out of the scroller). Its
+   container doesn't clip, so let the poster show overflow for the tape
+   overhang. The nth-child tilt cycle above would rotate the whole
+   featured block (meta + buttons included), so neutralize it and tilt
+   only the poster. */
+.show-card.is-featured{ transform:none; }
+.show-card.is-featured .show-media{ overflow:visible; transform:rotate(-1.2deg); }
+
+/* Lifting a poster off the wall straightens & raises it (scroller only). */
+.shows-grid .show-card:hover{ transform:rotate(0deg) translateY(-6px) scale(1.02); z-index:5; }
+
+/* ---- GRAIN -----------------------------------------------------
+   Single full-page noise overlay via body::after (no markup added).
+   Low opacity, pointer-events:none so it never blocks clicks.     */
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  z-index:9998; pointer-events:none;
+  opacity:.06; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='0.9'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
+
+/* ---- TORN-PAPER SECTION DIVIDERS -------------------------------
+   Decorative ripped-paper strip across the top of each content
+   section (inline SVG, no markup). Sits in the section's top
+   padding, so it never clips real content. pointer-events:none.   */
+#music, #shows, #gallery, #videos, #press, #contact{ position:relative; }
+#music::before,  #shows::before, #gallery::before,
+#videos::before, #press::before, #contact::before{
+  content:"";
+  position:absolute; left:0; right:0; top:-2px;
+  height:12px; z-index:2; pointer-events:none; opacity:.5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12'%3E%3Cpath d='M0 0H40V6L36 9 32 5 28 10 24 6 20 11 16 6 12 9 8 5 4 9 0 6Z' fill='%23ece7d8'/%3E%3C/svg%3E") repeat-x top left;
+  background-size:40px 12px;
+}
+
+/* ---- SECTION HEADINGS -----------------------------------------
+   Intentionally NOT revealed. The section <h2>s carry the site's
+   .visually-hidden class (clipped, !important, in styles.css) and
+   we leave that as the single source of truth for their visibility.
+   The .glitch-soft typography rule above only restyles them for the
+   (currently hidden) accessible label — it does not un-hide them.  */
+
+/* ---- REDUCED MOTION --------------------------------------------
+   Re-honor the existing preference: no hover lift/scale animation.
+   Static tilts remain (they don't animate).                       */
+@media (prefers-reduced-motion:reduce){
+  .show-card:hover{ transform:none; }
+}
