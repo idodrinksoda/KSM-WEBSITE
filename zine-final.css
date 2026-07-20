@@ -236,6 +236,26 @@ main h2.glitch-soft{
   .new-song-badge::before{ content:""; }
 }
 
+/* ---- SHOW CARD: poster not uploaded yet ------------------------------- */
+/* Card is announced (date/venue/tickets are real) but the poster art isn't
+   ready. .show-media img still gets a real src (flat-fill SVG matching the
+   backing color) so scripts/sync-show-schema.js — which requires an <img
+   src/alt> to build the MusicEvent block — keeps working; the handwritten
+   note is a visual overlay on top. Swap in the real poster later and drop
+   the "poster-pending" class + note span. */
+.show-media.poster-pending{ background:#0f0f14; }
+.poster-pending-note{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:24px;
+  font-family:'Permanent Marker', cursive;
+  font-size:clamp(18px,2.6vw,24px);
+  line-height:1.35;
+  color:var(--zine-pink);
+  transform:rotate(-4deg);
+  pointer-events:none;
+}
+
 /* ---- ABOUT SECTION ---------------------------------------------------- */
 #about{ padding:32px 0 0; }
 .about-wrap{
@@ -245,7 +265,7 @@ main h2.glitch-soft{
   flex:1 1 380px; min-width:280px; max-width:640px;
   font-family:var(--zine-mono);
   letter-spacing:.04em;
-  font-size:15px; line-height:1.9;
+  font-size:clamp(17px,2.4vw,20px); line-height:1.9;
   color:var(--fg);
 }
 .about-copy p{ margin:0 0 16px; }
