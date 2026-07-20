@@ -8,11 +8,11 @@ This file is loaded by Claude at the start of every session. Read it fully befor
 
 Static band website for **Kama Sutra Murder** (kamasutramurder.com).
 No build step, no framework — plain HTML, CSS, and a small amount of inline JS.
-Deployed via **GitHub Pages** from the `main` branch using the `CNAME` file.
+Deployed via **Cloudflare Pages**, connected to this GitHub repo — pushing/merging to `main` triggers an automatic build and deploy. DNS for kamasutramurder.com points at Cloudflare.
 
 **Live URL:** https://kamasutramurder.com
-**GitHub Pages source:** repo root of `main` branch
-**CNAME:** must stay at repo root — do not rename or delete it.
+**Deploy source:** Cloudflare Pages project, production branch `main`
+**CNAME:** legacy GitHub Pages artifact (repo was on GitHub Pages before the Cloudflare switch). GitHub Pages is still separately enabled in repo settings and technically "built" from `main`, but DNS no longer points to it — Cloudflare is what actually serves the site. Leave the file in place unless GitHub Pages is formally disabled for this repo.
 
 ---
 
@@ -168,7 +168,7 @@ The inline gallery JS fetches by tag — no code change needed.
 ### Branches
 | Branch | Purpose |
 |--------|---------|
-| `main` | **Production.** GitHub Pages serves this. Merge only tested, reviewed changes. |
+| `main` | **Production.** Cloudflare Pages auto-deploys this branch live. Merge only tested, reviewed changes. |
 | `dev`  | Integration branch. Work here, then PR to `main`. |
 | `feature/short-description` | New features (e.g., `feature/add-merch-section`) |
 | `fix/short-description`     | Bug fixes (e.g., `fix/mobile-show-card-overflow`) |

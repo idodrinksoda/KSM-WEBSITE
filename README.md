@@ -1,6 +1,6 @@
 # KSM-WEBSITE
 
-Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a touch of JS. Deployed via GitHub Pages with a custom domain.
+Static website for Kama Sutra Murder. Framework-free: plain HTML, CSS, and a touch of JS. Deployed via Cloudflare Pages with a custom domain.
 
 ## Project structure
 - `index.html` — Main page with all sections, inline JS (shows carousel, tape decor, music releases, gallery, modal).
@@ -30,7 +30,7 @@ npx serve . -p 8000
 Then open http://localhost:8000.
 
 ## Deploy
-Push/merge to `main`. GitHub Pages serves the repo root with `CNAME` → `kamasutramurder.com`.
+Push/merge to `main`. Cloudflare Pages is connected to this repo and auto-builds/deploys `main` live to `kamasutramurder.com`. (The root `CNAME` file is a legacy GitHub Pages artifact from before the Cloudflare switch — DNS now points at Cloudflare.)
 
 ## Key sections and patterns
 - Hero: background image served from Cloudinary via `.hero.has-image::before` in `styles.css`.
