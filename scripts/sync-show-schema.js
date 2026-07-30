@@ -44,6 +44,15 @@ const VENUES = {
       addressCountry: 'CA'
     },
     sameAs: 'https://www.google.com/maps/search/362+Powell+Street+Vancouver+BC'
+  },
+  "Bully's Studios": {
+    address: {
+      streetAddress: '67 6th Street',
+      addressLocality: 'New Westminster',
+      addressRegion: 'BC',
+      addressCountry: 'CA'
+    },
+    sameAs: 'https://www.google.com/maps/search/67+6th+Street+New+Westminster+BC'
   }
 };
 
