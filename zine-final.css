@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+/* Permanent Marker is loaded from index.html <head> (not @import'd here) so the
+   browser's preload scanner can fetch it immediately instead of waiting on this
+   stylesheet to load first — it's the fallback while Vtks Troath downloads. */
 
 /* Vtks Troath — self-hosted (not on Google Fonts). Personal-use license
    (1001Fonts FFP) — not cleared for commercial use; used here per explicit
