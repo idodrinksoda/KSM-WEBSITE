@@ -71,6 +71,14 @@ function todayISO() {
 
 function pad2(n) { return String(n).padStart(2, '0'); }
 
+// JSON-LD image URLs need a stable, submittable extension — f_auto content-
+// negotiates format per request, which Google's image indexer and other
+// structured-data consumers don't handle reliably. On-page <img> tags keep
+// f_auto (performance wins there); this only affects the schema's own copy.
+function toFixedFormatImageUrl(url) {
+  return url.replace(/\/upload\/f_auto,/, '/upload/f_jpg,');
+}
+
 function startDateTime(date, hour, minute) {
   return `${date}T${pad2(hour)}:${pad2(minute)}:00${TZ_OFFSET}`;
 }
@@ -142,7 +150,7 @@ function buildEvent(card) {
       address: Object.assign({ '@type': 'PostalAddress' }, venueDef.address),
       sameAs: venueDef.sameAs
     },
-    image: card.posterSrc,
+    image: toFixedFormatImageUrl(card.posterSrc),
     performer: { '@id': BAND_ID },
     organizer: { '@id': BAND_ID },
     // offers is optional — only emitted when the card has a ticket link.
