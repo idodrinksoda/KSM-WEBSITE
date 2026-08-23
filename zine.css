@@ -22,8 +22,9 @@
      .../upload/f_auto,q_auto,e_grayscale,e_contrast:50,w_640/PUBLIC_ID
    ================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap');
-
+/* Anton + Special Elite are loaded from index.html <head> (not @import'd here)
+   so the browser's preload scanner can fetch them immediately instead of
+   waiting on this stylesheet to load first. */
 :root{
   --zine-display:'Anton', Impact, 'Arial Narrow', sans-serif;
   --zine-mono:'Special Elite', 'Courier New', monospace;

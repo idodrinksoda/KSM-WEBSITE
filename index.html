@@ -58,15 +58,26 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Saira:wght@500;700;800&display=swap" rel="stylesheet">
+  <!-- Zine-skin display fonts: pulled up from zine.css/zine-final.css's @import so the
+       preload scanner finds them immediately instead of waiting on those stylesheets
+       to fetch + parse first (an @import inside a stylesheet isn't discovered until
+       its parent CSS loads, which delayed these behind two extra round trips). -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <!-- Vtks Troath is the font that actually renders for the hero title (highest-
+       specificity rule, in zine-final.css) but is self-hosted and wasn't discovered
+       until zine-final.css loaded — last of three stylesheets. Preloading it here lets
+       it start downloading immediately, cutting the visible font-swap flash on the
+       hero title down to a single swap instead of two or three. -->
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/vtks-troath.woff2" crossorigin>
   <link rel="preload" as="image" href="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_1920/hero_tot2cm" fetchpriority="high">
   <link rel="preload" as="image" href="https://res.cloudinary.com/dgxgi8bga/image/upload/f_auto,q_auto,w_640/v1778121005/GA-MAY28TH2026">
 
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css?v=9">
   <!-- ZINE SKIN (experiment, additive) — delete this line + zine.css to fully revert -->
-  <link rel="stylesheet" href="zine.css?v=3">
+  <link rel="stylesheet" href="zine.css?v=4">
   <!-- ZINE FINAL (combined direction, additive) — delete this line + zine-final.css to revert the skin -->
-  <link rel="stylesheet" href="zine-final.css?v=8">
+  <link rel="stylesheet" href="zine-final.css?v=9">
 
   <!--
     JSON-LD #1: MusicGroup
