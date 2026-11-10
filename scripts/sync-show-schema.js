@@ -45,6 +45,15 @@ const VENUES = {
     },
     sameAs: 'https://www.google.com/maps/search/362+Powell+Street+Vancouver+BC'
   },
+  'The Pit UBC': {
+    address: {
+      streetAddress: '6133 University Boulevard',
+      addressLocality: 'Vancouver',
+      addressRegion: 'BC',
+      addressCountry: 'CA'
+    },
+    sameAs: 'https://www.google.com/maps/search/6133+University+Blvd+Vancouver+BC'
+  },
   "Bully's Studios": {
     address: {
       streetAddress: '67 6th Street',
