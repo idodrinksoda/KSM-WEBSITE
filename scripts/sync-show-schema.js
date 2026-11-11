@@ -45,6 +45,10 @@ const VENUES = {
     },
     sameAs: 'https://www.google.com/maps/search/362+Powell+Street+Vancouver+BC'
   },
+  '808 & Bench': {
+    address: { addressLocality: 'Kamloops', addressRegion: 'BC', addressCountry: 'CA' },
+    sameAs: 'https://www.google.com/maps/search/808+and+Bench+Kamloops+BC'
+  },
   'The Pit UBC': {
     address: {
       streetAddress: '6133 University Boulevard',
@@ -113,7 +117,7 @@ function parseCard(block) {
   const venueLine = (block.match(/<div class="show-meta">[\s\S]*?<span>([^<]+)<\/span>/) || [])[1];
   if (!venueLine) return null;
   const [venuePartRaw, cityPartRaw = ''] = venueLine.split(/\s*[–-]\s*/);
-  const venue = venuePartRaw.trim();
+  const venue = venuePartRaw.trim().replace(/&amp;/g, '&');
   const city = cityPartRaw.trim();
 
   // First <img> inside the card is the poster
